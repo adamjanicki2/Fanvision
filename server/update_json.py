@@ -43,4 +43,4 @@ def save_schedule_as_json(fname, end_year):
 
 if __name__ == '__main__':
     sched = save_schedule_as_json("2021_NBA_Schedule.json", 2021)
-    print(sched)
+    #print(sched)

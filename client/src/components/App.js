@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { Router } from "@reach/router";
 import NotFound from "./pages/NotFound.js";
 import LoginPage from "./pages/LoginPage.js";
-
+import Navbar from "./modules/Navbar.js";
+import Loginbar from "./modules/Loginbar.js";
+import { navigate } from "@reach/router";
+import "./pages/LoginPage.css";
 import "../utilities.css";
 
 import { socket } from "../client-socket.js";
@@ -32,10 +35,12 @@ class App extends Component {
 
   handleLogin = (res) => {
     console.log(`Logged in as ${res.profileObj.name}`);
+    navigate('/dashboard');
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
       this.setState({ userId: user._id });
       post("/api/initsocket", { socketid: socket.id });
+      
     });
   };
 
@@ -47,6 +52,12 @@ class App extends Component {
   render() {
     return (
       <>
+      <Loginbar
+          handleLogin={this.handleLogin}
+          handleLogout={this.handleLogout}
+          userId={this.state.userId}
+        />
+        
         <Router>
           <LoginPage
             path="/"

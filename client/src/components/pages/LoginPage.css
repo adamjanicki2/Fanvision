@@ -1,0 +1,7 @@
+.LoginPage-background{
+    background-image: url("../../public/img/bw.jpg");
+    background-color: var(--offblack);
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+}

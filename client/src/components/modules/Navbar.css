@@ -1,0 +1,34 @@
+.Navbar-container {
+    padding: var(--s) var(--m);
+    background-color: var(--red);
+  }
+  
+  .Navbar-title {
+    color: var(--offblack);
+    font-size: 30px;
+  }
+  
+  .Navbar-routeContainer {
+    margin-left: var(--l);
+  }
+  
+  .Navbar-route,
+  .Navbar-route:visited {
+    color: var(--offblack);
+    opacity: 0.95;
+    text-decoration: none;
+  }
+  
+  .Navbar-route:hover {
+    color: var(--offwhite);
+    opacity: 0.75;
+  }
+  
+  .Navbar-route.Navbar-login {
+    opacity: 1;
+  }
+  
+  .Navbar-route + .Navbar-route {
+    margin-left: var(--m);
+  }
+  

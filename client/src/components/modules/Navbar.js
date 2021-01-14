@@ -10,34 +10,49 @@ class Navbar extends Component {
     constructor(props) {
       super(props);
     }
-  
     render() {
       return (
         <nav className="Navbar-container">
           <div className="Navbar-title u-inlineBlock">Fanvision</div>
           <div className="Navbar-routeContainer u-inlineBlock">
-            <Link to="/dashboard" className="Navbar-route">
-              Dashboard
-            </Link>
-            {this.props.userId && (
+          {this.props.userId !== undefined ? (
+              <Link to="/dashboard" className="Navbar-route">
+                Dashboard
+              </Link>
+            ) : (<div></div>)}
+            {this.props.userId !== undefined ? (
               <Link to="/predictions" className="Navbar-route">
                 Predictions
               </Link>
-            )}
-            <Link to="/standings" className="Navbar-route">
-              Standings
-            </Link>
-            <Link to="/profile" className="Navbar-route">
-              Profile
-            </Link>
+            ) : (<div></div>)}
+            {this.props.userId !== undefined ? (
+              <Link to="/standings" className="Navbar-route">
+                Standings
+              </Link>
+            ) : (<div></div>)}
+            {this.props.userId !== undefined ? (
+              <Link to="/profile" className="Navbar-route">
+                Profile
+              </Link>
+            ) : (<div></div>)}
             
+            {this.props.userId !== undefined? (
             <GoogleLogout
               clientId={GOOGLE_CLIENT_ID}
               buttonText="Logout"
               onLogoutSuccess={this.props.handleLogout}
               onFailure={(err) => console.log(err)}
-              className="Navbar-route Navbar-login"
+              className="NavBar-link NavBar-login"
             />
+          ) : (
+            <GoogleLogin
+              clientId={GOOGLE_CLIENT_ID}
+              buttonText="Login"
+              onSuccess={this.props.handleLogin}
+              onFailure={(err) => console.log(err)}
+              className="NavBar-link NavBar-login"
+            />
+          )}
           
             
           </div>

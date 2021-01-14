@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import GoogleLogin, { GoogleLogout } from "react-google-login";
 
 import "../../utilities.css";
 import "./LoginPage.css";
 
-const GOOGLE_CLIENT_ID = "911618425792-hk0acmfunco1f8qg441iih4pvm01cuae.apps.googleusercontent.com";
+
 
 class LoginPage extends Component {
   constructor(props) {
@@ -20,8 +19,7 @@ class LoginPage extends Component {
   render() {
     return (
       <>
-     
-        <h1>Fanvision</h1>
+        <h1>Temp log in page</h1>
         <h2> What we still need to change:</h2>
         <ul>
           <li>Change the Database SRV for Atlas (server.js)</li>

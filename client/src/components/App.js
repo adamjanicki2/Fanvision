@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import { Router } from "@reach/router";
 import NotFound from "./pages/NotFound.js";
 import LoginPage from "./pages/LoginPage.js";
+import Dashboard from "./pages/Dashboard.js";
+import Standings from "./pages/Standings.js";
+import Profile from "./pages/Profile.js";
+import Predictions from "./pages/Predictions.js";
 import Navbar from "./modules/Navbar.js";
-import Loginbar from "./modules/Loginbar.js";
 import { navigate } from "@reach/router";
 import "./pages/LoginPage.css";
 import "../utilities.css";
@@ -35,13 +38,13 @@ class App extends Component {
 
   handleLogin = (res) => {
     console.log(`Logged in as ${res.profileObj.name}`);
-    navigate('/dashboard');
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
       this.setState({ userId: user._id });
       post("/api/initsocket", { socketid: socket.id });
       
     });
+    navigate('/dashboard');
   };
 
   handleLogout = () => {
@@ -52,19 +55,18 @@ class App extends Component {
   render() {
     return (
       <>
-      <Loginbar
+      <Navbar
           handleLogin={this.handleLogin}
           handleLogout={this.handleLogout}
           userId={this.state.userId}
         />
         
         <Router>
-          <LoginPage
-            path="/"
-            handleLogin={this.handleLogin}
-            handleLogout={this.handleLogout}
-            userId={this.state.userId}
-          />
+          <LoginPage path="/" userId={this.state.userId}/>
+          <Dashboard path="/dashboard" userId={this.state.userId}/>
+          <Standings path="/standings" userId={this.state.userId}/>
+          <Predictions path="/predictions" userId={this.state.userId}/>
+          <Profile path="/profile" userId={this.state.userId}/>
           <NotFound default />
         </Router>
       </>

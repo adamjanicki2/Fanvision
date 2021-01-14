@@ -27,17 +27,17 @@ const path = require("path"); // provide utilities for working with file and dir
 
 const api = require("./api");
 const auth = require("./auth");
-const dotenv = require("dotenv");
+require("dotenv").config();
 
 // socket stuff
 const socketManager = require("./server-socket");
 
 // Server configuration below
 // TODO change connection URL after setting up your team database
-const mongoConnectionURL = "";
+const mongoConnectionURL = process.env.MONGO_SRV;
 
 // TODO change database name to the name you chose
-const databaseName = "";
+const databaseName = process.env.MONGO_NAME;
 
 // connect to mongodb
 mongoose

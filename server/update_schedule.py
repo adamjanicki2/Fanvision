@@ -1,19 +1,21 @@
-from basketball_reference_web_scraper import client
+from basketball_reference_web_scraper import client as bb_client
 import json
 import pytz
 import datetime
+import os
+from pymongo import MongoClient
+from dotenv import load_dotenv
 
-def save_schedule_as_json(fname, end_year):
-    """
-    Args: 
-        fname: String, name of file to write to
-        end_year: Int, year the season ends
-    Returns:
-        'success' if it fetched data and wrote to file
-        None if no data was retrieved
-    """
+l = load_dotenv()
+MONGO_CONNECTION_URL = os.getenv('MONGO_SRV')
+
+client = MongoClient(MONGO_CONNECTION_URL)
+db = client.cluster0
+
+def get_schedule(end_year):
+    
     try:
-        sched = client.season_schedule(season_end_year=end_year)
+        sched = bb_client.season_schedule(season_end_year=end_year)
     except:
         print("Invalid query")
         return None
@@ -36,11 +38,20 @@ def save_schedule_as_json(fname, end_year):
             games[date_].append(new_game)
         except:
             games[date_] = [new_game]
-    with open(fname, 'w') as f:
-        json.dump(games, f)
-    f.close()
+    return games
+
+def insert_into_db(games):
+    for date, game_set in games.items():
+        new_entry = {
+            'date': date,
+            'games': game_set
+        }
+        res = db.schedule.insert_one(new_entry)
     return 'success'
 
 if __name__ == '__main__':
-    sched = save_schedule_as_json("2021_NBA_Schedule.json", 2021)
-    #print(sched)
+    pass
+    # games = get_schedule(2021)
+    # inserted = insert_into_db(games)
+    # print(inserted)
+    

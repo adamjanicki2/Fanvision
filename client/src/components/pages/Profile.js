@@ -11,9 +11,9 @@ class Profile extends Component {
     // Initialize Default State
     this.state = {
       name: "",
-      gold_count: 0,
-      silver_count: 0,
-      bronze_count: 0,
+      gold_dates: [],
+      silver_dates: [],
+      bronze_dates: [],
     };
   }
 
@@ -21,7 +21,12 @@ class Profile extends Component {
     // remember -- api calls go here!
     get("/api/whoami").then((user) => {
       console.log(user.name);
-      this.setState({name: user.name})
+      this.setState({
+        name: user.name,
+        gold_dates: user.gold_dates,
+        silver_dates: user.silver_dates,
+        bronze_dates: user.bronze_dates,
+      })
     })
   };
 
@@ -30,9 +35,12 @@ class Profile extends Component {
       <>
         <h1>{this.state.name}</h1>
         <h2>This is your profile page!</h2>
-        <h2>Gold: {this.state.gold_count}</h2>
-        <h2>Silver: {this.state.silver_count}</h2>
-        <h2>Bronze: {this.state.bronze_count}</h2>
+        <h2>Gold Count: {this.state.gold_dates.length}</h2>
+        <h2>Gold Dates: {this.state.gold_count}</h2>
+        <h2>Silver Count: {this.state.silver_dates.length}</h2>
+        <h2>Silver Dates: {this.state.silver_dates}</h2>
+        <h2>Bronze Count: {this.state.bronze_dates.length}</h2>
+        <h2>Bronze Dates: {this.state.bronze_dates}</h2>
       </>
     );
   }

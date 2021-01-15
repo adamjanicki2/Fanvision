@@ -12,6 +12,10 @@
     margin-left: var(--l);
   }
   
+  .Navbar-logout {
+    margin-right: var(--l);
+  }
+
   .Navbar-route,
   .Navbar-route:visited {
     color: var(--offblack);

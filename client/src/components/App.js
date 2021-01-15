@@ -56,6 +56,7 @@ class App extends Component {
   render() {
     return (
       <>
+      
       <Navbar
           handleLogin={this.handleLogin}
           handleLogout={this.handleLogout}
@@ -70,6 +71,7 @@ class App extends Component {
           <Profile path="/profile" userId={this.state.userId}/>
           <NotFound default />
         </Router>
+        
       </>
     );
   }

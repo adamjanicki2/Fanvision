@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import NextGameCard from "../modules/NextGameCard.js";
 import "../../utilities.css";
 import "./Dashboard.css";
 
@@ -21,6 +21,7 @@ class Dashboard extends Component {
       <>
         <h1>Temp Dashboard Page</h1>
         <h2>Hello World</h2>
+        <NextGameCard/>
       </>
     );
   }

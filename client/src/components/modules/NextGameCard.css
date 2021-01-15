@@ -1,0 +1,10 @@
+.NextGameCard-container{
+    display: flex;
+    flex-direction: column;
+    flex-basis: auto;
+    align-items: center;
+    justify-content: center;
+    font-size: large;
+    border: 1px solid black;
+
+}

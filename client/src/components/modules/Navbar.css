@@ -35,3 +35,7 @@
   .Navbar-route + .Navbar-route {
     margin-left: var(--m);
   }
+
+  .Navbar-logout {
+    float: right;
+  }

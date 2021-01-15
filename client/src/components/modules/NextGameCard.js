@@ -7,7 +7,7 @@ class NextGameCard extends Component {
       this.state = { //hard coded for now
           home_team: "DAL",
           away_team: "PHI",
-          time: "18:00",
+          time: "18:00 ET",
       };
     }
 
@@ -19,9 +19,9 @@ class NextGameCard extends Component {
         return(
             <>
                 <div className="NextGameCard-container">
-                    <div>{this.state.away_team} @ {this.state.home_team}</div>
-                    <div>{this.state.time}</div>
-                </div>
+                    <div>{this.state.away_team} vs {this.state.home_team}</div>
+                    <div className="NextGameCard-time">{this.state.time}</div>
+                </div> 
             </>
         );
     }}

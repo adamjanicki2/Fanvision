@@ -4,10 +4,24 @@
     flex-basis: auto;
     align-items: center;
     justify-content: center;
-    font-size: large;
-    border: 1px solid #000000;
-    padding: var(--s);
+    font-size: 20pt;
+    border: 2px solid #000000;
+    padding: var(--m);
     margin-top : var(--s);
     margin-bottom : var(--s);
+    margin-left: 5px;
+    margin-right: 5px;
     width:fit-content;
+    word-spacing: 4px;
+}
+
+.NextGameCard-time{
+    font-size: 12pt;
+}
+
+.NextGameCard-allGamesContainer{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }

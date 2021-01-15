@@ -34,10 +34,41 @@
   --l: 24px;
 }
 
+@font-face {
+  font-family: 'pakenhamregular';
+  src: url('public/fonts/Packenham/pakenham.woff2') format('woff2'),
+       url('public/fonts/Packenham/pakenham.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'united_kingdomregular';
+  src: url('public/fonts/UnitedKingdom/uk.woff2') format('woff2'),
+       url('public/fonts/UnitedKingdom/uk.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+
+
 body {
   margin: 0;
   padding: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: "pakenhamregular", sans-serif;
+  font-weight: 300;
+}
+
+.UnitedKingdom {
+  font-family:"united_kingdomregular";
+  font-weight: 300;
+
+}
+
+.Pakenham {
+  font-family: 'pakenhamregular';
   font-weight: 300;
 }
 

@@ -9,6 +9,7 @@
   .Navbar-title {
     color: var(--offblack);
     font-size: 30px;
+    font-family: 'united_kingdomregular';
   }
   
   .Navbar-routeContainer {

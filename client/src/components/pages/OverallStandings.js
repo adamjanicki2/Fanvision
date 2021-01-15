@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 
 import "../../utilities.css";
-import "./Standings.css";
+import "./OverallStandings.css";
 
 
 
-class Standings extends Component {
+class OverallStandings extends Component {
   constructor(props) {
     super(props);
     // Initialize Default State
@@ -26,4 +26,4 @@ class Standings extends Component {
   }
 }
 
-export default Standings;
+export default OverallStandings;

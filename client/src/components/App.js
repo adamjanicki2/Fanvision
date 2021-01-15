@@ -3,7 +3,7 @@ import { Router } from "@reach/router";
 import NotFound from "./pages/NotFound.js";
 import LoginPage from "./pages/LoginPage.js";
 import Dashboard from "./pages/Dashboard.js";
-import Standings from "./pages/Standings.js";
+import OverallStandings from "./pages/OverallStandings.js";
 import Profile from "./pages/Profile.js";
 import Predictions from "./pages/Predictions.js";
 import Navbar from "./modules/Navbar.js";
@@ -65,7 +65,7 @@ class App extends Component {
         <Router>
           <LoginPage path="/" userId={this.state.userId}/>
           <Dashboard path="/dashboard" userId={this.state.userId}/>
-          <Standings path="/standings" userId={this.state.userId}/>
+          <OverallStandings path="/overallstandings" userId={this.state.userId}/>
           <Predictions path="/predictions" userId={this.state.userId}/>
           <Profile path="/profile" userId={this.state.userId}/>
           <NotFound default />

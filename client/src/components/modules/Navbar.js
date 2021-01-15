@@ -14,7 +14,6 @@ class Navbar extends Component {
       return (
         <nav className="Navbar-container">
           <div className="Navbar-title u-inlineBlock">Fanvision</div>
-          
           <div className="Navbar-routeContainer u-inlineBlock">
           {this.props.userId !== undefined ? (
               <Link to="/dashboard" className="Navbar-route">
@@ -43,7 +42,7 @@ class Navbar extends Component {
               buttonText="Logout"
               onLogoutSuccess={this.props.handleLogout}
               onFailure={(err) => console.log(err)}
-              className="Navbar-route Navbar-logout"
+              className="NavBar-link NavBar-login"
             />
           ) : (
             <GoogleLogin
@@ -51,7 +50,7 @@ class Navbar extends Component {
               buttonText="Login"
               onSuccess={this.props.handleLogin}
               onFailure={(err) => console.log(err)}
-              className="Navbar-route Navbar-login"
+              className="NavBar-link NavBar-login"
             />
           )}
           

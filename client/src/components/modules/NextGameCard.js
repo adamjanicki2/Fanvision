@@ -22,10 +22,6 @@ class NextGameCard extends Component {
                     <div>{this.state.away_team} @ {this.state.home_team}</div>
                     <div>{this.state.time}</div>
                 </div>
-                <div className="NextGameCard-container">
-                    <div>{this.state.away_team} @ {this.state.home_team}</div>
-                    <div>{this.state.time}</div>
-                </div>
             </>
         );
     }}

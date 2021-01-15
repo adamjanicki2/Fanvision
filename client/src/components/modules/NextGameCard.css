@@ -5,6 +5,9 @@
     align-items: center;
     justify-content: center;
     font-size: large;
-    border: 1px solid black;
-
+    border: 1px solid #000000;
+    padding: var(--s);
+    margin-top : var(--s);
+    margin-bottom : var(--s);
+    width:fit-content;
 }

@@ -26,8 +26,8 @@ class Navbar extends Component {
               </Link>
             ) : (<div></div>)}
             {this.props.userId !== undefined ? (
-              <Link to="/standings" className="Navbar-route">
-                Standings
+              <Link to="/overallstandings" className="Navbar-route">
+                Overall Standings
               </Link>
             ) : (<div></div>)}
             {this.props.userId !== undefined ? (

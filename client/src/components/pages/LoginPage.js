@@ -19,12 +19,13 @@ class LoginPage extends Component {
   render() {
     return (
       <>
+        <div className="LoginPage-background">
         <h1>Temp log in page</h1>
         <h2> What we still need to change:</h2>
         <ul>
           <li>Favicon not rendering up top</li>
         </ul>
-  
+        </div>
       </>
     );
   }

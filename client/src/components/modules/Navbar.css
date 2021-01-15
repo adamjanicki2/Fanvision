@@ -1,5 +1,8 @@
 .Navbar-container {
-    padding: var(--s) var(--m);
+    padding-top: var(--s);
+    padding-bottom: var(--s);
+    padding-left: var(--m);
+    padding-right: var(--m);
     background-color: var(--red);
   }
   
@@ -35,4 +38,3 @@
   .Navbar-route + .Navbar-route {
     margin-left: var(--m);
   }
-  

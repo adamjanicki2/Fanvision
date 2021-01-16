@@ -1,5 +1,4 @@
 from basketball_reference_web_scraper import client as bb_client
-import json
 import pytz
 import datetime
 import os
@@ -11,6 +10,7 @@ MONGO_CONNECTION_URL = os.getenv('MONGO_SRV')
 
 client = MongoClient(MONGO_CONNECTION_URL)
 db = client.cluster0
+
 
 def get_schedule(end_year):
     
@@ -40,18 +40,14 @@ def get_schedule(end_year):
             games[date_] = [new_game]
     return games
 
-def insert_into_db(games):
-    for date, game_set in games.items():
-        new_entry = {
-            'date': date,
-            'games': game_set
-        }
-        res = db.schedule.insert_one(new_entry)
-    return 'success'
-
-if __name__ == '__main__':
-    pass
-    # games = get_schedule(2021)
-    # inserted = insert_into_db(games)
-    # print(inserted)
-    
+def update_yesterday_games():
+    games = get_schedule(2021)
+    yesterday = str(datetime.datetime.now() - datetime.timedelta(days=1)).split(' ')[0]
+    try:
+        yesterday_games = games[yesterday]
+    except:
+        return 'No games played yesterday'
+    filt = {'date': yesterday}
+    newvals = { "$set": {'games': yesterday_games}}
+    updated = db.schedule.update_one(filt, newvals)
+    return 'successfully updated games for '+yesterday

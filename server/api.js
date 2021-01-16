@@ -74,16 +74,16 @@ router.get("/yesterdayresults", (req, res) => {
 // });
 
 router.get("/todaygames",(req,res) => {
-  new Schedule ({date:"2020-11-01", games:[]}).save().then(() => {console.log("saved to MongoDB")});
-  res.send("hello");
-  // let today = Date();
-  // const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD");
-  // //testing
+  // new Schedule ({date:"2020-11-01", games:[]}).save().then(() => {console.log("saved to MongoDB")});
+  // res.send("hello");
+  let today = Date();
+  const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD");
+  //testing
   // console.log(Schedule.find({date: "2021-01-16" }).then((games) => {
   //   console.log(games);
   // }));
-  // Schedule.find({date: today}).then((games) => {res.send(games)});
-  });
+  Schedule.find({date: today_str}).then((games) => {res.send(games)});
+});
 
   
 

@@ -13,7 +13,7 @@
   }
   
   .Navbar-routeContainer {
-    margin-left: var(--l);
+    margin-left: var(--xxl);
   }
   
   .Navbar-route,
@@ -21,6 +21,7 @@
     color: var(--offblack);
     opacity: 0.95;
     text-decoration: none;
+    font-size: 24px;
   }
   
   .Navbar-route:hover {
@@ -33,7 +34,7 @@
   }
   
   .Navbar-route + .Navbar-route {
-    margin-left: var(--m);
+    margin-left: var(--xl);
   }
 
   .Navbar-logout {

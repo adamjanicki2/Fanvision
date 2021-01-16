@@ -47,16 +47,13 @@ class Navbar extends Component {
               buttonText="Logout"
               onLogoutSuccess={this.props.handleLogout}
               onFailure={(err) => console.log(err)}
-              
             />
           ) : (
             <GoogleLogin
               clientId={GOOGLE_CLIENT_ID}
               buttonText="Login"
               onSuccess={this.props.handleLogin}
-              onFailure={(err) => console.log(err)}
-              className="Navbar-buttonFont"
-              
+              onFailure={(err) => console.log(err)}              
             />
           )}
           </div>

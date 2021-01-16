@@ -4,5 +4,37 @@
     height: 800px;
     background-position: center;
     background-size: cover;
-    color: #ffffff;
+    color: #f1f5f2;
+}
+
+.LoginPage-descriptionContainer{
+    display:flex;
+    flex-direction: column;
+    max-width: 55%;
+    padding-top: 40px;
+    padding-left: 80px;
+
+}
+
+.LoginPage-descriptionItem{
+    text-align: justify;
+    font-size: 15.15pt;
+    color: #39393a;
+    line-height: 1.5;
+    
+}
+
+.LoginPage-bottomMessage{
+    font-family:'united_kingdomregular'; 
+    font-size: 33pt;
+    color: #c01916;
+    padding: 30px;
+    padding-left:80px;
+    padding-top: 50px;
+    flex-basis: 0;
+}
+
+.LoginPage-footerContainer{
+    display:flex;
+
 }

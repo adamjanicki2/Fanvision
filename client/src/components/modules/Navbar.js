@@ -22,7 +22,7 @@ class Navbar extends Component {
             ) : (<div></div>)}
             {this.props.userId !== undefined ? (
               <Link to="/predictions" className="Navbar-route">
-                Predictions
+                Prediction Entry
               </Link>
             ) : (<div></div>)}
             {this.props.userId !== undefined ? (

@@ -1,0 +1,29 @@
+.Predictions-predictionEntryContainer{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+   
+    padding: 10px;
+}
+
+.Predictions-submitButton{
+    background-color: #dd1c1a;
+    color: #f1f5f2;
+    
+}
+
+.Predictions-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+.Predictions-column {
+display: flex;
+flex-direction: column;
+flex-basis: 100%;
+flex: 1;
+}
+

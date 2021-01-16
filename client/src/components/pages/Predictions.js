@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-
+import NextGameCard from "../modules/NextGameCard.js";
+import PredictionCriteriaBox from "../modules/PredictionCriteriaBox.js";
 import "../../utilities.css";
 import "./Predictions.css";
 
@@ -19,8 +20,53 @@ class Predictions extends Component {
   render() {
     return (
       <>
-        <h1>Temp Predictions Page</h1>
-        <h2>Hello World</h2>
+        <h1>Prediction Entry</h1>
+        <div className = "Predictions-predictionEntryContainer">
+          <div className="Predictions-row">
+            <div className="Predictions-column">
+              <NextGameCard/>
+              <PredictionCriteriaBox/>
+            </div>
+            <div className="Predictions-column">
+              <NextGameCard/>
+              <PredictionCriteriaBox/>
+            </div>
+            <div className="Predictions-column">
+              <NextGameCard/>
+              <PredictionCriteriaBox/>
+            </div>
+          <div/>
+          <div className="Predictions-row">
+            <div className="Predictions-column">
+              <NextGameCard/>
+              <PredictionCriteriaBox/>
+            </div>
+            <div className="Predictions-column">
+              <NextGameCard/>
+              <PredictionCriteriaBox/>
+            </div>
+            <div className="Predictions-column">
+              <NextGameCard/>
+              <PredictionCriteriaBox/>
+            </div>
+          </div>
+          <div className="Predictions-row">
+            <div className="Predictions-column">
+              <NextGameCard/>
+              <PredictionCriteriaBox/>
+            </div>
+            <div className="Predictions-column">
+              <NextGameCard/>
+              <PredictionCriteriaBox/>
+            </div>
+            <div className="Predictions-column">
+              <NextGameCard/>
+              <PredictionCriteriaBox/>
+            </div>
+          </div>
+        </div>
+        </div>
+        <input type="submit" value="LOCK IN PREDICTIONS" className="Predictions-submitButton"></input>
       </>
     );
   }

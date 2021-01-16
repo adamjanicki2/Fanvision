@@ -16,11 +16,36 @@ class OverallStandings extends Component {
     // remember -- api calls go here!
   }
 
+  makeStandingsTable = () => { //table hard coded for now
+  
+  }
+
   render() {
     return (
       <>
-        <h1>Temp Standings Page</h1>
-        <h2>Hello World</h2>
+        <h1>2020-2021 NBA Season Player Standings</h1>
+        <table>
+        <tbody>
+        <tr>
+          <th>Rank</th>
+          <th>Player Name</th>
+          <th>Total Points</th>
+          <th>Accolades</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Billy Bob</td>
+          <td>150</td>
+          <td>1 Gold</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Jimmy John</td>
+          <td>94</td>
+          <td>1 Silver</td>
+        </tr>
+        </tbody>
+      </table>
       </>
     );
   }

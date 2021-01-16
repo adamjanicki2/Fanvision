@@ -49,5 +49,13 @@ def update_yesterday_games():
         return 'No games played yesterday'
     filt = {'date': yesterday}
     newvals = { "$set": {'games': yesterday_games}}
-    updated = db.schedule.update_one(filt, newvals)
+    updated = db.seasonschedules.update_one(filt, newvals)
     return 'successfully updated games for '+yesterday
+
+def update_season():
+    games = get_schedule(2021)
+    for date, game_set in games.items():
+        filt = {'date': date}
+        newvals = { "$set": {'games': game_set}}
+        updated = db.seasonschedules.update_one(filt, newvals)
+    return 'Successfully updated season'

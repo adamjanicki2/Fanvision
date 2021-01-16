@@ -8,10 +8,13 @@
 */
 
 const express = require("express");
+const moment = require('moment');
+require('moment-timezone');
 
-// import models so we can interact with the database
+// WHERE WE IMPORT OUR SCHEMAS:
 const User = require("./models/user");
-
+const Games = require("./models/game_schedule");
+const Prediction = require("./models/single_prediction");
 // import authentication library
 const auth = require("./auth");
 
@@ -20,10 +23,6 @@ const router = express.Router();
 
 //initialize socket
 const socketManager = require("./server-socket");
-
-
-//import schedule model
-const Schedule = require("./models/game_schedule.js")
 
 router.post("/login", auth.login);
 router.post("/logout", auth.logout);
@@ -45,38 +44,20 @@ router.post("/initsocket", (req, res) => {
 // |------------------------------|
 // | write your API methods below!|
 // |------------------------------|
+router.get("/yesterdayresults", (req, res) => {
+  if (true){
+    //We only need to fetch yesterday's results if the user is logged in
+    //If so, find yesterday's results in the database
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterday_str = moment(yesterday).tz("America/New_York").format("YYYY-MM-DD");
+    Games.find({'date': yesterday_str}).then((games) => {
+      console.log(games);
 
-let getDate = () => {
-  let today = new Date();
-  let dd = today.getDate();
-  let mm = today.getMonth()+1; 
-  let yyyy = today.getFullYear();
-  if(dd<10) 
-  {
-      dd='0'+dd;
-  } 
-  if(mm<10) 
-  {
-      mm='0'+mm;
+    });
   }
-  today = yyyy+'-'+mm+'-'+dd;
-  return today
-  }
-
-router.get("/todaygames",(req,res) => {
-  let today = getDate(); //this line is working
-  //testing
-  Schedule.find({date: "2020-12-22" }).then ((schedule)=> {
-
-  console.log(schedule);
-    
-  res.send(schedule)
-    
-  }
-);
-  // Schedule.find({date: today}).then((games) => {res.send(games)});
 });
-
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
   console.log(`API route not found: ${req.method} ${req.url}`);

@@ -27,7 +27,7 @@ class AllTodaysGames extends Component{
     
     render(){
         return(
-            <div>{this.props.today_schedule}</div>
+            <NextGameCard home_team="ATL"/>
         );
         
     };

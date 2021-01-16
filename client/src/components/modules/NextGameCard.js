@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./NextGameCard.css";
 
+
 class NextGameCard extends Component {
     constructor(props) {
       super(props);

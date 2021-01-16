@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import NextGameCard from "../modules/NextGameCard.js";
+import NextGameCard from "../modules/NextGameCard.js";
 import AllTodaysGames from "../modules/AllTodaysGames.js";
 import "../../utilities.css";
 import "./Dashboard.css";
@@ -20,11 +20,12 @@ class Dashboard extends Component {
     //check for prediction entry status
 
     //fetch today's games
-    get("/api/todaysgames").then((games) => {
-      console.log(games[0].games);
+    get("/api/todaygames").then((games) => {
       this.setState({
         today_schedule: games[0].games,
       });
+      console.log(this.state.today_schedule);
+      ;
     })
   };
 
@@ -37,9 +38,9 @@ class Dashboard extends Component {
     return (
       <>
         <h1>Dashboard</h1>
-        <AllTodaysGames/>
         <h2>Prediction Status: {this.state.predictionsEntered ? "Complete" : "Incomplete"}</h2>
-        <h2>Upcoming Games</h2>
+        <h2>Today's Games</h2>
+        <h2>{JSON.stringify(this.state.today_schedule)}</h2>
         <h2>Previous Prediction Results</h2>
       </>
     );

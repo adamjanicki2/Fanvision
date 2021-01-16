@@ -20,17 +20,15 @@ class LoginPage extends Component {
     return (
       <>
         <div className="LoginPage-background">
-        <h1>Temp log in page</h1>
-        <h2> What we still need to change:</h2>
-        <ul>
-          <li>Favicon not rendering up top</li>
-        </ul>
+          <header className="LoginPage-bigMessage">Predict.</header>
+          <header className="LoginPage-bigMessage">Compete.</header>
+          <header className="LoginPage-bigMessage">Win.</header>
         </div>
         <div className="LoginPage-footerContainer">
           <div className="LoginPage-bottomMessage">Put your prediction skills to the test.</div>
           <div className="LoginPage-descriptionContainer">
-            <h3 className="LoginPage-descriptionItem">Fanvision is a platform where sports fans try to forecast the winner of every NBA game played on that day. Users are awarded points for guessing the correct winner and receive bonus points for accuracy of predictions about margin of victory.</h3>
-            <h3 className="LoginPage-descriptionItem">At the end of each day of action, these predictions are checked against game results, and point totals for each user are updated. Fans can compete against each other to find out who is the most accurate predictor of them all.</h3>
+            <h3 className="LoginPage-descriptionItem">Fanvision is a platform for NBA fans eager to demonstrate their predictive abilities. For every leaguewide gameday, fans submit predictions for the outcome of each contest. Users are awarded points for guessing the correct winner and earn bonus points for accurately forecasting the margin of victory.</h3>
+            <h3 className="LoginPage-descriptionItem">At the end of each day of action, your predictions are checked against actual game results and your point total is updated. Earn medals by topping the daily standings and compete against fellow fans to find out who makes the most accurate picks!</h3>
           </div>
       </div>
       </>

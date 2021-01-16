@@ -55,6 +55,7 @@ class Navbar extends Component {
               buttonText="Login"
               onSuccess={this.props.handleLogin}
               onFailure={(err) => console.log(err)}
+              className="Navbar-buttonFont"
               
             />
           )}

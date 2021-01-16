@@ -7,8 +7,8 @@
   }
   
   .Navbar-title {
-    color: var(--offblack);
-    font-size: 30px;
+    color: var(--offwhite);
+    font-size: 36px;
     font-family: 'united_kingdomregular';
   }
   
@@ -39,3 +39,4 @@
   .Navbar-logout {
     float: right;
   }
+

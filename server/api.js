@@ -52,7 +52,7 @@ router.get("/yesterdayresults", (req, res) => {
     const yesterday = new Date(today);
     yesterday.setDate(yesterday.getDate() - 1);
     const yesterday_str = moment(yesterday).tz("America/New_York").format("YYYY-MM-DD");
-    Schedule.find({}).then((games) => {
+    Schedule.find({date: yesterday_str}).then((games) => {
       console.log(games);
       res.send(games);
     });

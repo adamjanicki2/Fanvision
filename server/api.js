@@ -85,6 +85,39 @@ router.get("/todaygames",(req,res) => {
   // Schedule.find({date: today}).then((games) => {res.send(games)});
   });
 
+  
+
+router.post("/setpredictions", auth.ensureLoggedIn, (req, res) => {
+  //How the args to this post should be structed:
+  // req.user: contains the JS object representing the logged in user
+  // req.predictions: array of the  JS objects representing the user's predictions for the day
+  //Examples:
+  //req.predictions = [
+    //   {
+    //     home_team: ATLANTA_HAWKS,
+    //     away_team: BROOKLYN_NETS,
+    //     predicted_winner: ATLANTA_HAWKS,
+    //     predicted_margin: 19,
+  
+    //   },
+    //   {
+    //     home_team: BOSTON_CELTICS,
+    //     away_team: WASHINGTON_WIZARDS,
+    //     predicted_winner: BOSTON_CELTICS,
+    //     predicted_margin: 17,
+    //   }
+    // ]
+  let today = Date(); //this line is working
+  const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD");
+  const newPredictions = new Prediction({
+    date: today_str, 
+    user_id: req.user._id,
+    user_name: req.user.name,
+    todays_predictions: req.predictions,
+  });
+  newPredictions.save();
+  console.log("Submitted "+req.user._id+"'s predictions for "+today_str);
+});
 
 
 // anything else falls to this "not found" case

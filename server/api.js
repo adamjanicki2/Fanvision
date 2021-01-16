@@ -15,6 +15,8 @@ require('moment-timezone');
 const User = require("./models/user");
 const Schedule = require("./models/seasonSchedule");
 const Prediction = require("./models/prediction");
+const Scoreboard = require("./models/scoreboard");
+
 // import authentication library
 const auth = require("./auth");
 
@@ -85,7 +87,21 @@ router.get("/todaygames",(req,res) => {
   Schedule.find({date: today_str}).then((games) => {res.send(games)});
 });
 
-  
+router.post("/updatescoreboard", auth.ensureLoggedIn, (req, res) => {
+  //structure of args:
+  //req.user: the info on the user whose score we're updating
+  //req.points: amount of points to ADD to current_score
+  Scoreboard.updateOne({user_id: req.user._id, name: req.user.name, googleid: req.user.googleid}, {current_score: req.user.current_score + req.points}).then((scores) => {
+    console.log(scores);
+  })
+});
+
+router.get("/getscoreboard", (req, res) => {
+  Scoreboard.find({}).sort({current_score: 1}).then((scores) => {
+    //console.log(scores);
+    res.send(scores);
+  });
+});
 
 router.post("/setpredictions", auth.ensureLoggedIn, (req, res) => {
   //How the args to this post should be structed:

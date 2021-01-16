@@ -1,7 +1,7 @@
 const { OAuth2Client } = require("google-auth-library");
 const User = require("./models/user");
 const socketManager = require("./server-socket");
-
+const Scoreboard = require("./models/scoreboard");
 const CLIENT_ID = "911618425792-hk0acmfunco1f8qg441iih4pvm01cuae.apps.googleusercontent.com";
 const client = new OAuth2Client(CLIENT_ID);
 
@@ -24,10 +24,24 @@ function getOrCreateUser(user) {
     const newUser = new User({
       name: user.name,
       googleid: user.sub,
+      gold_dates: [],
+      silver_dates: [],
+      bronze_dates: [],
     });
 
     return newUser.save();
   });
+}
+
+function createNewScoreboardUser(user){
+  const newScore = new Scoreboard({
+    name: user.name,
+    googleid: user.googleid,
+    user_id: user._id,
+    current_score: 0,
+  });
+  newScore.save();
+  //console.log(newScore);
 }
 
 function login(req, res) {
@@ -35,6 +49,8 @@ function login(req, res) {
     .then((user) => getOrCreateUser(user))
     .then((user) => {
       // persist user in the session
+      //console.log(user._id);
+      createNewScoreboardUser(user);
       req.session.user = user;
       res.send(user);
     })

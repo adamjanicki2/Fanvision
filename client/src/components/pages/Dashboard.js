@@ -38,7 +38,12 @@ class Dashboard extends Component {
     return (
       <>
         <h1>Dashboard</h1>
-        <h2>Prediction Status: {this.state.predictionsEntered ? "Complete" : "Incomplete"}</h2>
+        <div className="u-inlineBlock">
+          <h2 className="u-inlineBlock">Prediction Status: </h2>
+          {this.state.predictionsEntered ? 
+          (<h2 className="u-inlineBlock CompleteGreen">Complete</h2>) : (<h2 className="u-inlineBlock IncompleteRed">Incomplete</h2>)
+          }
+        </div>
         <h2>Today's Games</h2>
         <h2>{JSON.stringify(this.state.today_schedule)}</h2>
         <h2>Previous Prediction Results</h2>

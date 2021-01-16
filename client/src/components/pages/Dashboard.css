@@ -1,0 +1,13 @@
+.IncompleteRed {
+    color: var(--red);
+    margin-left: var(--s);
+}
+
+.PredictionStatus {
+    float: right;
+}
+
+.CompleteGreen {
+    color: var(--brightgreen);
+    margin-left: var(--s);
+}

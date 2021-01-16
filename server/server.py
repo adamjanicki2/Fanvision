@@ -5,8 +5,8 @@ app = Flask(__name__)
 
 @app.route('/rescrapescheduleagain', methods = ['GET'])
 def rescrapescheduleagain():
-    #updated = update_yesterday_games()
-    updated = update_season()
+    updated = update_yesterday_games()
+    #updated = update_season()
     return updated, 200
 
 if __name__ == '__main__':

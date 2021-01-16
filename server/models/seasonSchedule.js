@@ -6,4 +6,4 @@ const scheduleSchema = new mongoose.Schema({
 });
 
 // compile model from schema
-module.exports = mongoose.model("schedule", scheduleSchema);
+module.exports = mongoose.model("seasonSchedule", scheduleSchema);

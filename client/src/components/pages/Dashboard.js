@@ -3,6 +3,7 @@ import "../../utilities.css";
 import "./Dashboard.css";
 import { get, post } from "../../utilities.js";
 import NextGameCard from "../modules/NextGameCard.js";
+import ResultGameCard from "../modules/ResultGameCard.js";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class Dashboard extends Component {
     // Initialize Default State
     this.state = {
       today_schedule: [],
+      yesterday_results: [],
       predictionsEntered: false,
     };
   };
@@ -19,8 +21,11 @@ class Dashboard extends Component {
       this.setState({
         today_schedule: games[0].games,
       });
-      //console.log(this.state.today_schedule);
-      
+     
+    get("/api/yesterdayresults").then((results) => {
+      // console.log(results[0].games);
+      this.setState({yesterday_results: results[0].games,})
+    });
   });
   };
 
@@ -30,6 +35,7 @@ class Dashboard extends Component {
 
 
   render() {
+    //make list of games for today's games
     let gamesList = null;
     const hasGames = this.state.today_schedule.length !== 0;
     if (hasGames){
@@ -44,6 +50,25 @@ class Dashboard extends Component {
     else{
       gamesList = <div>No Games today!</div>;
     }
+
+    //make list of game results for yesterday's games
+    let resultsList = null;
+    const hadGames = this.state.yesterday_results.length !== 0;
+    if (hadGames){
+      resultsList = this.state.yesterday_results.map((result) => (
+          <ResultGameCard
+            home_team={result.home_team}
+            away_team={result.away_team}
+            start_time={result.start_time}
+            home_team_score={result.home_team_score}
+            away_team_score={result.away_team_score}
+          />
+      ));
+    }
+    else{
+      resultsList = <div>No Games Yesterday</div>;
+    }
+
     return (
       <>
         <h1>Dashboard</h1>
@@ -57,6 +82,7 @@ class Dashboard extends Component {
         <h2>Today's Games</h2>
         <div className = "NextGameCard-allGamesContainer">{gamesList}</div>
         <h2>Previous Prediction Results</h2>
+        <div className = "ResultGameCard-allGamesContainer">{resultsList}</div>
       </>
     );
   }

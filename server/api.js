@@ -130,6 +130,12 @@ router.post("/setpredictions", auth.ensureLoggedIn, (req, res) => {
   console.log("Submitted "+req.user._id+"'s predictions for "+today_str);
 });
 
+router.get("/whoami/lastpredictions", auth.ensureLoggedIn, (req, res) => {
+  res.send(req.user.name);
+});
+
+
+
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

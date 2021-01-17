@@ -35,6 +35,8 @@ class Dashboard extends Component {
 
 
   render() {
+
+    
     //make list of games for today's games
     let gamesList = null;
     const hasGames = this.state.today_schedule.length !== 0;

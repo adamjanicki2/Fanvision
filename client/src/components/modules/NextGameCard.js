@@ -38,7 +38,7 @@ class NextGameCard extends Component {
             PHI: "Wells Fargo Center",
             PHX: "Talking Stick Resort Arena",
             POR: "Moda Center",
-            SAC: "Golden1 Center",
+            SAC: "Golden 1 Center",
             SAS: "AT&T Center",
             TOR: "Scotiabank Arena",
             UTA: "Vivint Smart Home Arena",

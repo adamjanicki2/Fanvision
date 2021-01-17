@@ -17,7 +17,7 @@ class PredictionCriteriaBox extends Component {
                     <div>
                         <label for="team-select">Predicted Winner:</label>
                         <select name="gameprediction" id="team-select">
-                            <option disabled="disabled" selected="selected">--Pick One--</option>
+                            <option disabled="disabled" selected="selected">--SELECT--</option>
                             <option value={this.props.away_team}>{this.props.away_team}</option>
                             <option value={this.props.home_team}>{this.props.home_team}</option>
                         </select>

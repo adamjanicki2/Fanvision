@@ -130,6 +130,15 @@ router.post("/setpredictions", auth.ensureLoggedIn, (req, res) => {
   console.log("Submitted "+req.user._id+"'s predictions for "+today_str);
 });
 
+router.get('/getprediction', auth.ensureLoggedIn, (req, res) => {
+  //Args: req.user, user to get predictions for date
+  //      req.date, date to search for
+  Prediction.find({date: req.date, user_id: req.user._id, user_name: req.user.name}).then((predictions) => {
+    res.send(predictions);
+  });
+
+});
+
 router.get("/whoami/lastpredictions", auth.ensureLoggedIn, (req, res) => {
   res.send(req.user.name);
 });

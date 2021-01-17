@@ -55,7 +55,7 @@ class Dashboard extends Component {
         </div>
 
         <h2>Today's Games</h2>
-        {gamesList}
+        <div className = "NextGameCard-allGamesContainer">{gamesList}</div>
         <h2>Previous Prediction Results</h2>
       </>
     );

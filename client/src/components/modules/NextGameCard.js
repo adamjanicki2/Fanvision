@@ -16,7 +16,7 @@ class NextGameCard extends Component {
             <>
                 <div className="NextGameCard-container">
                     <div>{this.props.away_team} vs {this.props.home_team}</div>
-                    <div className="NextGameCard-time">{this.props.start_time}</div>
+                    <div className="NextGameCard-time">{this.props.start_time} PM ET</div>
                 </div> 
             </>
         );

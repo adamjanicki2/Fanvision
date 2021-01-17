@@ -13,6 +13,7 @@ class Navbar extends Component {
     render() {
       return (
         <nav className="Navbar-container">
+          {/* ADD Fanvision Logo Here!! Location for logo: client/src/public/img/fanvision48.png */}
           <div className="Navbar-title u-inlineBlock">Fanvision</div>
           <div className="Navbar-routeContainer u-inlineBlock">
           {this.props.userId !== undefined ? (

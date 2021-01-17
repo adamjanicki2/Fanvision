@@ -1,31 +1,27 @@
 import React, { Component } from "react";
-import NextGameCard from "../modules/NextGameCard.js";
-import AllTodaysGames from "../modules/AllTodaysGames.js";
 import "../../utilities.css";
 import "./Dashboard.css";
 import { get, post } from "../../utilities.js";
+import NextGameCard from "../modules/NextGameCard.js";
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     // Initialize Default State
     this.state = {
-      today_schedule: null,
+      today_schedule: [],
       predictionsEntered: false,
     };
   };
 
   componentDidMount() {
-    //check for prediction entry status
-
-    //fetch today's games
     get("/api/todaygames").then((games) => {
       this.setState({
         today_schedule: games[0].games,
       });
-      console.log(this.state.today_schedule);
-      ;
-    })
+      //console.log(this.state.today_schedule);
+      
+  });
   };
 
 
@@ -34,6 +30,20 @@ class Dashboard extends Component {
 
 
   render() {
+    let gamesList = null;
+    const hasGames = this.state.today_schedule.length !== 0;
+    if (hasGames){
+      gamesList = this.state.today_schedule.map((game) => (
+          <NextGameCard 
+            home_team={game.home_team}
+            away_team={game.away_team}
+            start_time={game.start_time}
+          />
+      ));
+    }
+    else{
+      gamesList = <div>No Games today!</div>;
+    }
     return (
       <>
         <h1>Dashboard</h1>
@@ -45,7 +55,7 @@ class Dashboard extends Component {
         </div>
 
         <h2>Today's Games</h2>
-        <h2>{JSON.stringify(this.state.today_schedule)}</h2>
+        {gamesList}
         <h2>Previous Prediction Results</h2>
       </>
     );
@@ -53,15 +63,3 @@ class Dashboard extends Component {
 }
 
 export default Dashboard;
-
-       /* <div className="NextGameCard-allGamesContainer">
-          <NextGameCard/>
-          <NextGameCard/>
-          <NextGameCard/>
-          <NextGameCard/>
-          <NextGameCard/>
-          <NextGameCard/>
-          <NextGameCard/>
-          <NextGameCard/>
-          <NextGameCard/>
-        </div>*/

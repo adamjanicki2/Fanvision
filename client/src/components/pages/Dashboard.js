@@ -48,7 +48,7 @@ class Dashboard extends Component {
       ));
     }
     else{
-      gamesList = <div>No Games today!</div>;
+      gamesList = <div>No Games Today :(</div>;
     }
 
     //make list of game results for yesterday's games
@@ -66,14 +66,14 @@ class Dashboard extends Component {
       ));
     }
     else{
-      resultsList = <div>No Games Yesterday</div>;
+      resultsList = <div>No Games Yesterday :(</div>;
     }
 
     return (
       <>
         <h1>Dashboard</h1>
         <div className="u-inlineBlock">
-          <h2 className="u-inlineBlock">Prediction Status: </h2>
+          <h2 className="u-inlineBlock">Prediction Entry Status: </h2>
           {this.state.predictionsEntered ? 
           (<h2 className="u-inlineBlock CompleteGreen">Complete</h2>) : (<h2 className="u-inlineBlock IncompleteRed">Incomplete</h2>)
           }
@@ -81,7 +81,7 @@ class Dashboard extends Component {
 
         <h2>Today's Games</h2>
         <div className = "NextGameCard-allGamesContainer">{gamesList}</div>
-        <h2>Previous Prediction Results</h2>
+        <h2>Yesterday's Results</h2>
         <div className = "ResultGameCard-allGamesContainer">{resultsList}</div>
       </>
     );

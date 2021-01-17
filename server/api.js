@@ -105,16 +105,16 @@ router.post("/setpredictions", auth.ensureLoggedIn, (req, res) => {
   //Examples:
   //req.predictions = [
     //   {
-    //     home_team: ATLANTA_HAWKS,
-    //     away_team: BROOKLYN_NETS,
-    //     predicted_winner: ATLANTA_HAWKS,
+    //     home_team: ATL,
+    //     away_team: BKN,
+    //     predicted_winner: ATL,
     //     predicted_margin: 19,
   
     //   },
     //   {
-    //     home_team: BOSTON_CELTICS,
-    //     away_team: WASHINGTON_WIZARDS,
-    //     predicted_winner: BOSTON_CELTICS,
+    //     home_team: BOS,
+    //     away_team: WAS,
+    //     predicted_winner: BOS,
     //     predicted_margin: 17,
     //   }
     // ]
@@ -139,9 +139,7 @@ router.get('/getprediction', auth.ensureLoggedIn, (req, res) => {
 
 });
 
-router.get("/whoami/lastpredictions", auth.ensureLoggedIn, (req, res) => {
-  res.send(req.user.name);
-});
+
 
 
 

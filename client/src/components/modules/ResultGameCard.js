@@ -18,9 +18,9 @@ class ResultGameCard extends Component {
                     <div className="ResultGameCard-scoreIdentifier">Actual Result:</div>
                     <div className="ResultGameCard-scoreActual">{this.props.away_team_score} - {this.props.home_team_score}</div>
                     <div className="ResultGameCard-scoreIdentifier">Your Prediction:</div>
-                    <div className="ResultGameCard-scorePredicted">XX - XX</div>
+                    <div className="ResultGameCard-scorePredicted">{this.props.predicted_winner} by {this.props.predicted_margin}</div>
                     <div className="ResultGameCard-scoreIdentifier">Points Earned:</div>
-                    <div>XX</div>
+                    <div>{this.props.points_earned}</div>
                 </div> 
             </>
         );

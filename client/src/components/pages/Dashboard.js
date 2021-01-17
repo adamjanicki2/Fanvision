@@ -12,6 +12,7 @@ class Dashboard extends Component {
     this.state = {
       today_schedule: [],
       yesterday_results: [],
+      yesterday_predictions: [],
       predictionsEntered: false,
     };
   };
@@ -26,16 +27,66 @@ class Dashboard extends Component {
       // console.log(results[0].games);
       this.setState({yesterday_results: results[0].games,})
     });
+
+    // get("/api/getprediction").then((predictions) => {
+    //   // console.log(results[0].games);
+    //   console.log()
+    //   this.setState({yesterday_predictions: predictions[0].predictions,})
+    // });
   });
   };
 
-
+  //TODO determine how many points the user earned
+  awardPoints () {
+    return 69;
+  }
 
  
 
 
   render() {
 
+    // const predictionsList = this.state.yesterday_predictions;
+    //hardcoded predictions list for now
+    const predictionsList = [{
+      home_team: "SAS",
+      away_team: "HOU",
+      predicted_winner: "SAS",
+      predicted_margin: 19,
+
+    },
+    {
+      home_team: "BKN",
+      away_team: "ORL",
+      predicted_winner: "BKN",
+      predicted_margin: 11,
+    },
+    {
+      home_team: "TOR",
+      away_team: "CHA",
+      predicted_winner: "TOR",
+      predicted_margin: 17,
+    },
+    {
+      home_team: "MEM",
+      away_team: "PHI",
+      predicted_winner: "MEM",
+      predicted_margin: 3,
+    },
+    {
+      home_team: "MIA",
+      away_team: "DET",
+      predicted_winner: "MIA",
+      predicted_margin: 8,
+    },
+    {
+      home_team: "POR",
+      away_team: "ATL",
+      predicted_winner: "POR",
+      predicted_margin: 1,
+    }];
+
+    
     
     //make list of games for today's games
     let gamesList = null;
@@ -54,22 +105,47 @@ class Dashboard extends Component {
     }
 
     //make list of game results for yesterday's games
-    let resultsList = null;
+    let resultsList = [];
     const hadGames = this.state.yesterday_results.length !== 0;
     if (hadGames){
-      resultsList = this.state.yesterday_results.map((result) => (
+      for (let i=0;i<this.state.yesterday_results.length;i++){
+        let result = this.state.yesterday_results;
+        resultsList.push(
           <ResultGameCard
-            home_team={result.home_team}
-            away_team={result.away_team}
-            start_time={result.start_time}
-            home_team_score={result.home_team_score}
-            away_team_score={result.away_team_score}
+            home_team={result[i].home_team}
+            away_team={result[i].away_team}
+            start_time={result[i].start_time}
+            home_team_score={result[i].home_team_score}
+            away_team_score={result[i].away_team_score}
+            predicted_winner={predictionsList[i].predicted_winner}
+            predicted_margin={predictionsList[i].predicted_margin}
+            points_earned={this.awardPoints()}
           />
-      ));
+        );
+      };
+
     }
     else{
       resultsList = <div>No Games Yesterday :(</div>;
     }
+
+    // //make list of user predictions from yesterday
+    // let predictionssList = null;
+    // const hadGames = this.state.yesterday_predictions.length !== 0;
+    // if (hadGames){
+    //   predictionsList = this.state.yesterday_predictions.map((prediction) => (
+    //       <ResultGameCard
+    //         home_team={result.home_team}
+    //         away_team={result.away_team}
+    //         start_time={result.start_time}
+    //         home_team_score={result.home_team_score}
+    //         away_team_score={result.away_team_score}
+    //       />
+    //   ));
+    // }
+    // else{
+    //   predictionsList = null;
+    // }
 
     return (
       <>

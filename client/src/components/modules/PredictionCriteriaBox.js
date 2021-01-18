@@ -5,28 +5,34 @@ class PredictionCriteriaBox extends Component {
     constructor(props) {
       super(props);
       this.state = {
+        home_team: this.props.home_team,
+        away_team: this.props.away_team,
         predicted_winner: "",
         predicted_margin: 0,
       };
     }
 
     componentDidMount(){
-        console.log(this.props.home_team)
+
     }
 
     // called whenever the user makes entry into predicted winner box
     handleChangeWinner = (event) => {
-        this.setState({
-        predicted_winner: event.target.value,
-        });
+        this.setState({predicted_winner: event.target.value,});
     };
 
     // called whenever the user makes entry into margin box
     handleChangeMargin = (event) => {
-        this.setState({
-          predicted_margin: event.target.value,
-        });
-      };
+        this.setState({predicted_margin: event.target.value},)
+    };
+
+    componentDidUpdate() {
+        if (this.props.onChange){
+            this.props.onChange(this.state);
+        }
+    }
+       
+    
 
     render() {
         return(

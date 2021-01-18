@@ -35,11 +35,11 @@ class Profile extends Component {
       <>
         <h1>{this.state.name}</h1>
         <h2>This is your profile page!</h2>
-        <h2>Gold Count: {this.state.gold_dates.length}</h2>
-        <h2>Gold Dates: {this.state.gold_count}</h2>
-        <h2>Silver Count: {this.state.silver_dates.length}</h2>
+        <h2>Gold Count: {this.state.gold_dates}</h2>
+        <h2>Gold Dates: {this.state.gold_dates}</h2>
+        <h2>Silver Count: {this.state.silver_dates}</h2>
         <h2>Silver Dates: {this.state.silver_dates}</h2>
-        <h2>Bronze Count: {this.state.bronze_dates.length}</h2>
+        <h2>Bronze Count: {this.state.bronze_dates}</h2>
         <h2>Bronze Dates: {this.state.bronze_dates}</h2>
       </>
     );

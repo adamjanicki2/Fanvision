@@ -5,6 +5,9 @@ const scoreboardSchema = new mongoose.Schema({
   user_id: String,
   googleid: String,
   current_score: Number,
+  gold: Number,
+  silver: Number,
+  bronze: Number,
 });
 
 // compile model from schema

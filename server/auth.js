@@ -34,14 +34,24 @@ function getOrCreateUser(user) {
 }
 
 function createNewScoreboardUser(user){
-  const newScore = new Scoreboard({
-    name: user.name,
-    googleid: user.googleid,
-    user_id: user._id,
-    current_score: 0,
-  });
-  newScore.save();
-  //console.log(newScore);
+  let in_scoreboard;
+  const userscoreboard = Scoreboard.find({user_id: user._id, name: user.name}).then((existing) => {
+    in_scoreboard = existing.length !== 0;
+    console.log(in_scoreboard)
+    if (!in_scoreboard){
+      const newScore = new Scoreboard({
+        name: user.name,
+        googleid: user.googleid,
+        user_id: user._id,
+        current_score: 0,
+        gold: 0,
+        silver: 0,
+        bronze: 0,
+      });
+      newScore.save();
+    }
+  })
+  
 }
 
 function login(req, res) {

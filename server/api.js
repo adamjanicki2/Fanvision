@@ -104,7 +104,7 @@ router.post("/updatescoreboard", auth.ensureLoggedIn, (req, res) => {
   //structure of args:
   //req.user: the info on the user whose score we're updating
   //req.points: amount of points to ADD to current_score
-  Scoreboard.updateOne({user_id: req.user._id, name: req.user.name, googleid: req.user.googleid}, {current_score: req.user.current_score + req.points}).then((scores) => {
+  Scoreboard.updateOne({user_id: req.user._id, name: req.user.name, googleid: req.user.googleid}, {current_score: req.user.current_score + req.points, gold: req.user.gold_dates.length, silver: req.user.silver_dates.length, bronze: req.user.bronze_dates.length}).then((scores) => {
     console.log(scores);
   })
 });

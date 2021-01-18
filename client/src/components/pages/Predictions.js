@@ -41,15 +41,13 @@ class Predictions extends Component {
         this.setState({predictionsEntered: true})
         }
       });
+
+
   };
 
 
 
-  //TODO: fetches all content in PredictionCriteraBox Components and posts them to backend
-  postPredictions = () => {
-    
 
-  };
   //Calling setPredictions(predictionData); will post predictionData for today's date for current user to mongo
   setPredictions = (predictionData) => {
     post('/api/setpredictions', predictionData).then((result) => {
@@ -61,43 +59,33 @@ class Predictions extends Component {
 
 
   render() {
-    //make predictionsList with incomplete prediction objects
-    const home_teams = this.state.today_schedule.map((game) => (game.home_team)); //list of home_teams playing today (indices line up)
-    const away_teams = this.state.today_schedule.map((game) => (game.away_team)); //list of home_teams playing today
-    let predictionsList = [];
-    for (let i=0; i<home_teams.length; i++){
-      predictionsList.push({
-        home_team: home_teams[i], 
-        away_team: away_teams[i],
-        predicted_winner: "",
-        predicted_margin: 0,
-      }
-      );
-    }
-
-    console.log("PREDICTIONS LIST:"+predictionsList)
-    
+     
+    let allPredictionEntries=[]
     //runs everytime a PredictionCriteriaBox is updated by the user's inputs
     const eventhandler = (data) => {
+      console.log(data)
     //check that the prediction fields are all filled
       if (data.predicted_winner !== "" && data.predicted_margin !==0){
-        console.log(data)
-        //replace the old prediction with the new one
-      //   let obj = predictionsList.find((prediction, index) => {
-      //     if (prediction.home_team === data.home_team) {
-      //         predictionsList[index] = { 
-      //           home_team: data.home_team, 
-      //           away_team: data.away_team, 
-      //           predicted_winner: data.predicted_winner,
-      //           predicted_margin: data.predicted_margin
-      //         }
-      //         return true; // stop searching
-      //     }
-      // });
+        const data_home_team = data.home_team
+        //see if the game is already in allPredictionEntires
+        let found = false;
+        for(let i = 0; i < allPredictionEntries.length; i++) {
+            if (allPredictionEntries[i].home_team == data_home_team) {
+                found = true;
+                console.log("found game already exists");
+                break;
+                }}
+        if (found === false){ //if the game wasn't predicted yet, append to list
+          console.log("game did not yet exist, pushed new game");
+          allPredictionEntries.push(data);
+        } else{
+          console.log("modifying existing game")
+          allPredictionEntries = allPredictionEntries.map(obj => [data].find(o => o.home_team === obj.home_team) || obj);
+        }
+      console.log(allPredictionEntries)
+      }
+}
     
-    }
-    
-  }
 
     //make list of NextGameCards for today's games
     let gamesList = null;
@@ -142,7 +130,7 @@ class Predictions extends Component {
         <div className = "NextGameCard-allGamesContainer">  
         {gameEntryVisualList}
         </div>
-        <button onClick={this.postPredictions} disabled={this.state.predictionsEntered} className="Predictions-submitButton">LOCK IN PREDICTIONS</button>
+        <button onClick={this.setPredictions(allPredictionEntries)} disabled={this.state.predictionsEntered} className="Predictions-submitButton">LOCK IN PREDICTIONS</button>
       </>
     );
   }

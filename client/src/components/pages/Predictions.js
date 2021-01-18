@@ -13,17 +13,25 @@ class Predictions extends Component {
     // Initialize Default State
     this.state = {
       today_schedule: [],
+      user_id: null,
     };
   }
 
   componentDidMount() {
-    // remember -- api calls go here!
+ 
+    //call api to get today's games
     get("/api/todaygames").then((games) => {
       this.setState({today_schedule: games[0].games})});
-    };
-  
-  makeEntryElement = (gamesList,predictionCritList) =>{
-    
+
+    //call api to get user id
+    get("/api/whoami").then((user) => {
+      this.setState({user_id: user._id});
+    });
+  };
+
+  //TODO: fetches all content in PredictionCriteraBox Components and posts them to backend
+  postPredictions() {
+    console.log("you clicked the button amazing");
   };
   
 
@@ -68,7 +76,7 @@ class Predictions extends Component {
         <div className = "NextGameCard-allGamesContainer">  
         {gameEntryVisualList}
         </div>
-        <input type="submit" value="LOCK IN PREDICTIONS" className="Predictions-submitButton"></input>
+        <button onClick={this.postPredictions} className="Predictions-submitButton">LOCK IN PREDICTIONS</button>
       </>
     );
   }

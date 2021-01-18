@@ -138,25 +138,14 @@ router.post("/setpredictions", (req, res) => {
   //   ]
   let today = Date(); //this line is working
   const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD");
-
-  Prediction.find({date: today_str, user_id: req.user._id}).then((predictions) => {
-    if (predictions.length == 0 && req.entered == false && req.predictions.length !== 0){
-      const newPredictions = new Prediction({
-        date: today_str, 
-        user_id: req.user._id,
-        user_name: req.user.name,
-        todays_predictions: req.predictions,
-      });
-      newPredictions.save();
-      res.send("Submitted "+req.user._id+"'s predictions for "+today_str);
-      console.log("Successfully sent predictions for "+today_str);
-    }else{
-      res.send([]);
-      console.log("You already submitted predictions today, or predictions were empty");
-    }
+  const newPredictions = new Prediction({
+    date: today_str, 
+    user_id: req.user._id,
+    user_name: req.user.name,
+    todays_predictions: req.predictions,
   });
+  newPredictions.save().then((saved) => res.send("Submitted "+req.user._id+"'s predictions for "+today_str));
 
-  
 });
 
 router.get('/getprediction', (req, res) => {

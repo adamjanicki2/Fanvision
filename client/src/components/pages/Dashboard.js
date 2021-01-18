@@ -43,10 +43,7 @@ class Dashboard extends Component {
     let today = Date();
     const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD");
     get('/api/getprediction', {date: today_str}).then((prediction) => {
-      console.log("prediction:"+prediction)
-      if (prediction.length !== 0){
-        this.setState({predictionsEntered: true})
-        }
+        this.setState({predictionsEntered: true});
       });
   });
   };

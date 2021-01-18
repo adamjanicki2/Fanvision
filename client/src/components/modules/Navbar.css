@@ -15,7 +15,9 @@
   .Navbar-routeContainer {
     margin-left: var(--xxl);
   }
-  
+  .Navbar-name{
+    margin-right: 12px;
+  }
   .Navbar-route,
   .Navbar-route:visited {
     color: var(--offblack);

@@ -54,7 +54,6 @@ class Predictions extends Component {
     console.log(predictionData);
     console.log("predictions entered? : ");
     console.log(predictions_entered_yet);
-    console.log("button_pressed");
     if (this.state.predictionsEntered || predictionData.length == 0){
       console.log("Predictions: ");
       console.log(predictionData);
@@ -145,7 +144,7 @@ class Predictions extends Component {
         {gameEntryVisualList}
         </div>
         {this.state.predictionsEntered ? 
-          (<h2>You have locked in predictions for the day!</h2>) : (<button onClick={this.setPredictions(allPredictionEntries, this.state.predictionsEntered)} className="Predictions-submitButton">LOCK IN PREDICTIONS</button>)
+          (<h2>You have locked in predictions for the day!</h2>) : (<button onClick={console.log("Button clicked!")} className="Predictions-submitButton">LOCK IN PREDICTIONS</button>)
           }
         
       </>

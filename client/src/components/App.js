@@ -24,6 +24,7 @@ class App extends Component {
     super(props);
     this.state = {
       userId: undefined,
+      user_name: '',
     };
   }
 
@@ -31,7 +32,7 @@ class App extends Component {
     get("/api/whoami").then((user) => {
       if (user._id) {
         // they are registed in the database, and currently logged in.
-        this.setState({ userId: user._id });
+        this.setState({ userId: user._id , user_name: user.name});
       }
     });
   }
@@ -60,6 +61,7 @@ class App extends Component {
           handleLogin={this.handleLogin}
           handleLogout={this.handleLogout}
           userId={this.state.userId}
+          name={this.state.user_name}
         />
         
         <Router>

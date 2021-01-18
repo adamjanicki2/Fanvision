@@ -10,6 +10,7 @@ class Dashboard extends Component {
     super(props);
     // Initialize Default State
     this.state = {
+      user_id: null,
       today_schedule: [],
       yesterday_results: [],
       yesterday_predictions: [],
@@ -18,14 +19,20 @@ class Dashboard extends Component {
   };
 
   componentDidMount() {
+    //call api to get today's games
     get("/api/todaygames").then((games) => {
       this.setState({
         today_schedule: games[0].games,
       });
      
+    //call api to get yesterday's game scores/results
     get("/api/yesterdayresults").then((results) => {
-      // console.log(results[0].games);
       this.setState({yesterday_results: results[0].games,})
+    });
+
+    //call api to get user id
+    get("/api/whoami").then((user) => {
+      this.setState({user_id: user._id,})
     });
 
     // get("/api/getprediction").then((predictions) => {
@@ -128,24 +135,6 @@ class Dashboard extends Component {
     else{
       resultsList = <div>No Games Yesterday :(</div>;
     }
-
-    // //make list of user predictions from yesterday
-    // let predictionssList = null;
-    // const hadGames = this.state.yesterday_predictions.length !== 0;
-    // if (hadGames){
-    //   predictionsList = this.state.yesterday_predictions.map((prediction) => (
-    //       <ResultGameCard
-    //         home_team={result.home_team}
-    //         away_team={result.away_team}
-    //         start_time={result.start_time}
-    //         home_team_score={result.home_team_score}
-    //         away_team_score={result.away_team_score}
-    //       />
-    //   ));
-    // }
-    // else{
-    //   predictionsList = null;
-    // }
 
     return (
       <>

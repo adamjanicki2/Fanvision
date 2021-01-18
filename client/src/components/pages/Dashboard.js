@@ -143,8 +143,7 @@ class Dashboard extends Component {
     else{
       resultsList = <div>No Games Yesterday :(</div>;
     }
-
-    return (
+    let html_to_display = this.state.user_id ? (
       <>
         <h1>Dashboard</h1>
         <div className="u-inlineBlock">
@@ -159,7 +158,8 @@ class Dashboard extends Component {
         <h2>Yesterday's Results</h2>
         <div className = "ResultGameCard-allGamesContainer">{resultsList}</div>
       </>
-    );
+    ) : (<h2>Please log in to display dashboard!</h2>);
+    return html_to_display;
   }
 }
 

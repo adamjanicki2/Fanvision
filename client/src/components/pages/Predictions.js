@@ -41,23 +41,6 @@ class Predictions extends Component {
         this.setState({predictionsEntered: true})
         }
       });
-
-
-    //make predictionsList with incomplete prediction objects
-    const home_teams = this.state.today_schedule.map((game) => (game.home_team)); //list of home_teams playing today (indices line up)
-    const away_teams = this.state.today_schedule.map((game) => (game.away_team)); //list of home_teams playing today
-    let predictionsList = [];
-    for (let i=0; i<home_teams.length; i++){
-      predictionsList.push({
-        home_team: home_teams[i], 
-        away_team: away_teams[i],
-        predicted_winner: "",
-        predicted_margin: 0,
-      }
-      );
-    }
-    console.log("PREDICTIONS LIST:"+predictionsList)
-    this.setState({predictionObjects: predictionsList,});
   };
 
 
@@ -78,7 +61,21 @@ class Predictions extends Component {
 
 
   render() {
-    
+    //make predictionsList with incomplete prediction objects
+    const home_teams = this.state.today_schedule.map((game) => (game.home_team)); //list of home_teams playing today (indices line up)
+    const away_teams = this.state.today_schedule.map((game) => (game.away_team)); //list of home_teams playing today
+    let predictionsList = [];
+    for (let i=0; i<home_teams.length; i++){
+      predictionsList.push({
+        home_team: home_teams[i], 
+        away_team: away_teams[i],
+        predicted_winner: "",
+        predicted_margin: 0,
+      }
+      );
+    }
+
+    console.log("PREDICTIONS LIST:"+predictionsList)
     
     //runs everytime a PredictionCriteriaBox is updated by the user's inputs
     const eventhandler = (data) => {

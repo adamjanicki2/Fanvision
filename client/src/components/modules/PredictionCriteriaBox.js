@@ -13,7 +13,6 @@ class PredictionCriteriaBox extends Component {
     }
 
     componentDidMount(){
-
     }
 
     // called whenever the user makes entry into predicted winner box

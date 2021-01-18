@@ -144,7 +144,7 @@ router.post("/setpredictions", (req, res) => {
     user_name: req.user.name,
     todays_predictions: req.predictions,
   });
-  newPredictions.save().then((saved) => res.send("Submitted "+req.user._id+"'s predictions for "+today_str));
+  newPredictions.save().then((saved) => res.send(saved));
 
 });
 
@@ -152,7 +152,6 @@ router.get('/getprediction', (req, res) => {
   //Args: req.user, user to get predictions for date
   //      req.date, date to search for
   Prediction.find({date: req.date, user_id: req.user._id}).then((predictions) => {
-    console.log(predictions);
     res.send(predictions);
   });
 

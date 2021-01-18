@@ -36,7 +36,7 @@ class Predictions extends Component {
     let today = Date();
     const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD");
     get('/api/getprediction', {date: today_str}).then((prediction) => {
-        this.setState({predictionsEntered: true})
+        this.setState({predictionsEntered: true});
       });
 
 
@@ -47,9 +47,9 @@ class Predictions extends Component {
 
   //Calling setPredictions(predictionData); will post predictionData for today's date for current user to mongo
   setPredictions = (predictionData) => {
-    
+    console.log('PRINTING PREDICTION DATA:')
+    console.log(predictionData);
     if (this.state.predictionsEntered){
-      
       return
     }
     else{ post('/api/setpredictions', {predictions: predictionData}).then((result) => {
@@ -134,7 +134,7 @@ class Predictions extends Component {
         {gameEntryVisualList}
         </div>
         {this.state.predictionsEntered ? 
-          (<h2>You have locked in predictions for the day!</h2>) : (<button onClick={() => {this.setPredictions(this.state.predictionObjects)}} className="Predictions-submitButton">LOCK IN PREDICTIONS</button>)
+          (<h2>You have locked in predictions for the day!</h2>) : (<button onClick={() => {console.log(allPredictionEntries)}} className="Predictions-submitButton">LOCK IN PREDICTIONS</button>)
           }
         
       </>

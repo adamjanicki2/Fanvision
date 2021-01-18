@@ -45,11 +45,16 @@ class Predictions extends Component {
 
 
   //TODO: fetches all content in PredictionCriteraBox Components and posts them to backend
-  postPredictions() {
-    console.log("you clicked the button amazing");
-  };
+  postPredictions = () => {
+    
 
-  
+  };
+  //Calling setPredictions(predictionData); will post predictionData for today's date for current user to mongo
+  setPredictions = (predictionData) => {
+    post('/api/setpredictions', predictionData).then((result) => {
+      console.log(result);
+    });
+  };
 
   render() {
 

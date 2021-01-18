@@ -121,21 +121,21 @@ router.post("/setpredictions", auth.ensureLoggedIn, (req, res) => {
   // req.user: contains the JS object representing the logged in user
   // req.predictions: array of the  JS objects representing the user's predictions for the day
   //Examples:
-  //req.predictions = [
-    //   {
-    //     home_team: ATL,
-    //     away_team: BKN,
-    //     predicted_winner: ATL,
-    //     predicted_margin: 19,
+  // req.predictions = [
+  //     {
+  //       home_team: ATL,
+  //       away_team: BKN,
+  //       predicted_winner: ATL,
+  //       predicted_margin: 19,
   
-    //   },
-    //   {
-    //     home_team: BOS,
-    //     away_team: WAS,
-    //     predicted_winner: BOS,
-    //     predicted_margin: 17,
-    //   }
-    // ]
+  //     },
+  //     {
+  //       home_team: BOS,
+  //       away_team: WAS,
+  //       predicted_winner: BOS,
+  //       predicted_margin: 17,
+  //     }
+  //   ]
   let today = Date(); //this line is working
   const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD");
   const newPredictions = new Prediction({
@@ -145,7 +145,7 @@ router.post("/setpredictions", auth.ensureLoggedIn, (req, res) => {
     todays_predictions: req.predictions,
   });
   newPredictions.save();
-  console.log("Submitted "+req.user._id+"'s predictions for "+today_str);
+  res.send("Submitted "+req.user._id+"'s predictions for "+today_str);
 });
 
 router.get('/getprediction', auth.ensureLoggedIn, (req, res) => {

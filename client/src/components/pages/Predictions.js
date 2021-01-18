@@ -49,10 +49,25 @@ class Predictions extends Component {
 
 
   //Calling setPredictions(predictionData); will post predictionData for today's date for current user to mongo
-  setPredictions = (predictionData) => {
-    post('/api/setpredictions', predictionData).then((result) => {
+  setPredictions = (predictionData, predictions_entered_yet) => {
+    console.log("Predictions: ");
+    console.log(predictionData);
+    console.log("predictions entered? : ");
+    console.log(predictions_entered_yet);
+    console.log("button_pressed");
+    if (this.state.predictionsEntered || predictionData.length == 0){
+      console.log("Predictions: ");
+      console.log(predictionData);
+      console.log("predictions entered? : ");
+      console.log(predictions_entered_yet);
+      console.log("button_pressed");
+      return
+    }
+    else{ post('/api/setpredictions', {predictions: predictionData, entered: predictions_entered_yet}).then((result) => {
       console.log(result);
-    });
+      this.setState({predictionsEntered: true});
+      });
+    }
   };
 
   
@@ -122,7 +137,6 @@ class Predictions extends Component {
     for (let i=0;i<gamesList.length;i++){
       gameEntryVisualList.push(<div className="Predictions-item">{gamesList[i]}{predictionCritList[i]}</div>)
     }
-
     return (
       <>
 
@@ -131,7 +145,7 @@ class Predictions extends Component {
         {gameEntryVisualList}
         </div>
         {this.state.predictionsEntered ? 
-          (<h2>You have locked in predictions for the day!</h2>) : (<button onClick={this.setPredictions(allPredictionEntries)} className="Predictions-submitButton">LOCK IN PREDICTIONS</button>)
+          (<h2>You have locked in predictions for the day!</h2>) : (<button onClick={this.setPredictions(allPredictionEntries, this.state.predictionsEntered)} className="Predictions-submitButton">LOCK IN PREDICTIONS</button>)
           }
         
       </>

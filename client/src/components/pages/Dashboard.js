@@ -143,7 +143,7 @@ class Dashboard extends Component {
     else{
       resultsList = <div>No Games Yesterday :(</div>;
     }
-    let html_to_display = this.state.user_id ? (
+    let html_to_display = true ? (
       <>
         <h1>Dashboard</h1>
         <div className="u-inlineBlock">

@@ -16,7 +16,7 @@ const User = require("./models/user");
 const Schedule = require("./models/seasonSchedule");
 const Prediction = require("./models/prediction");
 const Scoreboard = require("./models/scoreboard");
-
+const Time = require("./models/Time");
 // import authentication library
 const auth = require("./auth");
 
@@ -142,7 +142,14 @@ router.get('/getprediction', auth.ensureLoggedIn, (req, res) => {
 
 
 
-
+// router.get("/temp", (req, res)=>{
+//   const rn = Math.round((new Date()).getTime() / 1000);
+//   const newE = new Time({name: 'time', last_scrape: rn});
+//   newE.save().then((hans) => {
+//     console.log(hans);
+//     res.send(hans);
+//   });
+// });
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

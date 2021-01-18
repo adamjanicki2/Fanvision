@@ -109,3 +109,7 @@ def update_season():
         newvals = { "$set": {'games': modified_gameset}}
         updated = db.seasonschedules.update_one(filt, newvals)
     return 'Successfully updated season'
+
+
+if __name__ == '__main__':
+    updated = update_season()

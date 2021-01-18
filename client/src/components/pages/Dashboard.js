@@ -5,6 +5,7 @@ import { get, post } from "../../utilities.js";
 import NextGameCard from "../modules/NextGameCard.js";
 import ResultGameCard from "../modules/ResultGameCard.js";
 
+
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +20,7 @@ class Dashboard extends Component {
   };
 
   componentDidMount() {
+
     //call api to get today's games
     get("/api/todaygames").then((games) => {
       this.setState({
@@ -35,11 +37,17 @@ class Dashboard extends Component {
       this.setState({user_id: user._id,})
     });
 
-    // get("/api/getprediction").then((predictions) => {
-    //   // console.log(results[0].games);
-    //   console.log()
-    //   this.setState({yesterday_predictions: predictions[0].predictions,})
-    // });
+    
+    const moment = require('moment');
+    require('moment-timezone');
+    let today = Date();
+    const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD");
+    get('/api/getprediction', {date: today_str}).then((prediction) => {
+      console.log("prediction:"+prediction)
+      if (prediction.length !== 0){
+        this.setState({predictionsEntered: true})
+        }
+      });
   });
   };
 

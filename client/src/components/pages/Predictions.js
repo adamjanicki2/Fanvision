@@ -14,6 +14,7 @@ class Predictions extends Component {
     this.state = {
       today_schedule: [],
       user_id: null,
+      predictionsEntered: false,
     };
   }
 
@@ -27,12 +28,27 @@ class Predictions extends Component {
     get("/api/whoami").then((user) => {
       this.setState({user_id: user._id});
     });
+
+    //call api to check if user has already predicted today's games
+    const moment = require('moment');
+    require('moment-timezone');
+    let today = Date();
+    const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD");
+    get('/api/getprediction', {date: today_str}).then((prediction) => {
+      console.log("prediction:"+prediction)
+      if (prediction.length !== 0){
+        this.setState({predictionsEntered: true})
+        }
+      });
   };
+
+
 
   //TODO: fetches all content in PredictionCriteraBox Components and posts them to backend
   postPredictions() {
     console.log("you clicked the button amazing");
   };
+
   
 
   render() {
@@ -65,6 +81,7 @@ class Predictions extends Component {
         )
     };
 
+    //list of items that are combination of the matchup and the input boxes
     let gameEntryVisualList= [];
     for (let i=1;i<gamesList.length+1;i++){
       gameEntryVisualList.push(<div className="Predictions-item">{gamesList[i]}{predictionCritList[i]}</div>)
@@ -76,7 +93,7 @@ class Predictions extends Component {
         <div className = "NextGameCard-allGamesContainer">  
         {gameEntryVisualList}
         </div>
-        <button onClick={this.postPredictions} className="Predictions-submitButton">LOCK IN PREDICTIONS</button>
+        <button onClick={this.postPredictions} disabled={this.state.predictionsEntered} className="Predictions-submitButton">LOCK IN PREDICTIONS</button>
       </>
     );
   }

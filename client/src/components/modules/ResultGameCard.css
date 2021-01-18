@@ -23,13 +23,13 @@
 }
 
 .ResultGameCard-scoreActual{
-    font-size: 14pt;
+    font-size: 18pt;
     color: var(--darkblue);
 }
 
 .ResultGameCard-scorePredicted{
     font-size: 14pt;
-    color: var(--orange);
+    color: var(--offblack);
 }
 
 .ResultGameCard-scoreIdentifier{

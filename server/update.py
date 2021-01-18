@@ -12,6 +12,7 @@ MONGO_CONNECTION_URL = os.getenv('MONGO_SRV')
 client = MongoClient(MONGO_CONNECTION_URL)
 db = client.cluster0
 
+TIME_THRESHOLD = 1.0 ##This is the min number of hours in between scrapes.
 CONVERSION = {
     1:1,
     2:2,
@@ -92,7 +93,7 @@ def get_schedule(end_year):
 
 def update_games():
     time_since = (round(time.time()) - int(db.times.find_one()['last_scrape']))/3600
-    if time_since < 2.0:
+    if time_since < TIME_THRESHOLD:
         return 'You scraped '+str(time_since)+' hours ago'
     else:
         games = get_schedule(2021)

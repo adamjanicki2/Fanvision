@@ -46,6 +46,24 @@ router.post("/initsocket", (req, res) => {
 // |------------------------------|
 // | write your API methods below!|
 // |------------------------------|
+const {PythonShell} =require('python-shell');
+
+router.get("/5KdnT6mfJ56YhGVcHeXDW2Kls5be4D", (req, res)=>{ 
+  //Here are the option object in which arguments can be passed for the python_test.js. 
+  let options = { 
+      mode: 'text', 
+      scriptPath: 'server/',
+      pythonOptions: ['-u'], // get print results in real-time 
+  }; 
+  PythonShell.run('update.py', options, function (err, result){ 
+        if (err) throw err; 
+        // result is an array consisting of messages collected  
+        //during execution of script. 
+        console.log(result.toString());
+        res.send(result.toString()) 
+  }); 
+}); 
+
 router.get("/yesterdayresults", (req, res) => {
   if (true){
     //We only need to fetch yesterday's results if the user is logged in
@@ -55,7 +73,7 @@ router.get("/yesterdayresults", (req, res) => {
     yesterday.setDate(yesterday.getDate() - 1);
     const yesterday_str = moment(yesterday).tz("America/New_York").format("YYYY-MM-DD");
     Schedule.find({date: yesterday_str}).then((games) => {
-      console.log(games);
+      //console.log(games);
       res.send(games);
     });
   }
@@ -138,8 +156,6 @@ router.get('/getprediction', auth.ensureLoggedIn, (req, res) => {
   });
 
 });
-
-
 
 
 // router.get("/temp", (req, res)=>{

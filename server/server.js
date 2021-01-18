@@ -50,24 +50,6 @@ mongoose
 // create a new express server
 const app = express();
 
-const {PythonShell} =require('python-shell');
-
-app.get("/update_games", (req, res, next)=>{ 
-  //Here are the option object in which arguments can be passed for the python_test.js. 
-  let options = { 
-      mode: 'text', 
-      scriptPath: 'server/',
-      pythonOptions: ['-u'], // get print results in real-time 
-  }; 
-  PythonShell.run('update.py', options, function (err, result){ 
-        if (err) throw err; 
-        // result is an array consisting of messages collected  
-        //during execution of script. 
-        console.log(result.toString());
-        res.send(result.toString()) 
-  }); 
-}); 
-
 app.use(validator.checkRoutes);
 
 // allow us to process POST requests

@@ -24,4 +24,4 @@ const PredictionSchema = new mongoose.Schema({
 });
 
 // compile model from schema
-module.exports = mongoose.model("prediction", PredictionSchema);
+module.exports = mongoose.model("predictions", PredictionSchema);

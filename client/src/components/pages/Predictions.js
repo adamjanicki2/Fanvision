@@ -31,11 +31,7 @@ class Predictions extends Component {
     });
 
     //call api to check if user has already predicted today's games
-    const moment = require('moment');
-    require('moment-timezone');
-    let today = Date();
-    const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD");
-    get('/api/getprediction', {date: today_str}).then((prediction) => {
+    get('/api/gettodaypredictions').then((prediction) => {
         this.setState({predictionsEntered: true});
       });
 

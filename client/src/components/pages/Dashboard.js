@@ -38,11 +38,7 @@ class Dashboard extends Component {
     });
 
     
-    const moment = require('moment');
-    require('moment-timezone');
-    let today = Date();
-    const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD");
-    get('/api/getprediction', {date: today_str}).then((prediction) => {
+    get('/api/gettodaypredictions').then((prediction) => {
         this.setState({predictionsEntered: true});
       });
   });

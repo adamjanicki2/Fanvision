@@ -14,7 +14,7 @@ require('moment-timezone');
 // WHERE WE IMPORT OUR SCHEMAS:
 const User = require("./models/user");
 const Schedule = require("./models/seasonSchedule");
-const Prediction = require("./models/prediction");
+const Prediction = require("./models/predictions");
 const Scoreboard = require("./models/scoreboard");
 const Time = require("./models/Time");
 // import authentication library
@@ -148,10 +148,12 @@ router.post("/setpredictions", (req, res) => {
 
 });
 
-router.get('/getprediction', (req, res) => {
+router.get('/gettodaypredictions', (req, res) => {
   //Args: req.user, user to get predictions for date
   //      req.date, date to search for
-  Prediction.find({date: req.date, user_id: req.user._id}).then((predictions) => {
+  let today = Date(); //this line is working
+  const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD");
+  Prediction.find({date: today_str, user_id: req.user._id}).then((predictions) => {
     res.send(predictions);
   });
 

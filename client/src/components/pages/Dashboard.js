@@ -123,6 +123,7 @@ class Dashboard extends Component {
     }
     let html_to_display = this.state.user_id ? (
       <>
+        <button onClick={() => {if(window.confirm('Are you sure?')){console.log("clicked")};}}>Test Button</button>        
         <h1>Dashboard</h1>
         <div className="u-inlineBlock">
           <h2 className="u-inlineBlock">Prediction Entry Status: </h2>

@@ -4,6 +4,8 @@ import PredictionCriteriaBox from "../modules/PredictionCriteriaBox.js";
 import "../../utilities.css";
 import "./Predictions.css";
 import { get, post } from "../../utilities.js";
+import Popup from "reactjs-popup";
+
 
 
 
@@ -49,21 +51,26 @@ class Predictions extends Component {
 
   //Calling setPredictions(predictionData); will post predictionData for today's date for current user to mongo
   setPredictions = (predictionData) => {
-    console.log('PRINTING PREDICTION DATA:')
-    console.log(predictionData);
-    if (this.state.predictionsEntered){
+    if(predictionData.length<this.state.today_schedule.length){
+      window.alert("Predictions not Complete!")
       return
-    }
-    else{ post('/api/setpredictions', {predictions: predictionData}).then((result) => {
-      //console.log(result);
-      this.setState({
-        predictionsEntered: true,
-        predictionObjects: predictionData,
-      });
-      });
-    }
-    window.location.reload() //refresh the page after clicking button and posting prediction
-  };
+    };
+    if(window.confirm('To Confirm Predictions, click OK:')){
+      console.log('PRINTING PREDICTION DATA:')
+      console.log(predictionData);
+      if (this.state.predictionsEntered){
+        return
+      }
+      else{ post('/api/setpredictions', {predictions: predictionData}).then((result) => {
+        //console.log(result);
+        this.setState({
+          predictionsEntered: true,
+          predictionObjects: predictionData,
+        });
+        });
+      }
+      window.location.reload() //refresh the page after clicking button and posting prediction
+  }};
 
   // showPredictions = () => {
 
@@ -140,7 +147,7 @@ class Predictions extends Component {
         <h1>Prediction Entry</h1>
         
         {this.state.predictionsEntered ? 
-          (<><div className = "NextGameCard-allGamesContainer">{gamesList}</div><h2>You have locked in predictions for the day!</h2></>) : (<><div className = "NextGameCard-allGamesContainer">  {gameEntryVisualList}</div><button onClick={() => {this.setPredictions(allPredictionEntries)}} className="Predictions-submitButton">LOCK IN PREDICTIONS</button></>)
+          (<><div className = "NextGame-Card-allGamesContainer">{gamesList}</div><h2>You have locked in predictions for the day!</h2></>) : (<><div className = "NextGameCard-allGamesContainer">  {gameEntryVisualList}</div><button onClick={() => {this.setPredictions(allPredictionEntries)}} className="Predictions-submitButton">LOCK IN PREDICTIONS</button></>)
           }
         
       </>

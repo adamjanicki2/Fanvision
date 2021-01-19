@@ -44,3 +44,8 @@
 .Result-win{
     color: var(--brightgreen);
 }
+.ResultGameCard-pointBreakdown{
+    font-size: 11pt;
+    word-spacing: 1px;
+    color: var(--darkblue);
+}

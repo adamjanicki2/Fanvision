@@ -39,6 +39,7 @@ class ResultGameCard extends Component {
                     <div className="ResultGameCard-scorePredicted">{this.getWinner()} by {this.getMargin()}</div>
                     <div className="ResultGameCard-scoreIdentifier">Points Earned:</div>
                     <div className={css_points}>{this.props.points_earned}</div>
+                    <div className="ResultGameCard-pointBreakdown">{this.props.points_breakdown}</div>
                 </div> 
             </>
         );

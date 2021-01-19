@@ -27,9 +27,6 @@ class OverallStandings extends Component {
 
   }
 
-  makeStandingsTable = () => { //table hard coded for now
-  
-  }
 
   render() {
     let isScores = this.state.scoreboard.length !== 0;

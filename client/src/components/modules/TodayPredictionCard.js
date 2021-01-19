@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import "./NextGameCard.css";
+import "./TodayPredictionCard.css";
 
 
-class NextGameCard extends Component {
+class TodayPredictionCard extends Component {
     constructor(props) {
       super(props);
     }
@@ -84,11 +84,13 @@ class NextGameCard extends Component {
             <>
                 <div className="NextGameCard-container">
                     <div>{this.props.away_team} vs {this.props.home_team}</div>
-                    <div className="NextGameCard-time">{this.props.start_time} PM ET</div>
+                    <div className="NextGameCard-time"> {this.props.start_time}</div>
                     <div className="NextGameCard-time"> {game_stadium}</div>
                     <div className="NextGameCard-time"> {game_city}</div>
+                    <div className="ResultGameCard-scoreIdentifier">Your Prediction:</div>
+                    <div className="ResultGameCard-scorePredicted">{this.props.predicted_winner} by {this.props.predicted_margin}</div>
                 </div>
             </> );
    
   }}         
-    export default NextGameCard;
+    export default TodayPredictionCard;

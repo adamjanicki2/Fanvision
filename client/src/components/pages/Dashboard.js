@@ -55,21 +55,26 @@ class Dashboard extends Component {
   awardPoints (actual_margin, predicted_margin, correct_guess) {
     //maps difference between actual and predicted margin to the point reward value
     const margin_points = {
-      0:10,
-      1:7,
-      2:6,
-      3:5,
-      4:4,
-      5:3
+        0: 15,
+        1: 12,
+        2: 10,
+        3: 8,
+        4: 7,
+        5: 6,
+        6: 5,
+        7: 4,
+        8: 3,
+        9: 2,
+        10: 1, 
     };
     if (!correct_guess){
-      return 0;
+      return [0,0];
     }
     const margin_difference = Math.abs(actual_margin-predicted_margin)
-    if ([0,1,2,3,4,5].includes(margin_difference)){
-      return 10+margin_points[margin_difference];
+    if ([0,1,2,3,4,5,6,7,8,9,10].includes(margin_difference)){
+      return [15,margin_points[margin_difference]];
     } else {
-      return 10;
+      return [15,0];
     }
   }
 
@@ -111,6 +116,7 @@ class Dashboard extends Component {
         const winner_predicted = this.state.yesterday_predictions.length-1>=i ? matchingPrediction.predicted_winner : '';
         const game_winner = result[i].away_team_score < result[i].home_team_score ? result[i].home_team : result[i].away_team;
         const correct_guess = winner_predicted === game_winner;
+        const point_reward = this.awardPoints(actual_margin, margin_predicted, correct_guess)
         resultsList.push(
           <ResultGameCard
             home_team={result[i].home_team}
@@ -120,7 +126,8 @@ class Dashboard extends Component {
             away_team_score={result[i].away_team_score}
             predicted_winner={this.state.yesterday_predictions.length-1>=i ? matchingPrediction.predicted_winner : '--'}
             predicted_margin={this.state.yesterday_predictions.length-1>=i ? matchingPrediction.predicted_margin : '--'}
-            points_earned={this.awardPoints(actual_margin, margin_predicted, correct_guess)}
+            points_breakdown={point_reward[0].toString()+"+"+point_reward[1].toString()}
+            points_earned = {point_reward[0]+point_reward[1]}
           />
         );
       };

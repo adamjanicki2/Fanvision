@@ -27,4 +27,10 @@
     justify-content: center;
 }
 
+.NextGameCard-time{
+    font-size: 12pt;
+    color: var(--red);
+    word-spacing: .1px;
+}
+
 

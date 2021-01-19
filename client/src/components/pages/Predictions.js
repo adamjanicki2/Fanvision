@@ -5,6 +5,7 @@ import "../../utilities.css";
 import "./Predictions.css";
 import { get, post } from "../../utilities.js";
 import Popup from "reactjs-popup";
+import TodayPredictionCard from "../modules/TodayPredictionCard.js";
 
 
 
@@ -37,13 +38,10 @@ class Predictions extends Component {
       if (prediction.length !== 0){
         this.setState({
           predictionsEntered: true, 
+          predictionObjects: prediction[0].todays_predictions,
           });
-    }
-    
-        
+    }   
    });
-
-
   };
 
 
@@ -72,16 +70,42 @@ class Predictions extends Component {
       window.location.reload() //refresh the page after clicking button and posting prediction
   }};
 
-  // showPredictions = () => {
-
-  //   };
 
   
-
-  
-
-
   render() {
+
+    if (this.state.predictionsEntered===true){
+      let TodayPredictionCardList = [];
+      const predictionObjects = this.state.predictionObjects;
+
+      for (let i=0;i<predictionObjects.length;i++){
+        const home_team = predictionObjects[i].home_team;
+        let matchingGame = this.state.today_schedule.filter(obj => {return obj.home_team === home_team})[0];
+        if (matchingGame===undefined){
+          window.location.reload();
+        }
+        console.log(matchingGame)
+        TodayPredictionCardList.push(
+          <TodayPredictionCard
+            away_team= {predictionObjects[i].away_team}
+            home_team= {predictionObjects[i].home_team}
+            start_time= {matchingGame.start_time}
+            predicted_winner= {predictionObjects[i].predicted_winner}
+            predicted_margin= {predictionObjects[i].predicted_margin}
+          />
+          )
+      }
+
+      return(
+        <>
+        <h1>Prediction Entry</h1>
+        <h2>Your Predictions are Locked In:</h2>
+        <div className="NextGameCard-allGamesContainer">{TodayPredictionCardList}</div>
+        
+        </>
+      )
+      
+    }
      
     let allPredictionEntries=[]
     //runs everytime a PredictionCriteriaBox is updated by the user's inputs
@@ -118,6 +142,7 @@ class Predictions extends Component {
             home_team={game.home_team}
             away_team={game.away_team}
             start_time={game.start_time}
+            predictionObjects={this.state.predictionObjects}
           />
       ));
       predictionCritList = this.state.today_schedule.map((game) => (
@@ -147,7 +172,8 @@ class Predictions extends Component {
         <h1>Prediction Entry</h1>
         
         {this.state.predictionsEntered ? 
-          (<><div className = "NextGameCard-allGamesContainer">{gamesList}</div><h2 className='u-textCenter'>You have locked in predictions for the day!</h2></>) : (<><div className = "NextGameCard-allGamesContainer">  {gameEntryVisualList}</div><button onClick={() => {this.setPredictions(allPredictionEntries)}} className="Predictions-submitButton">LOCK IN PREDICTIONS</button></>)
+          (<><div className = "NextGameCard-allGamesContainer">{gamesList}</div><h2 className='u-textCenter'>You have locked in predictions for the day!</h2></>) : 
+          (<><div className = "NextGameCard-allGamesContainer">  {gameEntryVisualList}</div><button onClick={() => {this.setPredictions(allPredictionEntries)}} className="Predictions-submitButton">LOCK IN PREDICTIONS</button></>)
           }
         
       </>

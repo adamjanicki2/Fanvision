@@ -53,16 +53,24 @@ class Dashboard extends Component {
 
   //TODO determine how many points the user earned
   awardPoints (actual_margin, predicted_margin, correct_guess) {
+    //maps difference between actual and predicted margin to the point reward value
+    const margin_points = {
+      0:10,
+      1:7,
+      2:6,
+      3:5,
+      4:4,
+      5:3
+    };
     if (!correct_guess){
       return 0;
     }
-    if (actual_margin === predicted_margin){
-      //Take care of zero division error
-      return Math.round(1.2*actual_margin);
+    const margin_difference = Math.abs(actual_margin-predicted_margin)
+    if ([0,1,2,3,4,5].includes(margin_difference)){
+      return 10+margin_points[margin_difference];
+    } else {
+      return 10;
     }
-    //find relative error:
-    const relative_error = Math.abs(actual_margin - predicted_margin)/actual_margin;
-    return Math.round(1/relative_error);
   }
 
  

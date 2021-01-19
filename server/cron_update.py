@@ -114,10 +114,5 @@ def update_scores():
 if __name__ == '__main__':
     updated = update_scores()
     print(updated)
-    print(calculate_score(3, 4, True))
-    print(calculate_score(3, 3, False))
-    print(calculate_score(3, 22, True))
-    # added = add_user_points('2021-01-18')
-    # print(added)
     
 

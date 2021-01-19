@@ -122,7 +122,7 @@ class Predictions extends Component {
     for (let i=0;i<gamesList.length;i++){
       gameEntryVisualList.push(<div className="Predictions-item">{gamesList[i]}{predictionCritList[i]}</div>)
     }
-    return (
+    let html_to_return = this.state.user_id ? (
       <>
 
         <h1>Prediction Entry</h1>
@@ -134,7 +134,8 @@ class Predictions extends Component {
           }
         
       </>
-    );
+    ) : (<h2>Please log in to display prediction entry!</h2>);
+    return html_to_return;
   }
 }
 

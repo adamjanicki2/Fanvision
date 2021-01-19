@@ -38,3 +38,9 @@
     color: var(--red);
 }
 
+.Result-loss{
+    color: var(--red);
+}
+.Result-win{
+    color: var(--brightgreen);
+}

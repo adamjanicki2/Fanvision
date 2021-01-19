@@ -37,6 +37,10 @@ class Dashboard extends Component {
       this.setState({user_id: user._id,})
     });
 
+    get("/api/getyesterdaypredictions").then((prediction) => {
+      console.log(prediction);
+      this.setState({yesterday_predictions: prediction});
+    });
     
     get('/api/gettodaypredictions').then((prediction) => {
       console.log(prediction);
@@ -48,8 +52,17 @@ class Dashboard extends Component {
   };
 
   //TODO determine how many points the user earned
-  awardPoints () {
-    return 69;
+  awardPoints (actual_margin, predicted_margin, correct_guess) {
+    if (!correct_guess){
+      return 0;
+    }
+    if (actual_margin === predicted_margin){
+      //Take care of zero division error
+      return Math.round(1.2*actual_margin);
+    }
+    //find relative error:
+    const relative_error = Math.abs(actual_margin - predicted_margin)/actual_margin;
+    return Math.round(1/relative_error);
   }
 
  
@@ -57,48 +70,6 @@ class Dashboard extends Component {
 
   render() {
 
-    // const predictionsList = this.state.yesterday_predictions;
-    //hardcoded predictions list for now
-    const predictionsList = [{
-      home_team: "SAS",
-      away_team: "HOU",
-      predicted_winner: "SAS",
-      predicted_margin: 19,
-
-    },
-    {
-      home_team: "BKN",
-      away_team: "ORL",
-      predicted_winner: "BKN",
-      predicted_margin: 11,
-    },
-    {
-      home_team: "TOR",
-      away_team: "CHA",
-      predicted_winner: "TOR",
-      predicted_margin: 17,
-    },
-    {
-      home_team: "MEM",
-      away_team: "PHI",
-      predicted_winner: "MEM",
-      predicted_margin: 3,
-    },
-    {
-      home_team: "MIA",
-      away_team: "DET",
-      predicted_winner: "MIA",
-      predicted_margin: 8,
-    },
-    {
-      home_team: "POR",
-      away_team: "ATL",
-      predicted_winner: "POR",
-      predicted_margin: 1,
-    }];
-
-    
-    
     //make list of games for today's games
     let gamesList = null;
     const hasGames = this.state.today_schedule.length !== 0;
@@ -121,6 +92,11 @@ class Dashboard extends Component {
     if (hadGames){
       for (let i=0;i<this.state.yesterday_results.length;i++){
         let result = this.state.yesterday_results;
+        const actual_margin = Math.abs(result[i].home_team_score - result[i].away_team_score);
+        const margin_predicted = this.state.yesterday_predictions.length-1>=i ? this.state.yesterday_predictions[i].predicted_margin : -1;
+        const winner_predicted = this.state.yesterday_predictions.length-1>=i ? this.state.yesterday_predictions[i].predicted_winner : '';
+        const game_winner = result[i].away_team_score < result[i].home_team_score ? result[i].home_team : result[i].away_team;
+        const correct_guess = winner_predicted === game_winner;
         resultsList.push(
           <ResultGameCard
             home_team={result[i].home_team}
@@ -128,9 +104,9 @@ class Dashboard extends Component {
             start_time={result[i].start_time}
             home_team_score={result[i].home_team_score}
             away_team_score={result[i].away_team_score}
-            predicted_winner={predictionsList[i].predicted_winner}
-            predicted_margin={predictionsList[i].predicted_margin}
-            points_earned={this.awardPoints()}
+            predicted_winner={this.state.yesterday_predictions.length-1>=i ? this.state.yesterday_predictions[i].predicted_winner : '--'}
+            predicted_margin={this.state.yesterday_predictions.length-1>=i ? this.state.yesterday_predictions[i].predicted_margin : '--'}
+            points_earned={this.awardPoints(actual_margin, margin_predicted, correct_guess)}
           />
         );
       };
@@ -139,7 +115,7 @@ class Dashboard extends Component {
     else{
       resultsList = <div>No Games Yesterday :(</div>;
     }
-    let html_to_display = true ? (
+    let html_to_display = this.state.user_id ? (
       <>
         <h1>Dashboard</h1>
         <div className="u-inlineBlock">

@@ -110,7 +110,7 @@ router.post("/updatescoreboard", (req, res) => {
 });
 
 router.get("/getscoreboard", (req, res) => {
-  Scoreboard.find({}).sort({current_score: 1}).then((scores) => {
+  Scoreboard.find({}).sort({current_score: -1}).then((scores) => {
     //console.log(scores);
     res.send(scores);
   });
@@ -142,7 +142,7 @@ router.post("/setpredictions", (req, res) => {
     date: today_str, 
     user_id: req.user._id,
     user_name: req.user.name,
-    todays_predictions: req.predictions,
+    todays_predictions: req.body.predictions,
   });
   newPredictions.save().then((saved) => res.send(saved));
 
@@ -158,16 +158,19 @@ router.get('/gettodaypredictions', (req, res) => {
   });
 
 });
+router.get('/getyesterdaypredictions', (req, res) => {
+  //Args: req.user, user to get predictions for date
+  //      req.date, date to search for
+  const today = new Date();
+  let yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
+  const yesterday_str = moment(yesterday).tz("America/New_York").format("YYYY-MM-DD");
+  Prediction.find({date: yesterday_str, user_id: req.user._id}).then((predictions) => {
+    res.send(predictions);
+  });
 
+});
 
-// router.get("/temp", (req, res)=>{
-//   const rn = Math.round((new Date()).getTime() / 1000);
-//   const newE = new Time({name: 'time', last_scrape: rn});
-//   newE.save().then((hans) => {
-//     console.log(hans);
-//     res.send(hans);
-//   });
-// });
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

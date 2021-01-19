@@ -26,6 +26,7 @@ class ResultGameCard extends Component {
     }
 
     render() {
+        let css_points = this.props.points_earned === 0? "Result-loss" : "Result-win";
         return(
             <>
                 <div className="ResultGameCard-container">
@@ -37,7 +38,7 @@ class ResultGameCard extends Component {
                     <div className="ResultGameCard-scoreIdentifier">Actual Result:</div>
                     <div className="ResultGameCard-scorePredicted">{this.getWinner()} by {this.getMargin()}</div>
                     <div className="ResultGameCard-scoreIdentifier">Points Earned:</div>
-                    <div>{this.props.points_earned}</div>
+                    <div className={css_points}>{this.props.points_earned}</div>
                 </div> 
             </>
         );

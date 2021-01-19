@@ -42,7 +42,7 @@ class App extends Component {
     console.log(`Logged in as ${res.profileObj.name}`);
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
-      this.setState({ userId: user._id });
+      this.setState({ userId: user._id , user_name: user.name});
       post("/api/initsocket", { socketid: socket.id });
       
     });
@@ -50,7 +50,7 @@ class App extends Component {
   };
 
   handleLogout = () => {
-    this.setState({ userId: undefined });
+    this.setState({ userId: undefined, user_name: "", });
     post("/api/logout");
     navigate('/');
   };

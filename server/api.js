@@ -59,8 +59,8 @@ router.get("/5KdnT6mfJ56YhGVcHeXDW2Kls5be4D", (req, res)=>{
         if (err) throw err; 
         // result is an array consisting of messages collected  
         //during execution of script. 
-        console.log(result.toString());
-        res.send(result.toString()) 
+        console.log({update_py: result.toString()});
+        res.send({update_py: result.toString()}); 
   }); 
 }); 
 

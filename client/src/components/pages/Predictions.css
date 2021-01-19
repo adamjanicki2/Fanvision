@@ -6,7 +6,16 @@
 .Predictions-submitButton{
     background-color: #dd1c1a;
     color: #f1f5f2;
-    
+    margin-top: 5%;
+    /* Idk how to center this button */
+    border-radius: 12px;
+    font-family: 'pakenhamregular';
+    font-size: 24px;
+}
+
+.Predictions-submitButton:hover{
+    background-color: #ffcccb;
+    color: var(--offblack);
 }
 
 .NextGameCard-container{

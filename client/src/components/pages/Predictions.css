@@ -16,6 +16,7 @@
 .Predictions-submitButton:hover{
     background-color: #ffcccb;
     color: var(--offblack);
+    cursor: pointer;
 }
 
 .NextGameCard-container{

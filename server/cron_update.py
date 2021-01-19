@@ -38,9 +38,25 @@ def update_yesterday_games():
         return 'no scores yet'
 ##TO DO: FIX SCORE CALCULATOR
 def calculate_score(guessed_margin, correct_margin, did_win):
-    relative = float(abs(guessed_margin-correct_margin)/correct_margin)
-    sum_ = correct_margin - round(relative * correct_margin)
-    return 10 if did_win else 0
+    mariokart = {
+    0: 15,
+    1: 12,
+    2: 10,
+    3: 8,
+    4: 7,
+    5: 6,
+    6: 5,
+    7: 4,
+    8: 3,
+    9: 2,
+    10: 1,
+    }
+    if not did_win:
+        return 0
+    difference = abs(guessed_margin - correct_margin)
+    if difference not in mariokart:
+        return 15
+    return 15 + mariokart[difference]
 
 def add_user_points(date):
     """
@@ -98,6 +114,9 @@ def update_scores():
 if __name__ == '__main__':
     updated = update_scores()
     print(updated)
+    print(calculate_score(3, 4, True))
+    print(calculate_score(3, 3, False))
+    print(calculate_score(3, 22, True))
     # added = add_user_points('2021-01-18')
     # print(added)
     

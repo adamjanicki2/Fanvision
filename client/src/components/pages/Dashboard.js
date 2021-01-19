@@ -139,7 +139,6 @@ class Dashboard extends Component {
     else{
       resultsList = <div>No Games Yesterday :(</div>;
     }
-    console.log(this.state.predictionsEntered);
     let html_to_display = true ? (
       <>
         <h1>Dashboard</h1>

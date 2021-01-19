@@ -56,6 +56,7 @@ class Predictions extends Component {
       this.setState({predictionsEntered: true});
       });
     }
+    window.location.reload() //refresh the page after clicking button and posting prediction
   };
 
   
@@ -66,7 +67,6 @@ class Predictions extends Component {
     let allPredictionEntries=[]
     //runs everytime a PredictionCriteriaBox is updated by the user's inputs
     const eventhandler = (data) => {
-      console.log(data)
     //check that the prediction fields are all filled
       if (data.predicted_winner !== "" && data.predicted_margin !==0){
         const data_home_team = data.home_team
@@ -75,14 +75,11 @@ class Predictions extends Component {
         for(let i = 0; i < allPredictionEntries.length; i++) {
             if (allPredictionEntries[i].home_team == data_home_team) {
                 found = true;
-                console.log("found game already exists");
                 break;
                 }}
         if (found === false){ //if the game wasn't predicted yet, append to list
-          console.log("game did not yet exist, pushed new game");
           allPredictionEntries.push(data);
         } else{
-          console.log("modifying existing game")
           allPredictionEntries = allPredictionEntries.map(obj => [data].find(o => o.home_team === obj.home_team) || obj);
         }
       console.log(allPredictionEntries)
@@ -133,7 +130,7 @@ class Predictions extends Component {
         {gameEntryVisualList}
         </div>
         {this.state.predictionsEntered ? 
-          (<h2>You have locked in predictions for the day!</h2>) : (<button onClick={() => {console.log(allPredictionEntries)}} className="Predictions-submitButton">LOCK IN PREDICTIONS</button>)
+          (<h2>You have locked in predictions for the day!</h2>) : (<button onClick={() => {this.setPredictions(allPredictionEntries)}} className="Predictions-submitButton">LOCK IN PREDICTIONS</button>)
           }
         
       </>

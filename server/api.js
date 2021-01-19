@@ -10,7 +10,8 @@
 const express = require("express");
 const moment = require('moment');
 require('moment-timezone');
-
+const cron = require('node-cron');
+const {PythonShell} =require('python-shell');
 // WHERE WE IMPORT OUR SCHEMAS:
 const User = require("./models/user");
 const Schedule = require("./models/seasonSchedule");
@@ -46,7 +47,23 @@ router.post("/initsocket", (req, res) => {
 // |------------------------------|
 // | write your API methods below!|
 // |------------------------------|
-const {PythonShell} =require('python-shell');
+
+//CRON SCHEDULER!!!
+
+// cron.schedule('30 2-8 * * *', () => {
+//   let options = { 
+//     mode: 'text', 
+//     scriptPath: 'server/',
+//     pythonOptions: ['-u'], // get print results in real-time 
+// }; 
+//   PythonShell.run('cron_update.py', options, function (err, result){ 
+//       if (err) throw err; 
+//       // result is an array consisting of messages collected  
+//       //during execution of script. 
+//       console.log({Python_Output: result.toString()}); 
+//   }); 
+// });
+
 
 router.get("/5KdnT6mfJ56YhGVcHeXDW2Kls5be4D", (req, res)=>{ 
   //Here are the option object in which arguments can be passed for the python_test.js. 
@@ -142,6 +159,7 @@ router.post("/setpredictions", (req, res) => {
     date: today_str, 
     user_id: req.user._id,
     user_name: req.user.name,
+    googleid: req.user.googleid,
     todays_predictions: req.body.predictions,
   });
   newPredictions.save().then((saved) => res.send(saved));

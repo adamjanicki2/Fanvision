@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const PredictionSchema = new mongoose.Schema({
   date: String, //formatted as mm/dd/yyyy
   user_id: String,
+  googleid: String,
   user_name: String,
   todays_predictions: Array,
   // An example of this array would be as follows:

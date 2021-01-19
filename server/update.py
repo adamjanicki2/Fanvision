@@ -4,6 +4,7 @@ import datetime
 import os
 from pymongo import MongoClient
 from dotenv import load_dotenv
+from utilities import TEAM_TO_ABBREV, CONVERSION
 import time
 
 l = load_dotenv()
@@ -13,53 +14,7 @@ client = MongoClient(MONGO_CONNECTION_URL)
 db = client.cluster0
 
 TIME_THRESHOLD = 1.0 ##This is the min number of hours in between scrapes.
-CONVERSION = {
-    1:1,
-    2:2,
-    3:3,
-    4:4,
-    5:5,
-    6:6,
-    7:7,
-    8:8,
-    9:9,
-    10:10,
-    11:11,
-    0:12
-}
 
-TEAM_TO_ABBREV = {
-  'ATLANTA_HAWKS': 'ATL',
-  'BROOKLYN_NETS': 'BKN',
-  'BOSTON_CELTICS': 'BOS',
-  'CHARLOTTE_HORNETS': 'CHA',
-  'CHICAGO_BULLS': 'CHI',
-  'CLEVELAND_CAVALIERS': 'CLE',
-  'DALLAS_MAVERICKS': 'DAL',
-  'DENVER_NUGGETS': 'DEN',
-  'DETROIT_PISTONS': 'DET',
-  'GOLDEN_STATE_WARRIORS': 'GSW',
-  'HOUSTON_ROCKETS': 'HOU',
-  'INDIANA_PACERS': 'IND',
-  'LOS_ANGELES_CLIPPERS': 'LAC',
-  'LOS_ANGELES_LAKERS': 'LAL',
-  'MEMPHIS_GRIZZLIES': 'MEM',
-  'MIAMI_HEAT': 'MIA',
-  'MILWAUKEE_BUCKS': 'MIL',
-  'MINNESOTA_TIMBERWOLVES': 'MIN',
-  'NEW_ORLEANS_PELICANS': 'NOP',
-  'NEW_YORK_KNICKS': 'NYK',
-  'OKLAHOMA_CITY_THUNDER': 'OKC',
-  'ORLANDO_MAGIC': 'ORL',
-  'PHILADELPHIA_76ERS': 'PHI',
-  'PHOENIX_SUNS': 'PHX',
-  'PORTLAND_TRAIL_BLAZERS': 'POR',
-  'SACRAMENTO_KINGS': 'SAC',
-  'SAN_ANTONIO_SPURS': 'SAS',
-  'TORONTO_RAPTORS': 'TOR',
-  'UTAH_JAZZ': 'UTA',
-  'WASHINGTON_WIZARDS': 'WAS',
-}
 
 def get_schedule(end_year):
     
@@ -108,7 +63,8 @@ def update_games():
                 continue
         updated_scrape_time = db.times.update_one({'name': 'time'}, {'$set': {'last_scrape': round(time.time())}})
         return 'successfully updated for days '+', '.join(dates_to_update)
-            
+
+
 if __name__ == '__main__':
     updated = update_games()
     print(updated)

@@ -38,12 +38,12 @@ class Dashboard extends Component {
     });
 
     get("/api/getyesterdaypredictions").then((prediction) => {
-      console.log(prediction);
-      this.setState({yesterday_predictions: prediction});
+      console.log("yesterday's prediction" + prediction[0].todays_predictions);
+      this.setState({yesterday_predictions: prediction[0].todays_predictions});
     });
     
     get('/api/gettodaypredictions').then((prediction) => {
-      console.log(prediction);
+      // console.log(prediction);
       if (prediction.length !== 0){
         console.log("changing predictionsEntered to true")
          this.setState({predictionsEntered: true});
@@ -92,9 +92,15 @@ class Dashboard extends Component {
     if (hadGames){
       for (let i=0;i<this.state.yesterday_results.length;i++){
         let result = this.state.yesterday_results;
+        let home_team = result[i].home_team;
+        console.log(home_team)
+        //find the corresponding prediction object from yesterday
+        let matchingPrediction = this.state.yesterday_predictions.filter(obj => {return obj.home_team === home_team})[0];
+        console.log(matchingPrediction)
+        console.log('------')
         const actual_margin = Math.abs(result[i].home_team_score - result[i].away_team_score);
-        const margin_predicted = this.state.yesterday_predictions.length-1>=i ? this.state.yesterday_predictions[i].predicted_margin : -1;
-        const winner_predicted = this.state.yesterday_predictions.length-1>=i ? this.state.yesterday_predictions[i].predicted_winner : '';
+        const margin_predicted = this.state.yesterday_predictions.length-1>=i ? matchingPrediction.predicted_margin : -1;
+        const winner_predicted = this.state.yesterday_predictions.length-1>=i ? matchingPrediction.predicted_winner : '';
         const game_winner = result[i].away_team_score < result[i].home_team_score ? result[i].home_team : result[i].away_team;
         const correct_guess = winner_predicted === game_winner;
         resultsList.push(
@@ -104,8 +110,8 @@ class Dashboard extends Component {
             start_time={result[i].start_time}
             home_team_score={result[i].home_team_score}
             away_team_score={result[i].away_team_score}
-            predicted_winner={this.state.yesterday_predictions.length-1>=i ? this.state.yesterday_predictions[i].predicted_winner : '--'}
-            predicted_margin={this.state.yesterday_predictions.length-1>=i ? this.state.yesterday_predictions[i].predicted_margin : '--'}
+            predicted_winner={this.state.yesterday_predictions.length-1>=i ? matchingPrediction.predicted_winner : '--'}
+            predicted_margin={this.state.yesterday_predictions.length-1>=i ? matchingPrediction.predicted_margin : '--'}
             points_earned={this.awardPoints(actual_margin, margin_predicted, correct_guess)}
           />
         );

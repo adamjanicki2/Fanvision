@@ -33,8 +33,11 @@ class Predictions extends Component {
     //call api to check if user has already predicted today's games
     get('/api/gettodaypredictions').then((prediction) => {
       if (prediction.length !== 0){
-        this.setState({predictionsEntered: true});
+        this.setState({
+          predictionsEntered: true, 
+          });
     }
+    
         
    });
 
@@ -53,11 +56,20 @@ class Predictions extends Component {
     }
     else{ post('/api/setpredictions', {predictions: predictionData}).then((result) => {
       //console.log(result);
-      this.setState({predictionsEntered: true});
+      this.setState({
+        predictionsEntered: true,
+        predictionObjects: predictionData,
+      });
       });
     }
     window.location.reload() //refresh the page after clicking button and posting prediction
   };
+
+  // showPredictions = () => {
+
+  //   };
+
+  
 
   
 
@@ -126,11 +138,9 @@ class Predictions extends Component {
       <>
 
         <h1>Prediction Entry</h1>
-        <div className = "NextGameCard-allGamesContainer">  
-        {gameEntryVisualList}
-        </div>
+        
         {this.state.predictionsEntered ? 
-          (<h2>You have locked in predictions for the day!</h2>) : (<button onClick={() => {this.setPredictions(allPredictionEntries)}} className="Predictions-submitButton">LOCK IN PREDICTIONS</button>)
+          (<><div className = "NextGameCard-allGamesContainer">{gamesList}</div><h2>You have locked in predictions for the day!</h2></>) : (<><div className = "NextGameCard-allGamesContainer">  {gameEntryVisualList}</div><button onClick={() => {this.setPredictions(allPredictionEntries)}} className="Predictions-submitButton">LOCK IN PREDICTIONS</button></>)
           }
         
       </>

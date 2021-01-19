@@ -32,8 +32,11 @@ class Predictions extends Component {
 
     //call api to check if user has already predicted today's games
     get('/api/gettodaypredictions').then((prediction) => {
+      if (prediction.length !== 0){
         this.setState({predictionsEntered: true});
-      });
+    }
+        
+   });
 
 
   };

@@ -39,8 +39,11 @@ class Dashboard extends Component {
 
     
     get('/api/gettodaypredictions').then((prediction) => {
-        this.setState({predictionsEntered: true});
-      });
+      console.log(prediction);
+      if (prediction.length !== 0){
+        console.log("changing predictionsEntered to true")
+         this.setState({predictionsEntered: true});
+    }});
   });
   };
 
@@ -136,6 +139,7 @@ class Dashboard extends Component {
     else{
       resultsList = <div>No Games Yesterday :(</div>;
     }
+    console.log(this.state.predictionsEntered);
     let html_to_display = true ? (
       <>
         <h1>Dashboard</h1>

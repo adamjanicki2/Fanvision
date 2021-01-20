@@ -6,7 +6,8 @@ import "./Predictions.css";
 import { get, post } from "../../utilities.js";
 import Popup from "reactjs-popup";
 import TodayPredictionCard from "../modules/TodayPredictionCard.js";
-
+const moment = require('moment');
+require('moment-timezone');
 
 
 
@@ -37,7 +38,6 @@ class Predictions extends Component {
     get('/api/gettodaypredictions').then((prediction) => {
       if (prediction.length !== 0){
         this.setState({
-          predictionsEntered: true, 
           predictionObjects: prediction[0].todays_predictions,
           });
     }   
@@ -49,6 +49,7 @@ class Predictions extends Component {
 
   //Calling setPredictions(predictionData); will post predictionData for today's date for current user to mongo
   setPredictions = (predictionData) => {
+    console.log(predictionData);
     if(predictionData.length<this.state.today_schedule.length){
       window.alert("Predictions not Complete!")
       return
@@ -69,6 +70,31 @@ class Predictions extends Component {
       }
       window.location.reload() //refresh the page after clicking button and posting prediction
   }};
+
+  //Calling savePredictions(predictionData); will post predictionData for today's date for current user to mongo without locking in
+  savePredictions = (predictionData) => {
+    if (this.state.predictionsEntered){
+      return
+    }
+
+    //check if there is already a saved prediction. if there is delete it first before posting new one
+    if (this.state.predictionObjects.length!==0){
+      let today = Date(); //this line is working
+      const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD");    
+      post('/api/deletesavedprediction', {date:today_str}).then((result) => {
+        console.log("deleted saved prediction")
+        })
+      }
+    
+     post('/api/setpredictions', {predictions: predictionData}).then((result) => {
+        //do not change predictionsEntered state
+        this.setState({
+          predictionObjects: predictionData,
+        });
+        });
+      
+      window.location.reload() //refresh the page after clicking button and posting prediction
+  };
 
 
   
@@ -110,6 +136,8 @@ class Predictions extends Component {
     let allPredictionEntries=[]
     //runs everytime a PredictionCriteriaBox is updated by the user's inputs
     const eventhandler = (data) => {
+      allPredictionEntries = this.state.predictionObjects;
+      console.log(allPredictionEntries);
     //check that the prediction fields are all filled
       if (data.predicted_winner !== "" && data.predicted_margin !==0){
         const data_home_team = data.home_team
@@ -145,15 +173,41 @@ class Predictions extends Component {
             predictionObjects={this.state.predictionObjects}
           />
       ));
-      predictionCritList = this.state.today_schedule.map((game) => (
-        <PredictionCriteriaBox
-          home_team={game.home_team}
-          away_team={game.away_team}
-          onChange={eventhandler}
-        />
-    ));
-    }
-    else{
+      predictionCritList = [];
+      const savedPredictions = this.state.predictionObjects;
+      for (let i=0;i<this.state.today_schedule.length;i++){
+        var found = false;
+        let saved_winner = null;
+        let saved_margin = null;
+        for(let j = 0; j < savedPredictions.length; j++) {
+          if (savedPredictions[j].home_team === this.state.today_schedule[i].home_team) {
+            saved_winner = savedPredictions[j].predicted_winner;
+            saved_margin = savedPredictions[j].predicted_margin;
+            found = true;
+            break;
+          }
+          };
+        if (found){
+          predictionCritList.push(
+            <PredictionCriteriaBox
+              home_team={this.state.today_schedule[i].home_team}
+              away_team={this.state.today_schedule[i].away_team}
+              saved_winner={saved_winner}
+              saved_margin={saved_margin}
+              onChange={eventhandler}
+            /> 
+          )
+        } else{
+          predictionCritList.push(
+            <PredictionCriteriaBox
+              home_team={this.state.today_schedule[i].home_team}
+              away_team={this.state.today_schedule[i].away_team}
+              saved_winner={ undefined}
+              saved_margin= {undefined}
+              onChange={eventhandler}
+            />) };
+    
+    }}else{
       predictionCritList = null
       gamesList = <div>No Games Today :(</div>;
       return (
@@ -173,7 +227,10 @@ class Predictions extends Component {
         
         {this.state.predictionsEntered ? 
           (<><div className = "NextGameCard-allGamesContainer">{gamesList}</div><h2 className='u-textCenter'>You have locked in predictions for the day!</h2></>) : 
-          (<><div className = "NextGameCard-allGamesContainer">  {gameEntryVisualList}</div><button onClick={() => {this.setPredictions(allPredictionEntries)}} className="Predictions-submitButton">LOCK IN PREDICTIONS</button></>)
+          (<><div className = "NextGameCard-allGamesContainer">  {gameEntryVisualList}</div>
+          <button onClick={() => {this.savePredictions(allPredictionEntries)}} className="Predictions-submitButton">Save Predictions</button>
+          <button onClick={() => {this.setPredictions(allPredictionEntries)}} className="Predictions-submitButton">LOCK IN PREDICTIONS</button>
+          </>)
           }
         
       </>

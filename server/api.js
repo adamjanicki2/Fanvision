@@ -201,6 +201,18 @@ router.get('/getyesterdaypredictions', (req, res) => {
 
 });
 
+router.post("/deletesavedprediction", (req, res) => {
+  
+  let today = Date(); //this line is working
+  const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD");
+  Prediction.deleteOne({date: today_str, user_id: req.user._id}).then((predictions) => {
+    console.log("Old Saved Prediction Deleted")
+  });
+
+});
+
+
+
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

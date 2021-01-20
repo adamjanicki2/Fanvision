@@ -34,20 +34,43 @@ class PredictionCriteriaBox extends Component {
     
 
     render() {
+
+        let options_html = (<></>)
+        if (this.props.saved_winner === undefined){
+            options_html = (
+            <>
+            <select name="gameprediction" id="team-select" onChange={this.handleChangeWinner}>
+                <option selected="selected" disabled="disabled">--SELECT--</option>
+                <option value={this.props.away_team}>{this.props.away_team}</option>
+                <option value={this.props.home_team}>{this.props.home_team}</option>
+            </select>
+            </>);
+        }else{
+            options_html = (
+            <>
+            <select name="gameprediction" id="team-select" value={this.props.saved_winner} onChange={this.handleChangeWinner}>
+                <option disabled="disabled">--SELECT--</option>
+                <option value={this.props.away_team}>{this.props.away_team}</option>
+                <option value={this.props.home_team}>{this.props.home_team}</option>
+            </select>
+            </>);
+        }
+
         return(
             <>
                 <div className = "PredictionCriteriaBox-container">
                     <div>
                         <label for="team-select">Predicted Winner:</label>
-                        <select name="gameprediction" id="team-select" onChange={this.handleChangeWinner}>
-                            <option disabled="disabled" selected="selected">--SELECT--</option>
-                            <option value={this.props.away_team}>{this.props.away_team}</option>
-                            <option value={this.props.home_team}>{this.props.home_team}</option>
-                        </select>
+                        <>{options_html}</>
                     </div>
                     <div>
                         <label for="margin-guess">Margin of Victory:</label>
-                        <input type="number" id="margin-guess" name="margin-guess" min="0" max="200" onChange={this.handleChangeMargin}></input>
+                        {this.props.saved_margin === undefined ?
+                        (<input type="number" id="margin-guess" name="margin-guess" min="0" max="200" onChange={this.handleChangeMargin}></input>):
+                        (<input type="number" id="margin-guess" name="margin-guess" min="0" max="200" value={this.props.saved_margin} onChange={this.handleChangeMargin}></input>)
+                        }
+                            
+                        
                     </div>
 
                 </div>

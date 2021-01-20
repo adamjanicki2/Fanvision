@@ -6,6 +6,7 @@ import NextGameCard from "../modules/NextGameCard.js";
 import ResultGameCard from "../modules/ResultGameCard.js";
 
 
+
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -82,6 +83,7 @@ class Dashboard extends Component {
 
 
   render() {
+    
 
     //make list of games for today's games
     let gamesList = null;
@@ -139,6 +141,7 @@ class Dashboard extends Component {
     let html_to_display = this.state.user_id ? (
       <>      
         <h1>Dashboard</h1>
+       
         <div className="u-inlineBlock">
           <h2 className="u-inlineBlock">Prediction Entry Status: </h2>
           {this.state.predictionsEntered ? 

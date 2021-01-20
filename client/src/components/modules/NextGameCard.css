@@ -32,5 +32,13 @@
     color: var(--red);
     word-spacing: .1px;
 }
+.NextGameCard-logosContainer{
+    display: flex;
+    justify-content: space-between;
+    
+}
+.NextGameCard-logo{ 
+    width: 100%;
+}
 
 

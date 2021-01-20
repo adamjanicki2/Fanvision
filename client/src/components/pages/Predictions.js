@@ -18,7 +18,7 @@ class Predictions extends Component {
     this.state = {
       today_schedule: [],
       user_id: null,
-      predictionsEntered: false,
+      lockedIn: false,
       predictionObjects: [],
     };
   }
@@ -40,6 +40,14 @@ class Predictions extends Component {
         this.setState({
           predictionObjects: prediction[0].todays_predictions,
           });
+
+    //call api for lockedIn status
+    get("/api/lockinstatus").then((res) => {
+      this.setState({lockedIn: res[0].status})
+    }
+    )
+
+    
     }   
    });
   };
@@ -57,23 +65,35 @@ class Predictions extends Component {
     if(window.confirm('To Confirm Predictions, click OK:')){
       console.log('PRINTING PREDICTION DATA:')
       console.log(predictionData);
-      if (this.state.predictionsEntered){
+      if (this.state.lockedIn){
         return
       }
-      else{ post('/api/setpredictions', {predictions: predictionData}).then((result) => {
+      else{ 
+        //check if there is already a saved prediction. if there is delete it first before posting new one
+        if (this.state.predictionObjects.length!==0){
+          let today = Date(); //this line is working
+          const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD");    
+          post('/api/deletesavedprediction', {date:today_str}).then((result) => {
+            console.log("deleted saved prediction")
+            })
+          }
+        post('/api/setpredictions', {predictions: predictionData}).then((result) => {
         //console.log(result);
         this.setState({
-          predictionsEntered: true,
           predictionObjects: predictionData,
         });
         });
       }
-      window.location.reload() //refresh the page after clicking button and posting prediction
-  }};
+  }
+    post("/api/changelockinstatus", {status: true}).then((result) => {
+      this.setState({lockedIn:true})
+    })
+    window.location.reload()
+};
 
   //Calling savePredictions(predictionData); will post predictionData for today's date for current user to mongo without locking in
   savePredictions = (predictionData) => {
-    if (this.state.predictionsEntered){
+    if (this.state.lockedIn){
       return
     }
 
@@ -87,12 +107,12 @@ class Predictions extends Component {
       }
     
      post('/api/setpredictions', {predictions: predictionData}).then((result) => {
-        //do not change predictionsEntered state
+        //do not change lockedIn state
         this.setState({
           predictionObjects: predictionData,
         });
         });
-      
+      window.alert("Predictions Saved!");
       window.location.reload() //refresh the page after clicking button and posting prediction
   };
 
@@ -100,7 +120,7 @@ class Predictions extends Component {
   
   render() {
 
-    if (this.state.predictionsEntered===true){
+    if (this.state.lockedIn===true){
       let TodayPredictionCardList = [];
       const predictionObjects = this.state.predictionObjects;
 
@@ -124,7 +144,7 @@ class Predictions extends Component {
 
       return(
         <>
-        <h1>Prediction Entry</h1>
+        <h1>Prediction Entry)</h1>
         <h2>Your Predictions are Locked In:</h2>
         <div className="NextGameCard-allGamesContainer">{TodayPredictionCardList}</div>
         
@@ -133,28 +153,30 @@ class Predictions extends Component {
       
     }
      
-    let allPredictionEntries=[]
+    let allPredictionEntries = this.state.predictionObjects;
+
+    console.log(allPredictionEntries);
     //runs everytime a PredictionCriteriaBox is updated by the user's inputs
     const eventhandler = (data) => {
-      allPredictionEntries = this.state.predictionObjects;
-      console.log(allPredictionEntries);
-    //check that the prediction fields are all filled
-      if (data.predicted_winner !== "" && data.predicted_margin !==0){
-        const data_home_team = data.home_team
-        //see if the game is already in allPredictionEntires
-        let found = false;
-        for(let i = 0; i < allPredictionEntries.length; i++) {
-            if (allPredictionEntries[i].home_team == data_home_team) {
-                found = true;
-                break;
-                }}
-        if (found === false){ //if the game wasn't predicted yet, append to list
-          allPredictionEntries.push(data);
-        } else{
-          allPredictionEntries = allPredictionEntries.map(obj => [data].find(o => o.home_team === obj.home_team) || obj);
+        console.log(allPredictionEntries);
+      //check that the prediction fields are all filled
+        if (data.predicted_winner !== "" && data.predicted_margin !==0){
+          const data_home_team = data.home_team
+          //see if the game is already in allPredictionEntires
+          let found = false;
+          for(let i = 0; i < allPredictionEntries.length; i++) {
+              if (allPredictionEntries[i].home_team == data_home_team) {
+                  found = true;
+                  break;
+                  }}
+          if (found === false){ //if the game wasn't predicted yet, append to list
+            allPredictionEntries.push(data);
+          } else{
+            allPredictionEntries = allPredictionEntries.map(obj => [data].find(o => o.home_team === obj.home_team) || obj);
+          }
+        console.log(allPredictionEntries)
         }
-      console.log(allPredictionEntries)
-      }
+
 }
     
 
@@ -202,7 +224,7 @@ class Predictions extends Component {
             <PredictionCriteriaBox
               home_team={this.state.today_schedule[i].home_team}
               away_team={this.state.today_schedule[i].away_team}
-              saved_winner={ undefined}
+              saved_winner={undefined}
               saved_margin= {undefined}
               onChange={eventhandler}
             />) };
@@ -223,9 +245,9 @@ class Predictions extends Component {
     let html_to_return = this.state.user_id ? (
       <>
 
-        <h1>Prediction Entry</h1>
+        <h1>Prediction Entry (saving kinda janky but will be fixed)</h1>
         
-        {this.state.predictionsEntered ? 
+        {this.state.lockedIn ? 
           (<><div className = "NextGameCard-allGamesContainer">{gamesList}</div><h2 className='u-textCenter'>You have locked in predictions for the day!</h2></>) : 
           (<><div className = "NextGameCard-allGamesContainer">  {gameEntryVisualList}</div>
           <button onClick={() => {this.savePredictions(allPredictionEntries)}} className="Predictions-submitButton">Save Predictions</button>

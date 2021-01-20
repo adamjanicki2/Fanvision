@@ -43,12 +43,10 @@ class Dashboard extends Component {
       this.setState({yesterday_predictions: prediction[0].todays_predictions});
     });
     
-    get('/api/gettodaypredictions').then((prediction) => {
-      // console.log(prediction);
-      if (prediction.length !== 0){
-        console.log("changing predictionsEntered to true")
-         this.setState({predictionsEntered: true});
-    }});
+    get("/api/lockinstatus").then((status) => {
+      this.setState({predictionsEntered: status[0].status})
+    }
+    )
   });
   };
 

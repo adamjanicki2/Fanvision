@@ -3,3 +3,8 @@
     flex-direction: column;
     justify-content: center;
 };
+
+.PredictionCriteriaBox-savedWinnerText{
+    font-size: 7pt;
+    color: #dd1c1a;
+}

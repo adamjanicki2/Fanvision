@@ -11,7 +11,6 @@ import { navigate } from "@reach/router";
 import "./pages/LoginPage.css";
 import "../utilities.css";
 import Popup from 'reactjs-popup';
-
 import { socket } from "../client-socket.js";
 
 import { get, post } from "../utilities";
@@ -44,8 +43,9 @@ class App extends Component {
     post("/api/login", { token: userToken }).then((user) => {
       this.setState({ userId: user._id , user_name: user.name});
       post("/api/initsocket", { socketid: socket.id });
-      
+      post('/api/setlockinstatus', { googleid: user.googleid});
     });
+    
     navigate('/');
   };
 

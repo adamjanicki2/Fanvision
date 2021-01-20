@@ -2,9 +2,11 @@ const { OAuth2Client } = require("google-auth-library");
 const User = require("./models/user");
 const socketManager = require("./server-socket");
 const Scoreboard = require("./models/scoreboard");
+const LockInStatus = require("./models/LockInStatus");
 const CLIENT_ID = "911618425792-hk0acmfunco1f8qg441iih4pvm01cuae.apps.googleusercontent.com";
 const client = new OAuth2Client(CLIENT_ID);
-
+const moment = require('moment');
+require('moment-timezone');
 // accepts a login token from the frontend, and verifies that it's legit
 function verify(token) {
   return client
@@ -37,7 +39,7 @@ function createNewScoreboardUser(user){
   let in_scoreboard;
   const userscoreboard = Scoreboard.find({user_id: user._id, name: user.name}).then((existing) => {
     in_scoreboard = existing.length !== 0;
-    console.log(in_scoreboard)
+    //console.log(in_scoreboard)
     if (!in_scoreboard){
       const newScore = new Scoreboard({
         name: user.name,
@@ -54,6 +56,23 @@ function createNewScoreboardUser(user){
   
 }
 
+function createNewStatusUser(user){
+  let instatus;
+  const statusboard = LockInStatus.find({googleid: user.googleid}).then((existing) => {
+    instatus = existing.length !== 0
+    if (!instatus){
+      let today = Date();
+      const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD"); 
+      const newStatus = new LockInStatus({
+        googleid: user.googleid,
+        date: today_str,
+        status: false,
+      });
+      newStatus.save();
+    }
+  })
+}
+
 function login(req, res) {
   verify(req.body.token)
     .then((user) => getOrCreateUser(user))
@@ -61,6 +80,7 @@ function login(req, res) {
       // persist user in the session
       //console.log(user._id);
       createNewScoreboardUser(user);
+      createNewStatusUser(user);
       req.session.user = user;
       res.send(user);
     })

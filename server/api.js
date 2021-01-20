@@ -18,6 +18,7 @@ const Schedule = require("./models/seasonSchedule");
 const Prediction = require("./models/predictions");
 const Scoreboard = require("./models/scoreboard");
 const Time = require("./models/Time");
+const LockInStatus = require("./models/LockInStatus");
 // import authentication library
 const auth = require("./auth");
 
@@ -145,6 +146,32 @@ router.get("/getscoreboard", (req, res) => {
   });
 });
 
+router.get("/lockinstatus", (req, res) => {
+  LockInStatus.find({googleid: req.user.googleid}).then((status) => {
+    res.send(status);
+  });
+});
+
+//USE THIS:
+router.post("/changelockinstatus", (req, res) => {
+  LockInStatus.updateOne({googleid: req.user.googleid}, { status: req.body.status}).then((status) => {
+    console.log(status);
+  });
+});
+
+
+//IGNORE THIS:
+router.post("/setlockinstatus", (req, res) => {
+  LockInStatus.find({googleid: req.body.googleid}).then((status) => {
+    if (status.length > 0){
+      let today = Date();
+      const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD");
+      if (status[0].date !== today_str){
+        LockInStatus.updateOne({googleid: status[0].googleid}, {date: today_str, status: false});
+      }
+    }
+  });
+});
 router.post("/setpredictions", (req, res) => {
   //How the args to this post should be structed:
   // req.user: contains the JS object representing the logged in user

@@ -18,6 +18,9 @@ class LoginPage extends Component {
     //That way when the dashboard loads and todays games are fetched, it has the updated scores in the db already!!!
     get('/api/5KdnT6mfJ56YhGVcHeXDW2Kls5be4D').then((response_message) => {
       console.log(response_message);
+      get('/api/kYh5LipxVj6rMs7B4rzBuodK01bWNH').then((response_msg) => {
+        console.log(response_msg);
+      });
     });
   }
 

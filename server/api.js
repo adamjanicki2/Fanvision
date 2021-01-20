@@ -50,36 +50,48 @@ router.post("/initsocket", (req, res) => {
 
 //CRON SCHEDULER!!!
 
-cron.schedule('30 5-16 * * *', () => {
-  let options = { 
-    mode: 'text', 
-    scriptPath: 'server/',
-    pythonOptions: ['-u'], // get print results in real-time 
-}; 
-  PythonShell.run('cron_update.py', options, function (err, result){ 
-      if (err) throw err; 
-      // result is an array consisting of messages collected  
-      //during execution of script. 
-      console.log({Python_Output: result.toString()}); 
-  }); 
-});
+// cron.schedule('30 5-16 * * *', () => {
+//   let options = { 
+//     mode: 'text', 
+//     scriptPath: 'server/',
+//     pythonOptions: ['-u'], // get print results in real-time 
+// }; 
+//   PythonShell.run('cron_update.py', options, function (err, result){ 
+//       if (err) throw err; 
+//       // result is an array consisting of messages collected  
+//       //during execution of script. 
+//       console.log({Python_Output: result.toString()}); 
+//   }); 
+// });
 
 
 router.get("/5KdnT6mfJ56YhGVcHeXDW2Kls5be4D", (req, res)=>{ 
-  //Here are the option object in which arguments can be passed for the python_test.js. 
   let options = { 
       mode: 'text', 
       scriptPath: 'server/',
-      pythonOptions: ['-u'], // get print results in real-time 
+      pythonOptions: ['-u'],
   }; 
   PythonShell.run('update.py', options, function (err, result){ 
         if (err) throw err; 
-        // result is an array consisting of messages collected  
-        //during execution of script. 
         console.log({update_py: result.toString()});
         res.send({update_py: result.toString()}); 
   }); 
-}); 
+});
+
+router.get("/kYh5LipxVj6rMs7B4rzBuodK01bWNH", (req, res) => {
+  let options = { 
+    mode: 'text', 
+    scriptPath: 'server/',
+    pythonOptions: ['-u'],
+  }; 
+  PythonShell.run('update_points.py', options, function (err, result){ 
+    if (err) throw err; 
+    console.log({update_points: result.toString()});
+    res.send({update_points: result.toString()}); 
+  }); 
+
+});
+
 
 router.get("/yesterdayresults", (req, res) => {
   if (true){

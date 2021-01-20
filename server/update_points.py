@@ -24,15 +24,14 @@ def update_games_db(date, game_set):
     except:
         return 'error for '+date
 
-def update_yesterday_games():
-    yesterday = pytz.timezone('US/Eastern').localize(datetime.datetime.now() - datetime.timedelta(days= 1)).strftime('%Y-%m-%d %H:%M:%S %Z%z').split(' ')[0]
+def update_yesterday_games(date):
     sched = get_schedule(CURRENT_YEAR)
-    if yesterday not in sched:
+    if date not in sched:
         return 'no games yesterday'
-    yesterday_games = sched[yesterday]
-    scores_in_yet = isinstance(yesterday_games[0]['home_team_score'], int)
+    game_for_date = sched[date]
+    scores_in_yet = isinstance(game_for_date[0]['home_team_score'], int)
     if scores_in_yet:
-        update_games_db(yesterday, yesterday_games)
+        update_games_db(date, game_for_date)
         return 'scores updated'
     else:
         return 'no scores yet'
@@ -58,13 +57,32 @@ def calculate_score(guessed_margin, correct_margin, did_win):
         return 15
     return 15 + mariokart[difference]
 
+def remove_predictions(date):
+    """
+    When this is called, 
+    all points updated thru yesterday, meaning we can remove all predictions 
+    up until 2 days ago!
+    """
+    start_date = datetime.datetime.strptime(date, '%Y-%m-%d') - datetime.timedelta(days=2)
+    l = []
+    for i in range(100):
+        date_to_remove = str(start_date - datetime.timedelta(days=i)).split(' ')[0]
+        l.append(date_to_remove)
+        db.predictions.delete_many({'date': date_to_remove})
+    return 'successfully deleted predictions up to '+str(start_date).split(' ')[0]
+
 def add_user_points(date):
     """
     The big one
     """
     ranking = ['gold', 'silver', 'bronze']
     predictions_from_yesterday = db.predictions.find({'date': date})
-    results_from_yesterday = sorted(db.seasonschedules.find_one({'date': date})['games'], key=lambda x: x['home_team'])
+    if not predictions_from_yesterday:
+        return 'No predictions from date'
+    sched_from_date = db.seasonschedules.find_one({'date': date})
+    if not sched_from_date:
+        return 'No games from date'
+    results_from_yesterday = sorted(sched_from_date['games'], key=lambda x: x['home_team'])
     medal_list = []
     for user_prediction in predictions_from_yesterday:
         user_googleid = user_prediction['googleid']
@@ -89,6 +107,18 @@ def add_user_points(date):
         updated_amount = db.scoreboards.update_one({'googleid': medal_list[i][1]}, { "$set": {ranking[i]: amount}})
     return {'medal_winners: '+date: {ranking[i]: medal_list[i] for i in range(len(medal_list))}}
 
+def handle_missed_days(today_, last_update_):
+    today = datetime.datetime.strptime(today_, '%Y-%m-%d')
+    last_update = datetime.datetime.strptime(last_update_, '%Y-%m-%d')
+    between = abs((today - last_update).days)
+    if between <= 1:
+        return
+    for i in range(between-1):
+        day_to_update = str(last_update +datetime.timedelta(days=i)).split(' ')[0]
+        added_ = add_user_points(day_to_update)
+    db.lastupdated.update_one({'_id_': 'python'}, { "$set": {'time_updated': str(today - datetime.timedelta(days=1)).split(' ')[0]}})
+    return 
+
 def update_scores():
     fetched = db.postedscore.find_one()
     today = pytz.timezone('US/Eastern').localize(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M:%S %Z%z').split(' ')[0]
@@ -97,7 +127,8 @@ def update_scores():
     if updated_scores_today:
         return 'Scores for yesterday already updated'
     else:
-        yesterday_update = update_yesterday_games()
+        yesterday_update = update_yesterday_games(yesterday)
+        handle_missed_days(today, db.lastupdated.find_one()['time_updated'].split(' ')[0])
         if yesterday_update == 'no games yesterday':
             return 'no games yesterday'
         elif yesterday_update == 'scores updated':
@@ -105,7 +136,9 @@ def update_scores():
             db.postedscore.update_one({'_id_':'python'}, { "$set": {'date': today}})
             db.postedscore.update_one({'_id_':'python'}, { "$set": {'scores_last_time': True}})
             added = add_user_points(yesterday)
-            return 'scores from yesterday just updated'
+            db.lastupdated.update_one({'_id_': 'python'}, { "$set": {'time_updated': today}})
+            removed = remove_predictions(today)
+            return 'scores from yesterday just updated '+removed
         else:
             ##scores not in yet
             db.postedscore.update_one({'_id_':'python'}, { "$set": {'date': today}})
@@ -114,7 +147,4 @@ def update_scores():
 if __name__ == '__main__':
     updated = update_scores()
     print(updated)
-    # added = add_user_points('2021-01-19')
-    # print(added)
-    
 

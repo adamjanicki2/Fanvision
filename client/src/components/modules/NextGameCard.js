@@ -149,7 +149,6 @@ class NextGameCard extends Component {
         let away_team = this.props.away_team;
         let home_img_src = home_team+"_logo"; 
         let away_img_src = away_team+"_logo";
-        let imgsrc=ATL_logo
         let game_stadium = teamStadiums[this.props.home_team];
         let game_city = teamCities[this.props.home_team];
 

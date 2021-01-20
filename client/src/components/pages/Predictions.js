@@ -84,11 +84,12 @@ class Predictions extends Component {
         });
         });
       }
+      post("/api/changelockinstatus", {status: true}).then((result) => {
+        this.setState({lockedIn:true})
+      })
+      window.location.reload()
   }
-    post("/api/changelockinstatus", {status: true}).then((result) => {
-      this.setState({lockedIn:true})
-    })
-    window.location.reload()
+    
 };
 
   //Calling savePredictions(predictionData); will post predictionData for today's date for current user to mongo without locking in

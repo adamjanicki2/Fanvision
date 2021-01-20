@@ -114,5 +114,7 @@ def update_scores():
 if __name__ == '__main__':
     updated = update_scores()
     print(updated)
+    # added = add_user_points('2021-01-19')
+    # print(added)
     
 

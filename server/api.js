@@ -50,7 +50,7 @@ router.post("/initsocket", (req, res) => {
 
 //CRON SCHEDULER!!!
 
-cron.schedule('30 0-12 * * *', () => {
+cron.schedule('30 5-16 * * *', () => {
   let options = { 
     mode: 'text', 
     scriptPath: 'server/',

@@ -36,7 +36,7 @@ def update_yesterday_games():
         return 'scores updated'
     else:
         return 'no scores yet'
-##TO DO: FIX SCORE CALCULATOR
+
 def calculate_score(guessed_margin, correct_margin, did_win):
     mariokart = {
     0: 15,

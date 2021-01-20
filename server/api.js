@@ -50,19 +50,19 @@ router.post("/initsocket", (req, res) => {
 
 //CRON SCHEDULER!!!
 
-// cron.schedule('30 2-8 * * *', () => {
-//   let options = { 
-//     mode: 'text', 
-//     scriptPath: 'server/',
-//     pythonOptions: ['-u'], // get print results in real-time 
-// }; 
-//   PythonShell.run('cron_update.py', options, function (err, result){ 
-//       if (err) throw err; 
-//       // result is an array consisting of messages collected  
-//       //during execution of script. 
-//       console.log({Python_Output: result.toString()}); 
-//   }); 
-// });
+cron.schedule('30 0-12 * * *', () => {
+  let options = { 
+    mode: 'text', 
+    scriptPath: 'server/',
+    pythonOptions: ['-u'], // get print results in real-time 
+}; 
+  PythonShell.run('cron_update.py', options, function (err, result){ 
+      if (err) throw err; 
+      // result is an array consisting of messages collected  
+      //during execution of script. 
+      console.log({Python_Output: result.toString()}); 
+  }); 
+});
 
 
 router.get("/5KdnT6mfJ56YhGVcHeXDW2Kls5be4D", (req, res)=>{ 

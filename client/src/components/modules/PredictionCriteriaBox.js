@@ -24,14 +24,15 @@ class PredictionCriteriaBox extends Component {
 
     // called whenever the user makes entry into margin box
     handleChangeMargin = (event) => {
-        this.setState({predicted_margin: event.target.value},)
+
+        this.setState({predicted_margin: event.target.value},);
     };
 
     componentDidUpdate() {
         if (this.props.onChange){
             this.props.onChange(this.state);
-        }
-    }
+        };
+    };
        
     
 

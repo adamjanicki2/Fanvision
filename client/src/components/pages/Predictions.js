@@ -66,6 +66,10 @@ class Predictions extends Component {
       window.alert("Predictions not Complete!")
       return
     };
+    if (this.marginsValid(predictionData)===false){
+      window.alert("Predicted margins invalid");
+      return
+    }
     if(window.confirm('To Confirm Predictions, click OK:')){
       console.log('PRINTING PREDICTION DATA:')
       console.log(predictionData);
@@ -115,6 +119,10 @@ class Predictions extends Component {
     if (this.state.lockedIn){
       return
     }
+    if (this.marginsValid(predictionData)===false){
+      window.alert("Predicted margins invalid");
+      return
+    }
 
     //correct the messed up crap in predictionData (dont allow margin 0)
     for (let i = 0; i<predictionData.length; i++){
@@ -149,6 +157,18 @@ class Predictions extends Component {
   };
 
 
+//ensure user entered margins all are positive numbers
+  marginsValid = (predictionData) => {
+    const all_margins = predictionData.map(pred => pred.predicted_margin);
+    for (let i=0; i<all_margins.length; i++){
+      if(isNaN(all_margins[i])){
+        return false;
+      } else if(all_margins[i]<1){
+        return false;
+      };
+    };
+    return true
+  };
   
   render() {
     console.log(this.state.lockedIn)
@@ -310,13 +330,11 @@ class Predictions extends Component {
       <>
 
         <h1>Prediction Entry</h1>
-        <h4>Bug: margins reset to zero in both front and backend if left unchanged then save.
-        </h4>
         
         {this.state.lockedIn ? 
           (<><div className = "NextGameCard-allGamesContainer">{gamesList}</div><h2 className='u-textCenter'>You have locked in predictions for the day!</h2></>) : 
           (<><div className = "NextGameCard-allGamesContainer">  {gameEntryVisualList}</div>
-          <button onClick={() => {this.savePredictions(allPredictionEntries)}} className="Predictions-submitButton">Save Winners</button>
+          <button onClick={() => {this.savePredictions(allPredictionEntries)}} className="Predictions-submitButton">Save Predictions</button>
           <button onClick={() => {this.setPredictions(allPredictionEntries)}} className="Predictions-submitButton">LOCK IN PREDICTIONS</button>
           </>)
           }

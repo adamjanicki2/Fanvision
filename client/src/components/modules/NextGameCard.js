@@ -154,9 +154,7 @@ class NextGameCard extends Component {
 
         if (home_team)
         
-        return(
-            
-            <>
+        return(       
                 <div className="NextGameCard-container">
                   <div className = "NextGameCard-matchup">
                     <div className = "NextGameCard-teamContainerTop">
@@ -175,7 +173,7 @@ class NextGameCard extends Component {
                     <div className="NextGameCard-time"> {game_city}</div>
                   </div>
                 </div>
-            </> );
+             );
    
   }}         
     export default NextGameCard;

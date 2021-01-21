@@ -6,6 +6,7 @@ import "./Predictions.css";
 import { get, post } from "../../utilities.js";
 import Popup from "reactjs-popup";
 import TodayPredictionCard from "../modules/TodayPredictionCard.js";
+
 const moment = require('moment');
 require('moment-timezone');
 
@@ -38,6 +39,11 @@ class Predictions extends Component {
     get('/api/get_earliest_game').then((game_) => {
       this.setState({ earliest_start_time: game_.time});
     });
+    
+    get('/api/current_time').then((res_) => {
+      this.setState({ current_time: res_.time});
+    });
+
     //call api to check if user has already predicted today's games
     get('/api/gettodaypredictions').then((prediction) => {
       if (prediction.length !== 0){
@@ -54,29 +60,6 @@ class Predictions extends Component {
     }   
    });
   };
-
-  convertTime = (inTime) => {
-    //inTime is a string "hh:mm"
-    let outTime = null;
-    const inHour = inTime.split(":")[0];
-    const CONVERSION = {
-      1:1,
-      2:2,
-      3:3,
-      4:4,
-      5:5,
-      6:6,
-      7:7,
-      8:8,
-      9:9,
-      10:10,
-      11:11,
-      0:12
-  }
-    let outHour = CONVERSION[parseInt(inHour)%12];
-    return toString(outHour)+":"+inTime.split(':')[1]
-
-  }
 
 
 
@@ -200,7 +183,7 @@ class Predictions extends Component {
   };
 
   render() {
-    console.log(this.state.lockedIn)
+    console.log(this.isBefore(this.state.earliest_start_time))
     if (this.state.lockedIn===true){
       let TodayPredictionCardList = [];
       const predictionObjects = this.state.predictionObjects;
@@ -211,7 +194,6 @@ class Predictions extends Component {
         if (matchingGame===undefined){
           window.location.reload();
         }
-        console.log(matchingGame)
         TodayPredictionCardList.push(
           <TodayPredictionCard
             away_team= {predictionObjects[i].away_team}
@@ -239,7 +221,7 @@ class Predictions extends Component {
     
     //runs everytime a PredictionCriteriaBox is updated by the user's inputs
     const eventhandler = (data) => {
-        console.log(data)
+
 
         //if not all fields are populated, check if the game has been saved previosuly
         if (data.predicted_winner === "" || data.predicted_margin ===0){
@@ -290,7 +272,7 @@ class Predictions extends Component {
           }
         
         }
-        console.log(allPredictionEntries)
+
 }
     
 
@@ -342,6 +324,15 @@ class Predictions extends Component {
               saved_margin= {undefined}
               onChange={eventhandler}
             />) };
+
+        if (this.isBefore(this.state.earliest_start_time)===false){
+          return(
+            <>
+            <h2>It is too late to submit predictions today.</h2>
+            <div className="NextGameCard-allGamesContainer">{gamesList}</div>
+            </>
+          )
+        }
     
     }}else{
       predictionCritList = null
@@ -360,11 +351,12 @@ class Predictions extends Component {
       <>
 
         <h1>Prediction Entry</h1>
-        
+    
+
         {this.state.lockedIn ? 
           (<><div className = "NextGameCard-allGamesContainer">{gamesList}</div><h2 className='u-textCenter'>You have locked in predictions for the day!</h2></>) : 
           (<><div className = "NextGameCard-allGamesContainer">  {gameEntryVisualList}</div>
-          <button onClick={() => {this.savePredictions(allPredictionEntries)}} className="Predictions-submitButton">Save Predictions</button>
+          <button outlined color='danger' onClick={() => {this.savePredictions(allPredictionEntries)}} className="Predictions-submitButton">Save</button>
           <button onClick={() => {this.setPredictions(allPredictionEntries)}} className="Predictions-submitButton">LOCK IN PREDICTIONS</button>
           </>)
           }

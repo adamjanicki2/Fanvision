@@ -20,14 +20,14 @@
     margin-right: 12px;
   }
   .Navbar-route {
-    color: var(--offblack);
+    color: var(--offwhite);
     opacity: 0.95;
     text-decoration: none;
     font-size: 28px;
   }
   
   .Navbar-route:hover {
-    color: var(--offwhite);
+    color: var(--medgrey);
     opacity: 0.75;
     border-bottom: 5px solid var(--offblack);
   }

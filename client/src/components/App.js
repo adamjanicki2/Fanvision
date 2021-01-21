@@ -12,7 +12,6 @@ import "./pages/LoginPage.css";
 import "../utilities.css";
 import Popup from 'reactjs-popup';
 import { socket } from "../client-socket.js";
-
 import { get, post } from "../utilities";
 
 /**

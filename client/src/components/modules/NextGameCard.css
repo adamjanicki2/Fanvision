@@ -1,9 +1,10 @@
 .NextGameCard-container{
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: row;
     max-width: 200%;
     margin-left:10px;
     margin-right:10px;
+    background-color: var(--offwhite);
 }
 
 
@@ -55,14 +56,15 @@
 .NextGameCard-abbrev{
     font-size:28pt;
     font-family: 'green_mountain_3regular';
+    color:black;
 }
 
 .NextGameCard-line{
     border: 1px solid;
 }
 img {
-    max-width:100px;
-    max-height:100px;
+    max-width:90px;
+    max-height:90px;
 
   }
 

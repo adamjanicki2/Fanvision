@@ -43,11 +43,8 @@ class Predictions extends Component {
 
     //call api for lockedIn status
     get("/api/lockinstatus").then((res) => {
-      let today = Date(); //this line is working
-      const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD"); 
-      if (res.date===today_str){
       this.setState({lockedIn: res[0].status})
-    }}
+    }
     )
 
     
@@ -66,6 +63,17 @@ class Predictions extends Component {
       window.alert("Predictions not Complete!")
       return
     };
+    //correct the messed up crap in predictionData (dont allow margin 0)
+    for (let i = 0; i<predictionData.length; i++){
+      if (predictionData[i].predicted_margin===0){
+        const home_team = predictionData[i].home_team;
+        const state_pred = this.state.predictionObjects.find(obj => {
+          return obj.home_team === home_team
+        })
+        predictionData[i]['predicted_margin'] = state_pred.predicted_margin;
+      }
+
+    }
     if (this.marginsValid(predictionData)===false){
       window.alert("Predicted margins invalid");
       return
@@ -85,19 +93,6 @@ class Predictions extends Component {
             console.log("deleted saved prediction")
             })
           }
-        //correct the messed up crap in predictionData (dont allow margin 0)
-    for (let i = 0; i<predictionData.length; i++){
-      if (predictionData[i].predicted_margin===0){
-        const home_team = predictionData[i].home_team;
-        const state_pred = this.state.predictionObjects.find(obj => {
-          return obj.home_team === home_team
-        })
-        predictionData[i]['predicted_margin'] = state_pred.predicted_margin;
-      }
-
-    }
-
-        
         post('/api/setpredictions', {predictions: predictionData}).then((result) => {
         //console.log(result);
         this.setState({
@@ -106,7 +101,6 @@ class Predictions extends Component {
         });
       }
       post("/api/changelockinstatus", {status: true}).then((result) => {
-        
         this.setState({lockedIn:true})
       })
       window.location.reload()
@@ -119,10 +113,7 @@ class Predictions extends Component {
     if (this.state.lockedIn){
       return
     }
-    if (this.marginsValid(predictionData)===false){
-      window.alert("Predicted margins invalid");
-      return
-    }
+    
 
     //correct the messed up crap in predictionData (dont allow margin 0)
     for (let i = 0; i<predictionData.length; i++){
@@ -135,7 +126,10 @@ class Predictions extends Component {
       }
 
     }
-
+    if (this.marginsValid(predictionData)===false){
+      window.alert("Predicted margins invalid");
+      return
+    }
 
     //check if there is already a saved prediction. if there is delete it first before posting new one
     if (this.state.predictionObjects.length!==0){
@@ -163,9 +157,7 @@ class Predictions extends Component {
     for (let i=0; i<all_margins.length; i++){
       if(isNaN(all_margins[i])){
         return false;
-      } else if(all_margins[i]<1){
-        return false;
-      };
+      } 
     };
     return true
   };
@@ -196,7 +188,7 @@ class Predictions extends Component {
 
       return(
         <>
-        <h1>Prediction Entry)</h1>
+        <h1>Prediction Entry</h1>
         <h2>Your Predictions are Locked In:</h2>
         <div className="NextGameCard-allGamesContainer">{TodayPredictionCardList}</div>
         
@@ -211,6 +203,7 @@ class Predictions extends Component {
     //runs everytime a PredictionCriteriaBox is updated by the user's inputs
     const eventhandler = (data) => {
         console.log(data)
+
         //if not all fields are populated, check if the game has been saved previosuly
         if (data.predicted_winner === "" || data.predicted_margin ===0){
           const data_home_team = data.home_team

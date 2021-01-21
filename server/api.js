@@ -49,22 +49,6 @@ router.post("/initsocket", (req, res) => {
 // | write your API methods below!|
 // |------------------------------|
 
-//CRON SCHEDULER!!!
-
-// cron.schedule('30 5-16 * * *', () => {
-//   let options = { 
-//     mode: 'text', 
-//     scriptPath: 'server/',
-//     pythonOptions: ['-u'], // get print results in real-time 
-// }; 
-//   PythonShell.run('cron_update.py', options, function (err, result){ 
-//       if (err) throw err; 
-//       // result is an array consisting of messages collected  
-//       //during execution of script. 
-//       console.log({Python_Output: result.toString()}); 
-//   }); 
-// });
-
 
 router.get("/5KdnT6mfJ56YhGVcHeXDW2Kls5be4D", (req, res)=>{ 
   let options = { 
@@ -108,20 +92,6 @@ router.get("/yesterdayresults", (req, res) => {
     });
   }
 });
-
-// const DATES_LIST = ['2020-12-22', '2020-12-23', '2020-12-25', '2020-12-26', '2020-12-27', '2020-12-28', '2020-12-29', '2020-12-30', '2020-12-31', '2021-01-01', '2021-01-02', '2021-01-03', '2021-01-04', '2021-01-05', '2021-01-06', '2021-01-07', '2021-01-08', '2021-01-09', '2021-01-10', '2021-01-11', '2021-01-12', '2021-01-13', '2021-01-14', '2021-01-15', '2021-01-16', '2021-01-17', '2021-01-18', '2021-01-19', '2021-01-20', '2021-01-21', '2021-01-22', '2021-01-23', '2021-01-24', '2021-01-25', '2021-01-26', '2021-01-27', '2021-01-28', '2021-01-29', '2021-01-30', '2021-01-31', '2021-02-01', '2021-02-02', '2021-02-03', '2021-02-04', '2021-02-05', '2021-02-06', '2021-02-07', '2021-02-08', '2021-02-09', '2021-02-10', '2021-02-11', '2021-02-12', '2021-02-13', '2021-02-14', '2021-02-15', '2021-02-16', '2021-02-17', '2021-02-18', '2021-02-19', '2021-02-20', '2021-02-21', '2021-02-22', '2021-02-23', '2021-02-24', '2021-02-25', '2021-02-26', '2021-02-27', '2021-02-28', '2021-03-01', '2021-03-02', '2021-03-03', '2021-03-04'];
-
-// router.get('/postgarbage', (req, res) => {
-//   for (let i = 0; i<DATES_LIST.length; i++){
-//     let cur_date = DATES_LIST[i]
-//     const newEntry = new Schedule({
-//       date: cur_date,
-//       games: ['test','123'],
-//     });
-//     newEntry.save().then((schedule => console.log(schedule)));
-//   }
-//   res.send('Done')
-// });
 
 router.get("/todaygames",(req,res) => {
   // access games scheduled for the current date
@@ -244,6 +214,30 @@ router.get('/current_time', (req, res) => {
   const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD HH:mm");
   res.send({time: today_str});
 });
+
+router.get('/get_earliest_game', (req, res) => {
+  let today = Date(); //this line is working
+  const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD");
+  Schedule.findOne({date: today_str}).then((today_games) => {
+    if (today_games){
+      let sorted = today_games.games.sort((a, b) => 
+      (a.start_time > b.start_time)? 1 : -1
+      );
+      res.send({time: sorted[0].start_time});
+    }else{
+      res.send({time: 'No games today'})
+    }
+  });
+});
+
+
+
+
+
+
+
+
+
 
 
 // anything else falls to this "not found" case

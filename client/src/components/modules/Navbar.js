@@ -48,7 +48,7 @@ class Navbar extends Component {
             
           </div>
           <div className='Navbar-logout u-inlineBlock'>
-          {this.props.userId !== undefined? <Link to="/profile" className='Navbar-route Navbar-name u-inlineBlock'>{this.props.name.split(" ")[0]}</Link> : <div/>}
+          {this.props.userId !== undefined? <Link to="/profile" className='Navbar-route Navbar-name u-inlineBlock' onClick={() => {this.setState({current_path: '/profile'})}}>{this.props.name.split(" ")[0]} </Link> : <div/>}
           {this.props.userId !== undefined? (
             <GoogleLogout
               clientId={GOOGLE_CLIENT_ID}

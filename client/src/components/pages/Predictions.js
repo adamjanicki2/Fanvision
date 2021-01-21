@@ -171,13 +171,15 @@ class Predictions extends Component {
   };
   
   isBefore = (earliest_game_time) => {
-    let is_current_time_before;
+    let is_current_time_before = true;
     get('/api/current_time').then((current_time) => {
-      let min_cur = current_time.time.split(' ')[1];
-      let min_early = earliest_game_time.split(' ')[1];
-      let num_cur = parseInt(min_cur.split(':')[0]) + parseInt(min_cur.split(':')[1])/60;
-      let num_early = parseInt(min_early.split(':')[0]) + parseInt(min_early.split(':')[1])/60;
-      is_current_time_before = num_cur < num_early;
+      if (earliest_game_time !== ''){
+        let min_cur = current_time.time.split(' ')[1];
+        let min_early = earliest_game_time.split(' ')[1];
+        let num_cur = parseInt(min_cur.split(':')[0]) + parseInt(min_cur.split(':')[1])/60;
+        let num_early = parseInt(min_early.split(':')[0]) + parseInt(min_early.split(':')[1])/60;
+        is_current_time_before = num_cur < num_early;
+      }
     });
     return is_current_time_before;
   };

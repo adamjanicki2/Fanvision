@@ -58,20 +58,30 @@ function createNewScoreboardUser(user){
 
 function createNewStatusUser(user){
   let instatus;
+  let today = Date();
+  const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD");
   const statusboard = LockInStatus.find({googleid: user.googleid}).then((existing) => {
+    //console.log(existing);
     instatus = existing.length !== 0
     if (!instatus){
-      let today = Date();
-      const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD"); 
       const newStatus = new LockInStatus({
         googleid: user.googleid,
         date: today_str,
         status: false,
       });
       newStatus.save();
+    }else{
+      if (existing[0].date !== today_str){
+        LockInStatus.updateOne({googleid: existing[0].googleid}, {date: today_str, status: false}).then((updated) => {
+          console.log(updated);
+        });
+        
+      }
     }
   })
 }
+
+
 
 function login(req, res) {
   verify(req.body.token)

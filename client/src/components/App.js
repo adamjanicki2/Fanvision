@@ -43,7 +43,7 @@ class App extends Component {
     post("/api/login", { token: userToken }).then((user) => {
       this.setState({ userId: user._id , user_name: user.name});
       post("/api/initsocket", { socketid: socket.id });
-      post('/api/setlockinstatus', { googleid: user.googleid});
+      //post('/api/setlockinstatus', { googleid: user.googleid});
     });
     
     navigate('/');

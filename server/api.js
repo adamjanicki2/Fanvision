@@ -161,17 +161,18 @@ router.post("/changelockinstatus", (req, res) => {
 
 
 //IGNORE THIS:
-router.post("/setlockinstatus", (req, res) => {
-  LockInStatus.find({googleid: req.body.googleid}).then((status) => {
-    if (status.length > 0){
-      let today = Date();
-      const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD");
-      if (status[0].date !== today_str){
-        LockInStatus.updateOne({googleid: status[0].googleid}, {date: today_str, status: false});
-      }
-    }
-  });
-});
+// router.post("/setlockinstatus", (req, res) => {
+//   LockInStatus.find({googleid: req.body.googleid}).then((status) => {
+//     if (status.length > 0){
+//       let today = Date();
+//       const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD");
+//       if (status[0].date !== today_str){
+//         LockInStatus.updateOne({googleid: status[0].googleid}, {date: today_str, status: false});
+//         console.log({msg: 'updated lockin status for todays date'});
+//       }
+//     }
+//   });
+// });
 router.post("/setpredictions", (req, res) => {
   //How the args to this post should be structed:
   // req.user: contains the JS object representing the logged in user

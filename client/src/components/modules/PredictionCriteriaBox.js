@@ -79,7 +79,7 @@ class PredictionCriteriaBox extends Component {
                         <label for="margin-guess">Margin of Victory:</label>
                         {this.props.saved_margin === undefined ?
                         (<input type="number" id="margin-guess" name="margin-guess" min="0" max="200" onChange={this.handleChangeMargin}></input>):
-                        (<input type="number" id="margin-guess" name="margin-guess" min="0" max="200" onChange={this.handleChangeMargin}></input>)
+                        (<input type="number" id="margin-guess" name="margin-guess" min="0" max="200" defaultValue={this.props.saved_margin} onChange={this.handleChangeMargin}></input>)
                         }
                             
                         

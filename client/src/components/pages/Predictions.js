@@ -43,8 +43,11 @@ class Predictions extends Component {
 
     //call api for lockedIn status
     get("/api/lockinstatus").then((res) => {
+      let today = Date(); //this line is working
+      const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD"); 
+      if (res.date===today_str){
       this.setState({lockedIn: res[0].status})
-    }
+    }}
     )
 
     
@@ -57,6 +60,7 @@ class Predictions extends Component {
 
   //Calling setPredictions(predictionData); will post predictionData for today's date for current user to mongo
   setPredictions = (predictionData) => {
+    
     console.log(predictionData);
     if(predictionData.length<this.state.today_schedule.length){
       window.alert("Predictions not Complete!")
@@ -77,6 +81,19 @@ class Predictions extends Component {
             console.log("deleted saved prediction")
             })
           }
+        //correct the messed up crap in predictionData (dont allow margin 0)
+    for (let i = 0; i<predictionData.length; i++){
+      if (predictionData[i].predicted_margin===0){
+        const home_team = predictionData[i].home_team;
+        const state_pred = this.state.predictionObjects.find(obj => {
+          return obj.home_team === home_team
+        })
+        predictionData[i]['predicted_margin'] = state_pred.predicted_margin;
+      }
+
+    }
+
+        
         post('/api/setpredictions', {predictions: predictionData}).then((result) => {
         //console.log(result);
         this.setState({
@@ -85,6 +102,7 @@ class Predictions extends Component {
         });
       }
       post("/api/changelockinstatus", {status: true}).then((result) => {
+        
         this.setState({lockedIn:true})
       })
       window.location.reload()
@@ -97,6 +115,19 @@ class Predictions extends Component {
     if (this.state.lockedIn){
       return
     }
+
+    //correct the messed up crap in predictionData (dont allow margin 0)
+    for (let i = 0; i<predictionData.length; i++){
+      if (predictionData[i].predicted_margin===0){
+        const home_team = predictionData[i].home_team;
+        const state_pred = this.state.predictionObjects.find(obj => {
+          return obj.home_team === home_team
+        })
+        predictionData[i]['predicted_margin'] = state_pred.predicted_margin;
+      }
+
+    }
+
 
     //check if there is already a saved prediction. if there is delete it first before posting new one
     if (this.state.predictionObjects.length!==0){
@@ -114,13 +145,13 @@ class Predictions extends Component {
         });
         });
       window.alert("Predictions Saved!");
-      window.location.reload() //refresh the page after clicking button and posting prediction
+      // window.location.reload() //refresh the page after clicking button and posting prediction
   };
 
 
   
   render() {
-
+    console.log(this.state.lockedIn)
     if (this.state.lockedIn===true){
       let TodayPredictionCardList = [];
       const predictionObjects = this.state.predictionObjects;
@@ -153,11 +184,10 @@ class Predictions extends Component {
       )
       
     }
-     
-    let allPredictionEntries = this.state.predictionObjects;
+     //make deep copy of predictionObjects
+    let allPredictionEntries = JSON.parse(JSON.stringify(this.state.predictionObjects));
+  
     
-    console.log("first load of all predictions")
-    console.log(allPredictionEntries);
     //runs everytime a PredictionCriteriaBox is updated by the user's inputs
     const eventhandler = (data) => {
         console.log(data)

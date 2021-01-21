@@ -239,7 +239,11 @@ router.post("/deletesavedprediction", (req, res) => {
 
 });
 
-
+router.get('/current_time', (req, res) => {
+  let today = Date(); //this line is working
+  const today_str = moment(today).tz("America/New_York").format("YYYY-MM-DD HH:mm");
+  res.send({time: today_str});
+});
 
 
 // anything else falls to this "not found" case

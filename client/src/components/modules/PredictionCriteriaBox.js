@@ -50,21 +50,20 @@ class PredictionCriteriaBox extends Component {
         }else if (this.props.saved_winner === this.props.away_team){
             options_html = (
             <>
-            <div className="PredictionCriteriaBox-savedWinnerText">Saved Winner:{this.props.away_team}</div>
             <select name="gameprediction" id="team-select" onChange={this.handleChangeWinner}>
                 <option value='none' selected disabled hidden>--SELECT--</option>
-                <option value={this.props.away_team}>{this.props.away_team}</option>
+                <option selected value={this.props.away_team}>{this.props.away_team}</option>
                 <option value={this.props.home_team}>{this.props.home_team}</option>
             </select>
             </>);
         }else if (this.props.saved_winner === this.props.home_team){
             options_html = (
             <>
-            <div className="PredictionCriteriaBox-savedWinnerText">Saved Winner:{this.props.home_team}</div>
+            
             <select name="gameprediction" id="team-select" onChange={this.handleChangeWinner}>
                 <option value='none' selected disabled hidden>--SELECT--</option>
                 <option value={this.props.away_team}>{this.props.away_team}</option>
-                <option sevalue={this.props.home_team}>{this.props.home_team}</option>
+                <option selected value={this.props.home_team}>{this.props.home_team}</option>
             </select>
             </>);
         }

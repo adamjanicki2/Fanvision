@@ -155,13 +155,46 @@ class Predictions extends Component {
     }
      
     let allPredictionEntries = this.state.predictionObjects;
-
+    
+    console.log("first load of all predictions")
     console.log(allPredictionEntries);
     //runs everytime a PredictionCriteriaBox is updated by the user's inputs
     const eventhandler = (data) => {
-        console.log(allPredictionEntries);
-      //check that the prediction fields are all filled
-        if (data.predicted_winner !== "" && data.predicted_margin !==0){
+        console.log(data)
+        //if not all fields are populated, check if the game has been saved previosuly
+        if (data.predicted_winner === "" || data.predicted_margin ===0){
+          const data_home_team = data.home_team
+          //see if the game is already in allPredictionEntires
+          let found = false;
+          let index = null;
+          for(let i = 0; i < allPredictionEntries.length; i++) {
+              if (allPredictionEntries[i].home_team == data_home_team) {
+                  found = true;
+                  index = i;
+                  break;
+                  }}
+          if (found){
+            if (data.predicted_winner === ""){
+            allPredictionEntries[index] = {
+              home_team: data.home_team, 
+              away_team: data.away_team, 
+              predicted_winner: allPredictionEntries[index].predicted_winner,
+              predicted_margin: data.predicted_margin,
+            }
+          }else if (data.predicted_margin===0){
+            allPredictionEntries[index] = {
+              home_team: data.home_team, 
+              away_team: data.away_team, 
+              predicted_winner: data.predicted_winner,
+              predicted_margin: allPredictionEntries[index].predicted_margin,
+            }
+          }
+          }
+        }
+
+
+      //check that all of the prediction fields are all filled
+       else if (data.predicted_winner !== "" && data.predicted_margin !==0){
           const data_home_team = data.home_team
           //see if the game is already in allPredictionEntires
           let found = false;
@@ -175,9 +208,9 @@ class Predictions extends Component {
           } else{
             allPredictionEntries = allPredictionEntries.map(obj => [data].find(o => o.home_team === obj.home_team) || obj);
           }
-        console.log(allPredictionEntries)
+        
         }
-
+        console.log(allPredictionEntries)
 }
     
 
@@ -246,7 +279,9 @@ class Predictions extends Component {
     let html_to_return = this.state.user_id ? (
       <>
 
-        <h1>Prediction Entry (saving kinda janky but will be fixed)</h1>
+        <h1>Prediction Entry</h1>
+        <h4>Bug: margins reset to zero in both front and backend if left unchanged then save.
+        </h4>
         
         {this.state.lockedIn ? 
           (<><div className = "NextGameCard-allGamesContainer">{gamesList}</div><h2 className='u-textCenter'>You have locked in predictions for the day!</h2></>) : 

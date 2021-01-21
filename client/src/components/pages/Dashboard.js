@@ -138,18 +138,18 @@ class Dashboard extends Component {
     }
     let html_to_display = this.state.user_id ? (
       <>      
-        <h1>Dashboard</h1>
+        <h1 className="pageheading">Dashboard</h1>
        
         <div className="u-inlineBlock">
-          <h2 className="u-inlineBlock">Prediction Entry Status: </h2>
+          <h2 className="u-inlineBlock predStatus">Today's Predictions: </h2>
           {this.state.predictionsEntered ? 
           (<h2 className="u-inlineBlock CompleteGreen">Complete</h2>) : (<h2 className="u-inlineBlock IncompleteRed">Incomplete</h2>)
           }
         </div>
 
-        <h2>Today's Games</h2>
+        <h2 className="sectionheading">Today's Games</h2>
         <div className = "NextGameCard-allGamesContainer">{gamesList}</div>
-        <h2>Yesterday's Results</h2>
+        <h2 className="sectionheading">Yesterday's Results</h2>
         <div className = "ResultGameCard-allGamesContainer">{resultsList}</div>
       </>
     ) : (<h2>Please log in to display dashboard!</h2>);

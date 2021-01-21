@@ -1,7 +1,6 @@
 .NextGameCard-container{
     display: flex;
     flex-direction: row;
-    max-width: 200%;
     margin-left:10px;
     margin-right:10px;
     background-color: var(--offwhite);
@@ -13,7 +12,8 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+    max-width: 100%;
 }
 
 .NextGameCard-setting{

@@ -286,7 +286,7 @@ class Predictions extends Component {
         {this.state.lockedIn ? 
           (<><div className = "NextGameCard-allGamesContainer">{gamesList}</div><h2 className='u-textCenter'>You have locked in predictions for the day!</h2></>) : 
           (<><div className = "NextGameCard-allGamesContainer">  {gameEntryVisualList}</div>
-          <button onClick={() => {this.savePredictions(allPredictionEntries)}} className="Predictions-submitButton">Save Predictions</button>
+          <button onClick={() => {this.savePredictions(allPredictionEntries)}} className="Predictions-submitButton">Save Winners</button>
           <button onClick={() => {this.setPredictions(allPredictionEntries)}} className="Predictions-submitButton">LOCK IN PREDICTIONS</button>
           </>)
           }

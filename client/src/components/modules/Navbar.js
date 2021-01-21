@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "@reach/router";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import "./Navbar.css";
-import logo from '../../public/img/fanvision48.png';
+import logo from '../../public/img/fanvision32.png';
 
 const GOOGLE_CLIENT_ID = "911618425792-hk0acmfunco1f8qg441iih4pvm01cuae.apps.googleusercontent.com";
 
@@ -13,7 +13,7 @@ class Navbar extends Component {
     render() {
       return (
         <nav className="Navbar-container">
-          <img src={logo} className='Navbar-logo'/>
+          <img src={logo} className='Navbar-logo u-inlineBlock'/>
           {/*.Navbar-logo in Navbar.css, idk what im doing with this*/}
           <div className="Navbar-title u-inlineBlock">Fanvision</div>
           <div className="Navbar-routeContainer u-inlineBlock">

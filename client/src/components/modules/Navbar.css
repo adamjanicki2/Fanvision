@@ -4,11 +4,12 @@
     padding-left: var(--m);
     padding-right: var(--m);
     background-color: var(--red);
+    border-radius: 0px 0px 10px 10px;
   }
   
   .Navbar-title {
     color: var(--offwhite);
-    font-size: 36px;
+    font-size: 40px;
     font-family: 'united_kingdomregular';
   }
   
@@ -18,23 +19,38 @@
   .Navbar-name{
     margin-right: 12px;
   }
-  .Navbar-route,
-  .Navbar-route:visited {
+  .Navbar-route {
     color: var(--offblack);
     opacity: 0.95;
     text-decoration: none;
-    font-size: 24px;
+    font-size: 28px;
   }
   
   .Navbar-route:hover {
     color: var(--offwhite);
     opacity: 0.75;
+    border-bottom: 5px solid var(--offblack);
   }
   
+  .Navbar-route:visited {
+    opacity: 0.95;
+    border-bottom: 5px solid var(--offblack);
+  }
+  
+  .Route-clicked {
+    color: var(--offwhite);
+    border-bottom: 5px solid var(--offblack);
+  }
+
   .Navbar-route.Navbar-login {
     opacity: 1;
   }
   
+  .Route-container {
+    margin-right: var(--xl);
+    margin-bottom: 0;
+  }
+
   .Navbar-route + .Navbar-route {
     margin-left: var(--xl);
   }
@@ -52,5 +68,5 @@
 
 .Navbar-logo {
   /* ADD logo formatting here!! */
-  
+  margin-right: var(--m);
 }

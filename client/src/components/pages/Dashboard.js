@@ -21,7 +21,7 @@ class Dashboard extends Component {
   };
 
   componentDidMount() {
-
+    
     //call api to get today's games
     get("/api/todaygames").then((games) => {
       this.setState({

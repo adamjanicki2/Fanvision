@@ -9,7 +9,12 @@ const GOOGLE_CLIENT_ID = "911618425792-hk0acmfunco1f8qg441iih4pvm01cuae.apps.goo
 class Navbar extends Component {
     constructor(props) {
       super(props);
+      this.state = {
+        current_path: '/',
+      };
     }
+
+
     render() {
       return (
         <nav className="Navbar-container">
@@ -18,17 +23,17 @@ class Navbar extends Component {
           <div className="Navbar-title u-inlineBlock">Fanvision</div>
           <div className="Navbar-routeContainer u-inlineBlock">
           {this.props.userId !== undefined ? (
-              <Link to="/dashboard" className="Navbar-route">
+              <Link to="/dashboard" className={this.state.current_path === '/dashboard'? "Navbar-route Route-clicked":"Navbar-route"} onClick={() => {this.setState({current_path: '/dashboard'})}}>
                 Dashboard
               </Link>
             ) : (<div></div>)}
             {this.props.userId !== undefined ? (
-              <Link to="/predictions" className="Navbar-route">
+              <Link to="/predictions" className={this.state.current_path === '/predictions'? "Navbar-route Route-clicked":"Navbar-route"} onClick={() => {this.setState({current_path: '/predictions'})}}>
                 Prediction Entry
               </Link>
             ) : (<div></div>)}
             {this.props.userId !== undefined ? (
-              <Link to="/overallstandings" className="Navbar-route">
+              <Link to="/overallstandings" className={this.state.current_path === '/overallstandings'? "Navbar-route Route-clicked":"Navbar-route"} onClick={() => {this.setState({current_path: '/overallstandings'})}}>
                 Overall Standings
               </Link>
             ) : (<div></div>)}

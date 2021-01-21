@@ -135,3 +135,7 @@ form {
 .u-link:hover {
   color: var(--primary--dim);
 }
+
+.App-background {
+  background-color: #ffffff;
+}

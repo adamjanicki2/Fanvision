@@ -142,6 +142,7 @@ def update_scores():
         else:
             ##scores not in yet
             db.postedscore.update_one({'_id_':'python'}, { "$set": {'date': today}})
+            db.postedscore.update_one({'_id_':'python'}, { "$set": {'scores_last_time': False}})
             return 'waiting on scores from yesterday'
 
 if __name__ == '__main__':

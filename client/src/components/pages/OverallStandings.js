@@ -33,6 +33,7 @@ class OverallStandings extends Component {
     let score_table = isScores ? (
     <>
     <h1 className='u-textCenter'>2020-2021 NBA Season Player Standings</h1>
+    
     <table>
         <tbody>
         <tr className='table-header'>

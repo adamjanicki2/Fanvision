@@ -33,12 +33,16 @@
     word-spacing: .1px;
 }
 .NextGameCard-logosContainer{
-    display: flex;
+    display:flex;
+    width:200px;
     justify-content: space-between;
     
 }
-.NextGameCard-logo{ 
-    width: 100%;
-}
-
+img {
+    display: block;
+    max-width:230px;
+    max-height:95px;
+    width: auto;
+    height: auto;
+  }
 

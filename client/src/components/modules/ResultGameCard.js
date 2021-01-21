@@ -99,7 +99,7 @@ class ResultGameCard extends Component {
             <>
                 <div className="ResultGameCard-container">
                     <div className = "NextGameCard-logosContainer">
-                      <img className="NextGameGard-logo" src={teamLogos[away_img_src]}/>
+                      <img width-className="NextGameGard-logo" src={teamLogos[away_img_src]}/>
                       <img className="NextGameGard-logo" src={teamLogos[home_img_src]}/>
                     </div>
                     <div>{this.props.away_team} vs {this.props.home_team}</div>

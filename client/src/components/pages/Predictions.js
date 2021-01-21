@@ -52,6 +52,28 @@ class Predictions extends Component {
    });
   };
 
+  convertTime = (inTime) => {
+    //inTime is a string "hh:mm"
+    let outTime = null;
+    const inHour = inTime.split(":")[0];
+    const CONVERSION = {
+      1:1,
+      2:2,
+      3:3,
+      4:4,
+      5:5,
+      6:6,
+      7:7,
+      8:8,
+      9:9,
+      10:10,
+      11:11,
+      0:12
+  }
+    let outHour = CONVERSION[parseInt(inHour)%12];
+    return toString(outHour)+":"+inTime.split(':')[1]
+
+  }
 
 
 

@@ -55,7 +55,14 @@
 
 }
 
+@font-face {
+  font-family: 'green_mountain_3regular';
+  src: url('public/fonts/GreenMountain/GreenMountain.woff2') format('woff2'),
+       url('public/fonts/GreenMountain/GreenMountain.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 
+}
 
 body {
   margin: 0;
@@ -75,6 +82,9 @@ body {
   font-weight: 300;
 }
 
+.GreenMountain {
+  font-family: 'green_mountain_3regular';
+}
 form {
   flex-grow: 1;
 }

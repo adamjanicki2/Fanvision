@@ -20,6 +20,7 @@ class Predictions extends Component {
       user_id: null,
       lockedIn: false,
       predictionObjects: [],
+      earliest_start_time: '',
     };
   }
 
@@ -34,13 +35,15 @@ class Predictions extends Component {
       this.setState({user_id: user._id});
     });
 
+    get('/api/get_earliest_game').then((game_) => {
+      this.setState({ earliest_start_time: game_.time});
+    });
     //call api to check if user has already predicted today's games
     get('/api/gettodaypredictions').then((prediction) => {
       if (prediction.length !== 0){
         this.setState({
           predictionObjects: prediction[0].todays_predictions,
           });
-
     //call api for lockedIn status
     get("/api/lockinstatus").then((res) => {
       this.setState({lockedIn: res[0].status})
@@ -184,6 +187,18 @@ class Predictions extends Component {
     return true
   };
   
+  isBefore = (earliest_game_time) => {
+    let is_current_time_before;
+    get('/api/current_time').then((current_time) => {
+      let min_cur = current_time.split(' ')[1];
+      let min_early = earliest_game_time.split(' ')[1];
+      let num_cur = parseInt(min_cur.split(':')[0]) + parseInt(min_cur.split(':')[1])/60;
+      let num_early = parseInt(min_early.split(':')[0]) + parseInt(min_early.split(':')[1])/60;
+      is_current_time_before = num_cur < num_early;
+    });
+    return is_current_time_before;
+  };
+
   render() {
     console.log(this.state.lockedIn)
     if (this.state.lockedIn===true){

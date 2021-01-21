@@ -221,7 +221,7 @@ router.get('/get_earliest_game', (req, res) => {
   Schedule.findOne({date: today_str}).then((today_games) => {
     if (today_games){
       let sorted = today_games.games.sort((a, b) => 
-      (a.start_time > b.start_time)? 1 : -1
+      (parseInt(a.start_time.split(' ')[1].split(':')[0]) + parseInt(a.start_time.split(' ')[1].split(':')[1])/60 > parseInt(b.start_time.split(' ')[1].split(':')[0]) + parseInt(b.start_time.split(' ')[1].split(':')[1])/60 )? 1 : -1
       );
       res.send({time: sorted[0].start_time});
     }else{
@@ -229,15 +229,6 @@ router.get('/get_earliest_game', (req, res) => {
     }
   });
 });
-
-
-
-
-
-
-
-
-
 
 
 // anything else falls to this "not found" case

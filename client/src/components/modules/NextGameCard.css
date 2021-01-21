@@ -1,11 +1,15 @@
-.NextGameCard-container{
+
+
+.NextGameCard-container1{
     display: flex;
     flex-direction: row;
     margin-left:10px;
     margin-right:10px;
     background-color: var(--offwhite);
+    border-style: solid;
+    border-radius: 15px;
+    align-items: center;
 }
-
 
 
 .NextGameCard-allGamesContainer{
@@ -14,17 +18,25 @@
     align-items: center;
     justify-content: space-evenly;
     max-width: 100%;
+    align-content: space-around;
+    
 }
 
 .NextGameCard-setting{
     display:flex;
     flex-direction: column;
+    margin-right: 15px;
+    align-items: center;
+
 }
 
 .NextGameCard-matchup{
     display:flex;
     flex-direction: column;
     justify-content: center;
+    margin:6px;
+    margin-left: 10px;
+    margin-right: 20px;
     
 }
 
@@ -32,22 +44,22 @@
 .NextGameCard-teamContainerTop{
     display:flex;
     align-items: center;
-    margin-bottom: -15px;
-    margin-top: -15px;
+    margin-bottom: -5px;
     
 }
 
 .NextGameCard-teamContainerBottom{
     display:flex;
     align-items: center;
-    margin-top: -15px;
+    margin-top: -5px;
     
     
 }
 
 .NextGameCard-time{
-    font-size: 12pt;
-    color: var(--red);
+    font-size: 16pt;
+    color: var(--offblack);
+    font-style: bold;
     word-spacing: 2px;
 }
 
@@ -56,11 +68,11 @@
 .NextGameCard-abbrev{
     font-size:28pt;
     font-family: 'green_mountain_3regular';
-    color:black;
+    color:var(--offblack);
 }
 
 .NextGameCard-line{
-    border: 1px solid;
+    border: 2px solid;
 }
 img {
     max-width:90px;

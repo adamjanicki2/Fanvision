@@ -158,14 +158,22 @@ class NextGameCard extends Component {
             
             <>
                 <div className="NextGameCard-container">
-                    <div className = "NextGameCard-logosContainer">
+                  <div className = "NextGameCard-matchup">
+                    <div className = "NextGameCard-teamContainerTop">
                       <img className="NextGameGard-logo" src={teamLogos[away_img_src]}/>
-                      <img className="NextGameGard-logo" src={teamLogos[home_img_src]}/>
+                      <h1 className="NextGameCard-abbrev">{this.props.away_team}</h1>
                     </div>
-                    <div>{this.props.away_team} vs {this.props.home_team}</div>
+                    <hr width="93%" className="NextGameCard-line"></hr>
+                    <div className = "NextGameCard-teamContainerBottom">
+                      <img className="NextGameGard-logo" src={teamLogos[home_img_src]}/>
+                      <h1 className="NextGameCard-abbrev">{this.props.home_team}</h1>
+                    </div>
+                  </div>
+                  <div className="NextGameCard-setting">
                     <div className="NextGameCard-time">{this.props.start_time} PM ET</div>
                     <div className="NextGameCard-time"> {game_stadium}</div>
                     <div className="NextGameCard-time"> {game_city}</div>
+                  </div>
                 </div>
             </> );
    

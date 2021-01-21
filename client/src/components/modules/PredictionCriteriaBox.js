@@ -50,21 +50,20 @@ class PredictionCriteriaBox extends Component {
         }else if (this.props.saved_winner === this.props.away_team){
             options_html = (
             <>
-            <div className="PredictionCriteriaBox-savedWinnerText">Saved Winner:{this.props.away_team}</div>
             <select name="gameprediction" id="team-select" onChange={this.handleChangeWinner}>
                 <option value='none' selected disabled hidden>--SELECT--</option>
-                <option value={this.props.away_team}>{this.props.away_team}</option>
+                <option selected value={this.props.away_team}>{this.props.away_team}</option>
                 <option value={this.props.home_team}>{this.props.home_team}</option>
             </select>
             </>);
         }else if (this.props.saved_winner === this.props.home_team){
             options_html = (
             <>
-            <div className="PredictionCriteriaBox-savedWinnerText">Saved Winner:{this.props.home_team}</div>
+            
             <select name="gameprediction" id="team-select" onChange={this.handleChangeWinner}>
                 <option value='none' selected disabled hidden>--SELECT--</option>
                 <option value={this.props.away_team}>{this.props.away_team}</option>
-                <option sevalue={this.props.home_team}>{this.props.home_team}</option>
+                <option selected value={this.props.home_team}>{this.props.home_team}</option>
             </select>
             </>);
         }
@@ -80,7 +79,7 @@ class PredictionCriteriaBox extends Component {
                         <label for="margin-guess">Margin of Victory:</label>
                         {this.props.saved_margin === undefined ?
                         (<input type="number" id="margin-guess" name="margin-guess" min="0" max="200" onChange={this.handleChangeMargin}></input>):
-                        (<input type="number" id="margin-guess" name="margin-guess" min="0" max="200" placeholder={this.props.saved_margin} onChange={this.handleChangeMargin}></input>)
+                        (<input type="number" id="margin-guess" name="margin-guess" min="0" max="200" onChange={this.handleChangeMargin}></input>)
                         }
                             
                         

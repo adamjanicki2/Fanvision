@@ -11,3 +11,30 @@ flex-direction: column;
 flex-basis: 100%;
 flex: 1;
 }
+.table-header {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.table-entry{
+  font-size: 20px;
+  
+}
+
+table {
+  font-family: 'pakenhamregular';
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  width: 86%;
+}
+
+td, th {
+  border: 1px solid var(--offblack);
+  text-align: center;
+  padding: 10px;
+}
+
+tr:nth-child(even) {
+  background-color: var(--medgrey);
+}

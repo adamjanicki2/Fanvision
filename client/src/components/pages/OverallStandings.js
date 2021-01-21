@@ -32,21 +32,21 @@ class OverallStandings extends Component {
     let isScores = this.state.scoreboard.length !== 0;
     let score_table = isScores ? (
     <>
-    <h1>2020-2021 NBA Season Player Standings</h1>
+    <h1 className='u-textCenter'>2020-2021 NBA Season Player Standings</h1>
     <table>
         <tbody>
-        <tr>
+        <tr className='table-header'>
           <th>Rank</th>
           <th>Player Name</th>
           <th>Total Points</th>
-          <th>Accolades</th>
+          <th>Medals</th>
         </tr>
     {this.state.scoreboard.map((entry, i) => 
-      <tr>
+      <tr className='table-entry'>
         <td>{i+1}</td>
         <td>{entry.name}</td>
         <td>{entry.current_score}</td>
-        <td>{entry.gold} Gold {entry.silver} Silver {entry.bronze} Bronze</td>
+        <td>{entry.gold} Gold, {entry.silver} Silver, {entry.bronze} Bronze</td>
       </tr>
     )}
     </tbody>

@@ -37,7 +37,7 @@ class Profile extends Component {
     let html_to_display = isLoggedin? (
       <>
       <div className="u-textCenter">
-        <img src={this.state.picture}/>
+        <img src={this.state.picture} className='Profile-picture'/>
         <h1>{this.state.name}</h1>
         <h2>This is your profile page!</h2>
         <h2>Gold Count: {this.state.gold_dates.length}</h2>

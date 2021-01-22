@@ -53,7 +53,7 @@ def update_games():
     else:
         games = get_schedule(2021)
         time_since = int(time_since/24) + 1 ##timesince now in days, always rounds up
-        dates_to_update = [str(datetime.datetime.now() - datetime.timedelta(days= d)).split(' ')[0] for d in range(time_since+1)]
+        dates_to_update = [str(datetime.datetime.now() - datetime.timedelta(days= d)).split(' ')[0] for d in range(1,time_since+1)]
         for date in dates_to_update:
             try:
                 games_for_date = games[date]

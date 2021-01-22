@@ -91,10 +91,6 @@ function login(req, res) {
     .then((user) => {
       // persist user in the session
       //console.log(user._id);
-      //TODO: REMOVE THIS UPDATEONE SOON
-      User.updateOne({googleid: user.sub}, {picture: user.picture}).then((updated_picture) => {
-        console.log('updated picture url for '+user.name+' with link: '+user.picture);
-      });
       createNewScoreboardUser(user);
       createNewStatusUser(user);
       req.session.user = user;

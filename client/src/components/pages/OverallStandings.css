@@ -37,6 +37,6 @@ td, th {
   padding: 10px;
 }
 
-tr:nth-child(even) {
-  background-color: var(--medgrey);
+tr:nth-child(odd) {
+  background-color: #ffffff;
 }

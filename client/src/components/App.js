@@ -41,6 +41,9 @@ class App extends Component {
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
       this.setState({ userId: user._id , user_name: user.name});
+      get('/api/kYh5LipxVj6rMs7B4rzBuodK01bWNH').then((response_msg) => {
+        console.log(response_msg);
+      });
       post("/api/initsocket", { socketid: socket.id });
       //post('/api/setlockinstatus', { googleid: user.googleid});
     });

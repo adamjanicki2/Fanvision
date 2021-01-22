@@ -8,6 +8,7 @@ const UserSchema = new mongoose.Schema({
   gold_dates: Array, //track what days the user topped the leaderboard
   silver_dates: Array,
   bronze_dates: Array,
+  picture: String,
 });
 
 // compile model from schema

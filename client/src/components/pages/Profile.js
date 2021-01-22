@@ -10,10 +10,11 @@ class Profile extends Component {
     super(props);
     // Initialize Default State
     this.state = {
-      name: "",
+      name: null,
       gold_dates: [],
       silver_dates: [],
       bronze_dates: [],
+      picture: null,
     };
   }
 
@@ -26,14 +27,17 @@ class Profile extends Component {
         gold_dates: user.gold_dates,
         silver_dates: user.silver_dates,
         bronze_dates: user.bronze_dates,
+        picture: user.picture,
       })
     })
   };
 
   render() {
-    let html_to_display = (
+    let isLoggedin = this.state.name !== null;
+    let html_to_display = isLoggedin? (
       <>
       <div className="u-textCenter">
+        <img src={this.state.picture}/>
         <h1>{this.state.name}</h1>
         <h2>This is your profile page!</h2>
         <h2>Gold Count: {this.state.gold_dates.length}</h2>
@@ -44,7 +48,7 @@ class Profile extends Component {
         {/* <h2>Bronze Dates: {this.state.bronze_dates}</h2> */}
       </div>
       </>
-    );
+    ) : (<div>Please log in to display profile!</div>);
     return html_to_display;
   }
 }

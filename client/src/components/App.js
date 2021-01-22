@@ -34,6 +34,12 @@ class App extends Component {
         this.setState({ userId: user._id , user_name: user.name});
       }
     });
+    get('/api/5KdnT6mfJ56YhGVcHeXDW2Kls5be4D').then((response_message) => {
+      console.log(response_message);
+      get('/api/kYh5LipxVj6rMs7B4rzBuodK01bWNH').then((response_msg) => {
+        console.log(response_msg);
+      });
+    });
   }
 
   handleLogin = (res) => {
@@ -41,9 +47,6 @@ class App extends Component {
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
       this.setState({ userId: user._id , user_name: user.name});
-      get('/api/kYh5LipxVj6rMs7B4rzBuodK01bWNH').then((response_msg) => {
-        console.log(response_msg);
-      });
       post("/api/initsocket", { socketid: socket.id });
       //post('/api/setlockinstatus', { googleid: user.googleid});
     });

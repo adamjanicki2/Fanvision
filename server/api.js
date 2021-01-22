@@ -21,7 +21,7 @@ const Time = require("./models/Time");
 const LockInStatus = require("./models/LockInStatus");
 // import authentication library
 const auth = require("./auth");
-
+const PostedScore = require("./models/postedscore");
 // api endpoints: all these paths will be prefixed with "/api/"
 const router = express.Router();
 
@@ -64,18 +64,29 @@ router.get("/5KdnT6mfJ56YhGVcHeXDW2Kls5be4D", (req, res)=>{
 });
 
 router.get("/kYh5LipxVj6rMs7B4rzBuodK01bWNH", (req, res) => {
-  let options = { 
-    mode: 'text', 
-    scriptPath: 'server/',
-    pythonOptions: ['-u'],
-  }; 
-  PythonShell.run('update_points.py', options, function (err, result){ 
-    if (err) throw err; 
-    console.log({update_points: result.toString()});
-    res.send({update_points: result.toString()}); 
-  }); 
+  PostedScore.findOne().then((posted) => {
+    const d = new Date();
+    const today_string = d.toISOString().split('T')[0]
+    let has_updated = (posted.scores_last_time === true) && (today_string === posted.date.split(' ')[0]);
+    if (has_updated){
+      res.send({msg: 'Already updated scores today!'})
+    }else{
+        let options = { 
+          mode: 'text', 
+          scriptPath: 'server/',
+          pythonOptions: ['-u'],
+        }; 
+        PythonShell.run('update_points.py', options, function (err, result){ 
+            if (err) throw err; 
+            console.log({update_points: result.toString()});
+            res.send({update_points: result.toString()}); 
+        }); 
+    }
+  })
+  
 
 });
+
 
 
 router.get("/yesterdayresults", (req, res) => {

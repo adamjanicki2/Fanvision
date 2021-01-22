@@ -1,5 +1,4 @@
 from basketball_reference_web_scraper import client as bb_client
-import pytz
 import datetime
 import os
 from pymongo import MongoClient
@@ -120,29 +119,35 @@ def handle_missed_days(today_, last_update_):
     return 
 
 def update_scores():
-    fetched = db.postedscore.find_one()
-    today = pytz.timezone('US/Eastern').localize(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M:%S %Z%z').split(' ')[0]
-    yesterday = pytz.timezone('US/Eastern').localize(datetime.datetime.now() - datetime.timedelta(days= 1)).strftime('%Y-%m-%d %H:%M:%S %Z%z').split(' ')[0]
-    updated_scores_today = fetched['date'] == today and fetched['scores_last_time']
+    """
+    All times in GMT/UTC
+    """
+    fetched = db.postedscores.find_one()
+    current_unix_time = round(time.time())
+    today = datetime.datetime.utcfromtimestamp(current_unix_time)
+    yesterday = (today - datetime.timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')
+    today = today.strftime('%Y-%m-%d %H:%M:%S')
+    
+    updated_scores_today = (fetched['date'].split(' ')[0] == today.split(' ')[0]) and (fetched['scores_last_time'])
     if updated_scores_today:
-        return 'Scores for yesterday already updated'
+        return 'Scores for '+yesterday.split(' ')[0]+' already updated'
     else:
         yesterday_update = update_yesterday_games(yesterday)
-        handle_missed_days(today, db.lastupdated.find_one()['time_updated'].split(' ')[0])
+        handle_missed_days(today.split(' ')[0], db.lastupdated.find_one()['time_updated'].split(' ')[0])
         if yesterday_update == 'no games yesterday':
             return 'no games yesterday'
         elif yesterday_update == 'scores updated':
             ##Scores updated, we need to update points
-            db.postedscore.update_one({'_id_':'python'}, { "$set": {'date': today}})
-            db.postedscore.update_one({'_id_':'python'}, { "$set": {'scores_last_time': True}})
+            db.postedscores.update_one({'_id_':'python'}, { "$set": {'date': today}})
+            db.postedscores.update_one({'_id_':'python'}, { "$set": {'scores_last_time': True}})
             added = add_user_points(yesterday)
             db.lastupdated.update_one({'_id_': 'python'}, { "$set": {'time_updated': today}})
             removed = remove_predictions(today)
             return 'scores from yesterday just updated '+removed
         else:
             ##scores not in yet
-            db.postedscore.update_one({'_id_':'python'}, { "$set": {'date': today}})
-            db.postedscore.update_one({'_id_':'python'}, { "$set": {'scores_last_time': False}})
+            db.postedscores.update_one({'_id_':'python'}, { "$set": {'date': today}})
+            db.postedscores.update_one({'_id_':'python'}, { "$set": {'scores_last_time': False}})
             return 'waiting on scores from yesterday'
 
 if __name__ == '__main__':

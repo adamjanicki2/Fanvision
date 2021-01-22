@@ -185,6 +185,7 @@ class Predictions extends Component {
   };
 
   render() {
+    
     console.log(this.isBefore(this.state.earliest_start_time))
     if (this.state.lockedIn===true){
       let TodayPredictionCardList = [];
@@ -208,18 +209,25 @@ class Predictions extends Component {
       }
 
       return(
-        
-        <>
+        <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.8,opacity:0 },
+         visible:{scale:1,opacity:1,transition:{delay:0,duration:1}},}}>
+
+     
+       
         <div className="Predictions-header">
-          <header className="Predictions-headerText">Prediction Entry</header>
+        <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.8,opacity:0 },
+         visible:{scale:1,opacity:1,transition:{delay:.08,duration:.1}},}}>
+          <header className="Predictions-headerText">Locked In</header>
+        </motion.div>
+        <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.8,opacity:0 },
+         visible:{scale:1,opacity:1,transition:{delay:.08,duration:.1}},}}>
           <h3 className="Predictions-headersubText">You've locked in your predictions for today.</h3>
           <h3 className="Predictions-headersubText">View them below.</h3>
+          </motion.div>
         </div>
-    
-
         <div className="NextGameCard-allGamesContainer">{TodayPredictionCardList}</div>
-        
-        </>
+        </motion.div>
+
       )
       
     }

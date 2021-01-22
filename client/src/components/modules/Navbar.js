@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,useEffect } from "react";
 import { Link } from "@reach/router";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import "./Navbar.css";

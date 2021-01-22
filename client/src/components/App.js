@@ -13,7 +13,7 @@ import "../utilities.css";
 import Popup from 'reactjs-popup';
 import { socket } from "../client-socket.js";
 import { get, post } from "../utilities";
-import { motion } from "framer-motion";
+import { motion,AnimatePresence } from "framer-motion";
 
 /**
  * Define the "App" component as a class.
@@ -62,6 +62,7 @@ class App extends Component {
   };
 
   render() {
+
     return (
       <>
       <Navbar
@@ -70,7 +71,6 @@ class App extends Component {
           userId={this.state.userId}
           name={this.state.user_name}
         />
-        <motion.div intial="pageInitial" animate = "pageAnimate" variants ={{pageInitial:{opacity:0,},pageAnimate:{opacity:1},}}>
         <Router>
           <LoginPage path="/" userId={this.state.userId}/>
           <Dashboard path="/dashboard" userId={this.state.userId}/>
@@ -79,7 +79,6 @@ class App extends Component {
           <Profile path="/profile" userId={this.state.userId}/>
           <NotFound default />
         </Router>
-        </motion.div>
       </>
     );
   }

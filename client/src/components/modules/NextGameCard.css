@@ -2,6 +2,7 @@
 
 .NextGameCard-container1{
     display: flex;
+
     flex-direction: row;
     margin:15px;
     margin-bottom: 30px;
@@ -63,7 +64,7 @@
 }
 
 .NextGameCard-time{
-    font-size: 16pt;
+    font-size: 14pt;
     color: var(--offblack);
     font-style: bold;
     word-spacing: 2px;

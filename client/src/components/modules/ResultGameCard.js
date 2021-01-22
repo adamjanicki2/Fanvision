@@ -40,7 +40,9 @@ class ResultGameCard extends Component {
 
     componentDidMount(){
 
+
     }
+
 
     getWinner (){
         const home_score = this.props.home_team_score;

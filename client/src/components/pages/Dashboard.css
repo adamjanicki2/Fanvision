@@ -1,3 +1,38 @@
+
+.Dashboard-header{
+    background-image: url("../../public/img/swish.jpg");
+    background-color: var(--offblack);
+    height: 620px;
+    background-position: bottom;
+    background-size: cover;
+
+
+
+}
+
+.Dashboard-blurdarken{
+    filter: blur(1px) brightness(90%);
+}
+
+.Dashboard-headerText{
+    font-family:'united_kingdomregular'; 
+    font-size: 65pt;
+    color: #f1f5f2;
+    padding-right:35px;
+    padding-top: 250px;
+    text-align: center;
+    filter: brightness(100%);
+}
+
+.Dashboard-headersubText{
+    font-family:'pakenhamregular'; 
+    font-size: 18pt;
+    color: #f1f5f2;
+    text-align:center;
+    word-spacing: 1px;
+
+}
+
 .IncompleteRed {
     color: var(--red);
     margin-left: var(--s);

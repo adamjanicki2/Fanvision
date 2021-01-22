@@ -12,6 +12,7 @@ class Dashboard extends Component {
     super(props);
     // Initialize Default State
     this.state = {
+      name:null,
       user_id: null,
       today_schedule: [],
       yesterday_results: [],
@@ -21,6 +22,13 @@ class Dashboard extends Component {
   };
 
   componentDidMount() {
+    //get name
+    get("/api/whoami").then((user) => {
+      console.log(user.name);
+      this.setState({
+        name: user.name,
+      })
+    })
     
     //call api to get today's games
     get("/api/todaygames").then((games) => {
@@ -138,8 +146,14 @@ class Dashboard extends Component {
       resultsList = <div>No Games Yesterday :(</div>;
     }
     let html_to_display = this.state.user_id ? (
-      <>      
-        <h1 className="pageheading">Dashboard</h1>
+      <> 
+      <div>
+        <div className="Dashboard-header Dashboard-bg">
+          <header className="Dashboard-headerText">Dashboard</header>
+          <h3 className="Dashboard-headersubText">Welcome, {this.state.name.split(" ")[0]}. Check in on the action.</h3>
+        </div>
+      </div>
+          
        
         <div className="u-inlineBlock">
           <h2 className="u-inlineBlock predStatus">Today's Predictions: </h2>

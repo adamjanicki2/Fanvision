@@ -11,3 +11,21 @@
     color: var(--brightgreen);
     margin-left: var(--s);
 }
+
+.pageheading{
+    font-size: 56pt;
+    margin:8px;
+    margin-top:10px;
+    margin-left: 12px;
+}
+
+.sectionheading{
+
+    font-size: 24pt;
+    text-align: center;
+
+}
+
+.predStatus{
+    margin-left: 12px;
+}

@@ -155,7 +155,7 @@ class NextGameCard extends Component {
         if (home_team)
         
         return(       
-                <div className="NextGameCard-container">
+                <div className="NextGameCard-container1">
                   <div className = "NextGameCard-matchup">
                     <div className = "NextGameCard-teamContainerTop">
                       <img className="NextGameGard-logo" src={teamLogos[away_img_src]}/>

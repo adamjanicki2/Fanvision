@@ -146,6 +146,8 @@ def update_scores():
             return 'waiting on scores from yesterday'
 
 if __name__ == '__main__':
-    updated = update_scores()
-    print(updated)
+    # updated = update_scores()
+    # print(updated)
+    fetched = db.postedscore.find_one()
+    print(fetched['date'], fetched['scores_last_time'])
 

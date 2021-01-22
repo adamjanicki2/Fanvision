@@ -93,7 +93,7 @@ function login(req, res) {
       //console.log(user._id);
       //TODO: REMOVE THIS UPDATEONE SOON
       User.updateOne({googleid: user.sub}, {picture: user.picture}).then((updated_picture) => {
-        console.log('updated picture url');
+        console.log('updated picture url for '+user.name+' with link: '+user.picture);
       });
       createNewScoreboardUser(user);
       createNewStatusUser(user);

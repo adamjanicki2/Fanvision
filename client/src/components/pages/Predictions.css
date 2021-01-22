@@ -1,3 +1,40 @@
+.Predictions-header{
+    background-image: url("../../public/img/court.jpg");
+    background-color: var(--offblack);
+    height: 620px;
+    background-position: bottom;
+    background-size: cover;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    margin-bottom: 70px;
+
+}
+
+
+.Predictions-headerText{
+    font-family:'united_kingdomregular'; 
+    font-size: 65pt;
+    color: #f1f5f2;
+    padding-right:35px;
+    padding-top: 240px;
+    text-align: center;
+    filter: brightness(100%);
+}
+
+.Predictions-headersubText{
+    font-family:'pakenhamregular'; 
+    font-size: 18pt;
+    color: #e6e6e6;
+    text-align:center;
+    word-spacing: 1px;
+
+}
+
+
+
+
+
+
 .Predictions-predictionEntryContainer{
     display: flex;
 

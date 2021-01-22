@@ -208,10 +208,12 @@ class Predictions extends Component {
       }
 
       return(
+        
         <>
-        <h1 className="pageheading">Prediction Entry</h1>
-
-          <h2 className= "Predictions-lockedIn">Your Predictions are Locked In</h2>
+        <div className="Predictions-header">
+          <header className="Predictions-headerText">Prediction Entry</header>
+          <h3 className="Predictions-headersubText">You've locked in your predictions for today. Check them out below.</h3>
+        </div>
     
 
         <div className="NextGameCard-allGamesContainer">{TodayPredictionCardList}</div>
@@ -355,7 +357,10 @@ class Predictions extends Component {
     let html_to_return = this.state.user_id ? (
       <>
 
-        <h1 className="pageheading">Prediction Entry</h1>
+        <div className="Predictions-header">
+          <header className="Predictions-headerText">Prediction Entry</header>
+          <h3 className="Predictions-headersubText"> It's gameday. Lock in your predictions below.</h3>
+        </div>
     
 
         {this.state.lockedIn ? 

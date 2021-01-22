@@ -5,14 +5,13 @@
     height: 620px;
     background-position: bottom;
     background-size: cover;
-
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+ 
 
 
 }
 
-.Dashboard-blurdarken{
-    filter: blur(1px) brightness(90%);
-}
 
 .Dashboard-headerText{
     font-family:'united_kingdomregular'; 
@@ -27,7 +26,7 @@
 .Dashboard-headersubText{
     font-family:'pakenhamregular'; 
     font-size: 18pt;
-    color: #f1f5f2;
+    color: #a9a9a9;
     text-align:center;
     word-spacing: 1px;
 

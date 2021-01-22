@@ -6,7 +6,7 @@ import "./Predictions.css";
 import { get, post } from "../../utilities.js";
 import Popup from "reactjs-popup";
 import TodayPredictionCard from "../modules/TodayPredictionCard.js";
-
+import {motion} from "framer-motion";
 const moment = require('moment');
 require('moment-timezone');
 
@@ -212,7 +212,8 @@ class Predictions extends Component {
         <>
         <div className="Predictions-header">
           <header className="Predictions-headerText">Prediction Entry</header>
-          <h3 className="Predictions-headersubText">You've locked in your predictions for today. Check them out below.</h3>
+          <h3 className="Predictions-headersubText">You've locked in your predictions for today.</h3>
+          <h3 className="Predictions-headersubText">View them below.</h3>
         </div>
     
 
@@ -358,16 +359,27 @@ class Predictions extends Component {
       <>
 
         <div className="Predictions-header">
+        <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.5,opacity:0 },
+         visible:{scale:1,opacity:1,transition:{delay:.2}},}}>
           <header className="Predictions-headerText">Prediction Entry</header>
-          <h3 className="Predictions-headersubText"> It's gameday. Lock in your predictions below.</h3>
+        </motion.div>
+        <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.5,opacity:0 },
+         visible:{scale:1,opacity:1,transition:{delay:.32}},}}>
+          <h3 className="Predictions-headersubText"> It's GAMEDAY!</h3>
+          <h3 className="Predictions-headersubText"> Lock in your predictions below.</h3>
+        </motion.div>
         </div>
     
 
         {this.state.lockedIn ? 
           (<><div className = "NextGameCard-allGamesContainer">{gamesList}</div><h2 className='u-textCenter'>You have locked in predictions for the day!</h2></>) : 
           (<><div className = "NextGameCard-allGamesContainer">  {gameEntryVisualList}</div>
-          <button outlined color='danger' onClick={() => {this.savePredictions(allPredictionEntries)}} className="Predictions-submitButton">Save</button>
-          <button onClick={() => {this.setPredictions(allPredictionEntries)}} className="Predictions-submitButton">LOCK IN PREDICTIONS</button>
+          <div className="Predictions-buttonContainer">
+          <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => {this.savePredictions(allPredictionEntries)}} className="Predictions-submitButton">
+            Save
+          </motion.button>
+          <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}onClick={() => {this.setPredictions(allPredictionEntries)}} className="Predictions-submitButton">LOCK IN PREDICTIONS</motion.button>
+          </div>
           </>)
           }
         

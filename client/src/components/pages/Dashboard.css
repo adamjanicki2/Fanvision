@@ -2,7 +2,7 @@
 .Dashboard-header{
     background-image: url("../../public/img/swish.jpg");
     background-color: var(--offblack);
-    height: 620px;
+    height: 85vh;
     background-position: bottom;
     background-size: cover;
     border-bottom-left-radius: 8px;

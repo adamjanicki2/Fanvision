@@ -31,6 +31,10 @@
     opacity: 0.75;
     border-bottom: 5px solid var(--offblack);
   }
+
+  .Navbar-route {
+    transition: all .1s;
+  }
   
   .Navbar-route:visited {
     opacity: 0.95;

@@ -3,7 +3,8 @@
 .NextGameCard-container1{
     display: flex;
     flex-direction: row;
-    margin:10px;
+    margin:15px;
+    margin-bottom: 30px;
     background-color: var(--offwhite);
     border-style: solid;
     border-radius: 12px;
@@ -53,6 +54,12 @@
     margin-top: -5px;
     
     
+}
+
+.vsText{
+    font-family: 'green_mountain_3regular';
+    font-size: 18pt;
+    text-align: center
 }
 
 .NextGameCard-time{

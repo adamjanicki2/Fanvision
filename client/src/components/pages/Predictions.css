@@ -47,13 +47,22 @@
     margin-bottom: -5px;
 }
 
+.Predictions-buttonContainer{
+    margin-top: 30px;
+    display:flex;
+    justify-content: center;
+    
+}
 .Predictions-submitButton{
     background-color: #dd1c1a;
-    color: #f1f5f2;
+    color: #ffffff;
     margin-top: 5%;
     border-radius: 6px;
-    font-family: "pakenhamregular";
+    font-family: "green_mountain_3regular";
     font-size: 24px;
+    margin:10px;
+    padding-top:2px;
+    padding-bottom: 2px;
 }
 
 .Predictions-submitButton:hover{
@@ -61,6 +70,9 @@
     color: var(--offblack);
     cursor: pointer;
 }
+.Predictions-submitButton {
+    transition: all .1s;
+  }
 
 .NextGameCard-container{
     display: flex;
@@ -86,30 +98,4 @@
     text-align: center;
     color:green;
 
-}
-.checkmark {
-    display:inline-block;
-    width: 22px;
-    height:22px;
-    -ms-transform: rotate(45deg); /* IE 9 */
-    -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
-    transform: rotate(45deg);
-}
-
-.checkmark_stem {
-    position: absolute;
-    width:3px;
-    height:9px;
-    background-color:green;
-    left:11px;
-    top:6px;
-}
-
-.checkmark_kick {
-    position: absolute;
-    width:3px;
-    height:3px;
-    background-color:green;
-    left:8px;
-    top:12px;
 }

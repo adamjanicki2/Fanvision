@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import "../../utilities.css";
 import "./LoginPage.css";
 import { get } from "../../utilities.js";
-
+import { motion } from "framer-motion";
 
 class LoginPage extends Component {
   constructor(props) {
@@ -22,9 +22,18 @@ class LoginPage extends Component {
     return (
       <>
         <div className="LoginPage-background">
+        <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.8,opacity:0 },
+         visible:{scale:1,opacity:1,transition:{delay:1}},}}>
           <header className="LoginPage-bigMessage">Predict.</header>
+          </motion.div>
+          <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.8,opacity:0 },
+         visible:{scale:1,opacity:1,transition:{delay:2}},}}>
           <header className="LoginPage-bigMessage">Compete.</header>
+          </motion.div>
+          <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.8,opacity:0 },
+         visible:{scale:1,opacity:1,transition:{delay:3}},}}>
           <header className="LoginPage-bigMessage">Win.</header>
+          </motion.div>
         </div>
         <div className="LoginPage-footerContainer">
           <div className="LoginPage-bottomMessage">Put your prediction skills to the test.</div>

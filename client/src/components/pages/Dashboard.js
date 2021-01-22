@@ -4,6 +4,7 @@ import "./Dashboard.css";
 import { get, post } from "../../utilities.js";
 import NextGameCard from "../modules/NextGameCard.js";
 import ResultGameCard from "../modules/ResultGameCard.js";
+import {motion} from "framer-motion";
 
 
 
@@ -149,8 +150,15 @@ class Dashboard extends Component {
       <> 
       <div>
         <div className="Dashboard-header Dashboard-bg">
+        <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.8,opacity:0 },
+         visible:{scale:1,opacity:1,transition:{delay:.08}},}}>
           <header className="Dashboard-headerText">Dashboard</header>
-          <h3 className="Dashboard-headersubText">Welcome, {this.state.name.split(" ")[0]}. Check in on the action.</h3>
+        </motion.div>
+        <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.8,opacity:0 },
+         visible:{scale:1,opacity:1,transition:{delay:.2}},}}>
+          <h3 className="Dashboard-headersubText">Welcome, {this.state.name.split(" ")[0]}.</h3>
+          <h3 className="Dashboard-headersubText">Check in on the action.</h3>
+        </motion.div>
         </div>
       </div>
           

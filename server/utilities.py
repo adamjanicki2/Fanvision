@@ -30,6 +30,7 @@ TEAM_TO_ABBREV = {
   'UTAH_JAZZ': 'UTA',
   'WASHINGTON_WIZARDS': 'WAS',
 }
+CURRENT_YEAR = 2021
 
 CONVERSION = {
     1:1,
@@ -45,3 +46,24 @@ CONVERSION = {
     11:11,
     0:12
 }
+
+def calculate_score(guessed_margin, correct_margin, did_win):
+    mariokart = {
+    0: 15,
+    1: 12,
+    2: 10,
+    3: 8,
+    4: 7,
+    5: 6,
+    6: 5,
+    7: 4,
+    8: 3,
+    9: 2,
+    10: 1,
+    }
+    if not did_win:
+        return 0
+    difference = abs(guessed_margin - correct_margin)
+    if difference not in mariokart:
+        return 15
+    return 15 + mariokart[difference]

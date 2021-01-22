@@ -66,20 +66,22 @@ router.get("/5KdnT6mfJ56YhGVcHeXDW2Kls5be4D", (req, res)=>{
 router.get("/kYh5LipxVj6rMs7B4rzBuodK01bWNH", (req, res) => {
   PostedScore.findOne().then((posted) => {
     const d = new Date();
+    const full_today = d.toISOString().split('.')[0].split('T').join(' ');
     const today_string = d.toISOString().split('T')[0]
     let has_updated = (posted.scores_last_time === true) && (today_string === posted.date.split(' ')[0]);
     if (has_updated){
-      res.send({msg: 'Already updated scores today!'})
+      console.log({msg: 'Already updated scores today! '+full_today+' UTC)'});
+      res.send({msg: 'Already updated scores today! ('+full_today+' UTC)'});
     }else{
         let options = { 
           mode: 'text', 
           scriptPath: 'server/',
           pythonOptions: ['-u'],
         }; 
-        PythonShell.run('update_points.py', options, function (err, result){ 
+        PythonShell.run('update_scores.py', options, function (err, result){ 
             if (err) throw err; 
-            console.log({update_points: result.toString()});
-            res.send({update_points: result.toString()}); 
+            console.log({UPDATE_SCORES: result.toString()+' ('+full_today+' UTC)'});
+            res.send({UPDATE_SCORES: result.toString()+' ('+full_today+' UTC)'}); 
         }); 
     }
   })

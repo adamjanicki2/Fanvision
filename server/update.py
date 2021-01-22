@@ -49,7 +49,7 @@ def get_schedule(end_year):
 def update_games():
     time_since = (round(time.time()) - int(db.times.find_one()['last_scrape']))/3600
     if time_since < TIME_THRESHOLD:
-        return 'You scraped '+str(time_since)+' hours ago'
+        return 'You scraped '+str(round(time_since*60, 3))+' minutes ago'
     else:
         games = get_schedule(2021)
         time_since = int(time_since/24) + 1 ##timesince now in days, always rounds up
@@ -62,7 +62,7 @@ def update_games():
                 ##this date has no games, continue
                 continue
         updated_scrape_time = db.times.update_one({'name': 'time'}, {'$set': {'last_scrape': round(time.time())}})
-        return 'successfully updated for days '+', '.join(dates_to_update)
+        return 'successfully updated game schedule for days '+', '.join(dates_to_update)
 
 
 if __name__ == '__main__':

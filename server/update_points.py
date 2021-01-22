@@ -6,8 +6,7 @@ from dotenv import load_dotenv
 from utilities import TEAM_TO_ABBREV, CONVERSION
 import time
 from update import get_schedule
-
-CURRENT_YEAR = 2021
+from utilities import CURRENT_YEAR, calculate_score
 
 l = load_dotenv()
 MONGO_CONNECTION_URL = os.getenv('MONGO_SRV')
@@ -35,26 +34,6 @@ def update_yesterday_games(date):
     else:
         return 'no scores yet'
 
-def calculate_score(guessed_margin, correct_margin, did_win):
-    mariokart = {
-    0: 15,
-    1: 12,
-    2: 10,
-    3: 8,
-    4: 7,
-    5: 6,
-    6: 5,
-    7: 4,
-    8: 3,
-    9: 2,
-    10: 1,
-    }
-    if not did_win:
-        return 0
-    difference = abs(guessed_margin - correct_margin)
-    if difference not in mariokart:
-        return 15
-    return 15 + mariokart[difference]
 
 def remove_predictions(date):
     """
@@ -92,6 +71,7 @@ def add_user_points(date):
             daily_score += calculate_score(int(user_guess['predicted_margin']), abs(int(outcome['home_team_score']) - int(outcome['away_team_score'])), winner == user_guess['predicted_winner'])
             calculate_score(int(user_guess['predicted_margin']), abs(int(outcome['home_team_score']) - int(outcome['away_team_score'])), winner == user_guess['predicted_winner'])
         user_current_score = int(db.scoreboards.find_one({'googleid': user_googleid})['current_score'])
+        updated_daily_score = db.scoreboards.update_one({'googleid': user_googleid}, { "$set": {'last_day_score': daily_score}})
         updated = db.scoreboards.update_one({'googleid': user_googleid}, { "$set": {'current_score': user_current_score + daily_score}})
         medal_list.append((daily_score, user_googleid))
         medal_list = sorted(medal_list, key=lambda x: x[0], reverse = True)

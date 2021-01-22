@@ -33,7 +33,7 @@
     color: var(--offwhite);
     opacity: 0.95;
     text-decoration: none;
-    font-size: 28px;
+    font-size: 24px;
   }
   
   .Navbar-route:hover {
@@ -62,7 +62,6 @@
   
   .Route-container {
     margin-right: var(--xl);
-    margin-bottom: 0;
   }
 
   .Navbar-route + .Navbar-route {
@@ -83,4 +82,15 @@
   /* ADD logo formatting here!! */
   margin-right: var(--m);
 }
+
+.Navbar-pfpContainer{
+  padding-right: 40px;
+}
+.Navbar-pfp {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  
+    
+  }
 

@@ -3,7 +3,7 @@ import { Link } from "@reach/router";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import "./Navbar.css";
 import logo from '../../public/img/fanvision32.png';
-
+import { get, post } from "../../utilities.js";
 const GOOGLE_CLIENT_ID = "911618425792-hk0acmfunco1f8qg441iih4pvm01cuae.apps.googleusercontent.com";
 
 class Navbar extends Component {
@@ -11,8 +11,18 @@ class Navbar extends Component {
       super(props);
       this.state = {
         current_path: '/',
+        picture: null,
       };
     }
+
+    componentDidMount (){
+      get("/api/whoami").then((user) => {
+        this.setState({
+          picture: user.picture,
+        })
+      })
+    };
+    
 
 
     render() {
@@ -29,12 +39,12 @@ class Navbar extends Component {
             ) : (<div></div>)}
             {this.props.userId !== undefined ? (
               <Link to="/predictions" className={this.state.current_path === '/predictions'? "Navbar-route Route-clicked":"Navbar-route"} onClick={() => {this.setState({current_path: '/predictions'})}}>
-                Prediction Entry
+                Predict
               </Link>
             ) : (<div></div>)}
             {this.props.userId !== undefined ? (
               <Link to="/overallstandings" className={this.state.current_path === '/overallstandings'? "Navbar-route Route-clicked":"Navbar-route"} onClick={() => {this.setState({current_path: '/overallstandings'})}}>
-                Overall Standings
+                Standings
               </Link>
             ) : (<div></div>)}
             {/* {this.props.userId !== undefined ? (
@@ -48,7 +58,14 @@ class Navbar extends Component {
             
           </div>
           <div className='Navbar-logout u-inlineBlock'>
-          {this.props.userId !== undefined? <Link to="/profile" className='Navbar-route Navbar-name u-inlineBlock' onClick={() => {this.setState({current_path: '/profile'})}}>{this.props.name.split(" ")[0]} </Link> : <div/>}
+          {this.props.userId !== undefined? 
+          <div>
+            <div className="Navbar-pfpContainer"> 
+          <img src={this.state.picture} className='Navbar-pfp'/>
+          </div>
+          <Link to="/profile" className='Navbar-route Navbar-name u-inlineBlock' onClick={() => {this.setState({current_path: '/profile'})}}>{this.props.name.split(" ")[0]} </Link> 
+          </div>
+          :<div/>}
           {this.props.userId !== undefined? (
             <GoogleLogout
               clientId={GOOGLE_CLIENT_ID}

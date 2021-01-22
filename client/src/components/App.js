@@ -63,6 +63,7 @@ class App extends Component {
 
   render() {
 
+
     return (
       <>
       <Navbar
@@ -71,6 +72,7 @@ class App extends Component {
           userId={this.state.userId}
           name={this.state.user_name}
         />
+
         <Router>
           <LoginPage path="/" userId={this.state.userId}/>
           <Dashboard path="/dashboard" userId={this.state.userId}/>

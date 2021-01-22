@@ -7,6 +7,9 @@ import { get, post } from "../../utilities.js";
 import Popup from "reactjs-popup";
 import TodayPredictionCard from "../modules/TodayPredictionCard.js";
 import {motion} from "framer-motion";
+ import Loader from 'react-loader-spinner';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+
 const moment = require('moment');
 require('moment-timezone');
 
@@ -185,6 +188,25 @@ class Predictions extends Component {
   };
 
   render() {
+
+    if (this.state === {
+      today_schedule: [],
+      user_id: null,
+      lockedIn: false,
+      predictionObjects: [],
+      earliest_start_time: '',
+    }){
+      console.log("should load spinner");
+      return(
+        <Loader
+           type="Puff"
+           color="#00BFFF"
+           height={100}
+           width={100}
+           timeout={3000} //3 secs
+        />
+       );
+    }
     
     console.log(this.isBefore(this.state.earliest_start_time))
     if (this.state.lockedIn===true){
@@ -209,11 +231,10 @@ class Predictions extends Component {
       }
 
       return(
-        <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.8,opacity:0 },
-         visible:{scale:1,opacity:1,transition:{delay:0,duration:1}},}}>
+ 
 
      
-       
+       <>
         <div className="Predictions-header">
         <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.8,opacity:0 },
          visible:{scale:1,opacity:1,transition:{delay:.08,duration:.1}},}}>
@@ -226,7 +247,7 @@ class Predictions extends Component {
           </motion.div>
         </div>
         <div className="NextGameCard-allGamesContainer">{TodayPredictionCardList}</div>
-        </motion.div>
+      </>
 
       )
       
@@ -354,7 +375,7 @@ class Predictions extends Component {
       predictionCritList = null
       gamesList = <div>No Games Today :(</div>;
       return (
-        <>{gamesList}</>
+        <><><div className="center-screen"><Loader type="Grid" color="black" height={50} width={50}/></div></></>
         )
     };
 

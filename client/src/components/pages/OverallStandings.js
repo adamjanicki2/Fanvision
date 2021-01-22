@@ -3,7 +3,8 @@ import { get } from "../../utilities.js";
 
 import "../../utilities.css";
 import "./OverallStandings.css";
-
+import Loader from 'react-loader-spinner';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 
 class OverallStandings extends Component {
@@ -52,7 +53,7 @@ class OverallStandings extends Component {
     )}
     </tbody>
     </table>
-    </>) : (<div>No players to display!</div>);
+    </>) : (<div className="center-screen"><Loader type="Grid" color="black" height={50} width={50}/></div>);
 
     let html_to_return = this.state.user_id ? score_table : (<h2>Please log in and refresh to display Standings!</h2>);
 

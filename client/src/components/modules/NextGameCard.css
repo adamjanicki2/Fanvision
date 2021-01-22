@@ -82,7 +82,9 @@
     border: 2px solid;
 }
 img {
-    max-width:90px;
+    height:auto;
+    width:auto;
+    max-width: 90px;
     max-height:90px;
 
   }

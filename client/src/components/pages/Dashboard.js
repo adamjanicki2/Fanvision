@@ -5,6 +5,8 @@ import { get, post } from "../../utilities.js";
 import NextGameCard from "../modules/NextGameCard.js";
 import ResultGameCard from "../modules/ResultGameCard.js";
 import {motion} from "framer-motion";
+import Loader from 'react-loader-spinner';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 
 
@@ -175,7 +177,7 @@ class Dashboard extends Component {
         <h2 className="sectionheading">Yesterday's Results:</h2>
         <div className = "ResultGameCard-allGamesContainer">{resultsList}</div>
       </>
-    ) : (<h2>Please log in to display dashboard!</h2>);
+    ) : (<><div className="center-screen"><Loader type="Grid" color="black" height={50} width={50}/></div></>);
     return html_to_display;
   }
 }

@@ -82,7 +82,7 @@ class Dashboard extends Component {
 
   render() {
     
-
+    let total_points=0;
     //make list of games for today's games
     let gamesList = null;
     const hasGames = this.state.today_schedule.length !== 0;
@@ -117,6 +117,7 @@ class Dashboard extends Component {
         const game_winner = result[i].away_team_score < result[i].home_team_score ? result[i].home_team : result[i].away_team;
         const correct_guess = winner_predicted === game_winner;
         const point_reward = this.awardPoints(actual_margin, margin_predicted, correct_guess)
+        total_points = total_points+ point_reward[0]+point_reward[1];
         resultsList.push(
           <ResultGameCard
             home_team={result[i].home_team}
@@ -149,7 +150,7 @@ class Dashboard extends Component {
 
         <h2 className="sectionheading">Today's Games</h2>
         <div className = "NextGameCard-allGamesContainer">{gamesList}</div>
-        <h2 className="sectionheading">Yesterday's Results</h2>
+        <h2 className="sectionheading">Yesterday's Results:</h2>
         <div className = "ResultGameCard-allGamesContainer">{resultsList}</div>
       </>
     ) : (<h2>Please log in to display dashboard!</h2>);

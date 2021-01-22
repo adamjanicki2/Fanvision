@@ -161,7 +161,7 @@ class NextGameCard extends Component {
                       <img className="NextGameGard-logo" src={teamLogos[away_img_src]}/>
                       <h1 className="NextGameCard-abbrev">{this.props.away_team}</h1>
                     </div>
-                    <hr width="93%" className="NextGameCard-line"></hr>
+                    <hr width="95%" className="NextGameCard-line"></hr>
                     <div className = "NextGameCard-teamContainerBottom">
                       <img className="NextGameGard-logo" src={teamLogos[home_img_src]}/>
                       <h1 className="NextGameCard-abbrev">{this.props.home_team}</h1>

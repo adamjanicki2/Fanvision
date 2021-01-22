@@ -3,11 +3,10 @@
 .NextGameCard-container1{
     display: flex;
     flex-direction: row;
-    margin-left:10px;
-    margin-right:10px;
+    margin:10px;
     background-color: var(--offwhite);
     border-style: solid;
-    border-radius: 15px;
+    border-radius: 12px;
     align-items: center;
 }
 

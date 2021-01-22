@@ -112,7 +112,7 @@ class ResultGameCard extends Component {
                         <div className="ResultGameCard-score ResultGameCard-matchupItem">{this.props.away_team_score}</div>
                         <div className="finalandbox">
                             <h3 className="ResultGameCard-matchupItem finalText">Final</h3>
-                            <a href={box_score_link} target="_blank" >Box Score</a>
+                            <a href={box_score_link} target="_blank">Box Score</a>
                         </div>
                         <div className="ResultGameCard-score ResultGameCard-matchupItem">{this.props.home_team_score}</div>
                         <img src={teamLogos[home_img_src]}/>
@@ -128,8 +128,9 @@ class ResultGameCard extends Component {
                         </div>
                         <div className="ResultGameCard-resultItem">
                             <div className="ResultGameCard-pointBreakdown"> Points Earned:</div>
-                            <div className = "ResultGameCard-points">{"+"+this.props.points_earned}</div>
+                            <div className={css_points}>{this.props.points_earned}</div>
                         </div>
+                        <div className="ResultGameCard-pointBreakdown">{this.props.points_breakdown}</div>
                     </div>
                 
                 </div> 

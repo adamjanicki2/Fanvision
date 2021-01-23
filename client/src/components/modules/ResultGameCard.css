@@ -99,6 +99,15 @@
     font-size: 36pt;
 }
 
+.ResultGameCard-points-loss{
+    font-size: 36pt;
+    color: #ea3c53;
+}
+
+.ResultGameCard-points-win{
+    font-size: 36pt;
+    color: var(--brightgreen);
+}
 
 
 

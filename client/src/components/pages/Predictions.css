@@ -90,6 +90,8 @@
     margin-right: 5px;
     width:fit-content;
     word-spacing: 4px;
+    border-radius: 6px;
+    background-color: var(--offwhite);
 }
 
 .Predictions-lockedIn{

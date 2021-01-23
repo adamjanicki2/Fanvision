@@ -66,19 +66,17 @@ class OverallStandings extends Component {
     let score_table = isScores ? (
     <>
     
-    {/* <h1 className='u-textCenter'>2020-2021 NBA Season Player Standings</h1> */}
-    <div>
-        <div className="Standings-header">
-        <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.8,opacity:0 },
-         visible:{scale:1,opacity:1,transition:{delay:.08,duration:.1}},}}>
-          <header className="Standings-headerText">Standings</header>
-        </motion.div>
-        <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.8,opacity:0 },
-         visible:{scale:1,opacity:1,transition:{delay:.2,durant:.1}},}}>
-          <h3 className="Standings-headersubText">See who's on top.</h3>
-        </motion.div>
-        </div>
+      <div className="Standings-header">
+      <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.8,opacity:0 },
+        visible:{scale:1,opacity:1,transition:{delay:.08,duration:.1}},}}>
+        <header className="Standings-headerText">Standings</header>
+      </motion.div>
+      <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.8,opacity:0 },
+        visible:{scale:1,opacity:1,transition:{delay:.2,durant:.1}},}}>
+        <h3 className="Standings-headersubText">See who's on top.</h3>
+      </motion.div>
       </div>
+      
     <h1 className="updatedText">Updated as of {this.dateConvert(this.state.time.substring(0,10))} @ {this.state.time.slice(-5)} ET</h1>
     <div className="table-container">
     <table className='styled-table'>
@@ -104,12 +102,14 @@ class OverallStandings extends Component {
     </tbody>
     </table>
     </div>
+    
+
     </>) : (<div className="center-screen"><Loader type="Grid" color="black" height={50} width={50}/></div>);
 
     let html_to_return = this.state.user_id ? score_table : (<h2>Please log in and refresh to display Standings!</h2>);
 
 
-    return html_to_return;
+    return <div className = 'bg'>{html_to_return}</div>;
   }
 }
 

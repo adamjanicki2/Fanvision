@@ -235,6 +235,7 @@ class Predictions extends Component {
 
      
        <>
+       <div className='bg'>
         <div className="Predictions-header">
         <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.8,opacity:0 },
          visible:{scale:1,opacity:1,transition:{delay:.08,duration:.1}},}}>
@@ -247,6 +248,7 @@ class Predictions extends Component {
           </motion.div>
         </div>
         <div className="NextGameCard-allGamesContainer">{TodayPredictionCardList}</div>
+        </div>
       </>
 
       )
@@ -375,7 +377,7 @@ class Predictions extends Component {
       predictionCritList = null
       gamesList = <div>No Games Today :(</div>;
       return (
-        <><><div className="center-screen"><Loader type="Grid" color="black" height={50} width={50}/></div></></>
+        <div className='bg'><div className="center-screen"><Loader type="Grid" color="black" height={50} width={50}/></div></div>
         )
     };
 
@@ -386,7 +388,7 @@ class Predictions extends Component {
     }
     let html_to_return = this.state.user_id ? (
       <>
-
+      <div className='bg'>
         <div className="Predictions-header">
         <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.5,opacity:0 },
          visible:{scale:1,opacity:1,transition:{delay:.2}},}}>
@@ -411,7 +413,7 @@ class Predictions extends Component {
           </div>
           </>)
           }
-        
+       </div> 
       </>
     ) : (<h2 className="sectionheading">Please log in to display prediction entry!</h2>);
     return html_to_return;

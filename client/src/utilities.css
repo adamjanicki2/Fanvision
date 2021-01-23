@@ -140,3 +140,9 @@ form {
 .App-background {
   background-color: #ffffff;
 }
+
+.bg{
+  background: url('./public/img/bg.png');
+  height: 100%;
+  width: 100%;
+}

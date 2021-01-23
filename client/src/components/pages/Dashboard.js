@@ -157,7 +157,8 @@ class Dashboard extends Component {
     }
     let html_to_display = this.state.user_id ? (
       <> 
-      <div>
+      <div className='bg'>
+
         <div className="Dashboard-header Dashboard-bg">
         <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.8,opacity:0 },
          visible:{scale:1,opacity:1,transition:{delay:.08,duration:.1}},}}>
@@ -169,7 +170,7 @@ class Dashboard extends Component {
           <h3 className="Dashboard-headersubText">Check in on the action.</h3>
         </motion.div>
         </div>
-      </div>
+      
           
        
         <div className="u-inlineBlock">
@@ -183,11 +184,13 @@ class Dashboard extends Component {
 
         <h2 className="sectionheading">Today's Games</h2>
         <div className = "NextGameCard-allGamesContainer">{gamesList}</div>
+  
         <h2 className="sectionheading">Yesterday's Results</h2>
         <h2 className = " u-textCenter lastDayPoints CompleteGreen">+{this.state.last_day_score}</h2>
         <div className = "ResultGameCard-allGamesContainer">{resultsList}</div>
+        </div>
       </>
-    ) : (<><div className="center-screen"><Loader type="Grid" color="black" height={50} width={50}/></div></>);
+    ) : (<div className='bg'><div className="center-screen"><Loader type="Grid" color="black" height={50} width={50}/></div></div>);
     return html_to_display;
   }
 }

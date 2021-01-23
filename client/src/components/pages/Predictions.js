@@ -25,6 +25,7 @@ class Predictions extends Component {
       lockedIn: false,
       predictionObjects: [],
       earliest_start_time: '',
+      can_enter_predictions: null,
     };
   }
 
@@ -40,7 +41,20 @@ class Predictions extends Component {
     });
 
     get('/api/get_earliest_game').then((game_) => {
+      const early = parseInt(game_.time.split(' ')[1].split(':')[0]) + (parseInt(game_.time.split(' ')[1].split(':')[1])/60);
+      
       this.setState({ earliest_start_time: game_.time});
+      get('/api/current_time').then((current_time) => {
+        const cur_str = current_time.time;
+        const cur =  parseInt(cur_str.split(' ')[1].split(':')[0]) + (parseInt(cur_str.split(' ')[1].split(':')[1])/60);
+        if (cur >= early){
+          this.setState({ can_enter_predictions: false})
+          console.log('too late to enter predictions!')
+        }else{
+          this.setState({ can_enter_predictions: true})
+          console.log('still time to enter predictions!')
+        }
+      });
     });
     
     get('/api/current_time').then((res_) => {
@@ -65,10 +79,30 @@ class Predictions extends Component {
   };
 
 
+  update_pred_valid = () => {
+    get('/api/get_earliest_game').then((game_) => {
+      const early = parseInt(game_.time.split(' ')[1].split(':')[0]) + (parseInt(game_.time.split(' ')[1].split(':')[1])/60);
+      get('/api/current_time').then((current_time) => {
+        const cur_str = current_time.time;
+        const cur =  parseInt(cur_str.split(' ')[1].split(':')[0]) + (parseInt(cur_str.split(' ')[1].split(':')[1])/60);
+        if (cur >= early){
+          this.setState({ can_enter_predictions: false})
+          return false;
+        }else{
+          this.setState({ can_enter_predictions: true})
+          return true;
+        }
+      });
+    });
+  }
 
   //Calling setPredictions(predictionData); will post predictionData for today's date for current user to mongo
   setPredictions = (predictionData) => {
-    
+    const can_still_enter = this.update_pred_valid();
+    if (can_still_enter === false){
+      console.log('Time to predict expired!')
+      return;
+    }
     console.log(predictionData);
     if(predictionData.length<this.state.today_schedule.length){
       window.alert("Predictions not Complete!")
@@ -122,9 +156,13 @@ class Predictions extends Component {
   //Calling savePredictions(predictionData); will post predictionData for today's date for current user to mongo without locking in
   savePredictions = (predictionData) => {
     if (this.state.lockedIn){
-      return
+      return;
     }
-    
+    const can_still_enter = this.update_pred_valid();
+    if (can_still_enter === false){
+      console.log('Time to predict expired!')
+      return;
+    }
 
     //correct the messed up crap in predictionData (dont allow margin 0)
     for (let i = 0; i<predictionData.length; i++){
@@ -173,6 +211,8 @@ class Predictions extends Component {
     return true
   };
   
+  
+
   isTimeBefore = (earliest_game_time) => {
     get('/api/current_time').then((current_time) => {
       
@@ -202,10 +242,9 @@ class Predictions extends Component {
   });
   }
   render() {
-    let isBefore = this.isTimeBefore(this.state.earliest_start_time);
-    console.log(isBefore)
-    if(this.isTimeBefore(this.state.earliest_start_time)===false){
-      return <div>too late</div>
+    
+    if(this.state.can_enter_predictions===false){
+      return (<div>too late!!!!!!!!!!!!!!!!</div>);
     }
 
 
@@ -364,7 +403,7 @@ class Predictions extends Component {
               onChange={eventhandler}
             />) };
 
-        if (this.isTimeBefore(this.state.earliest_start_time)===false){
+        if (this.state.can_enter_predictions === false){
           return(
             <>
             <h2>It is too late to submit predictions today.</h2>

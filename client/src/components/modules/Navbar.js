@@ -37,6 +37,11 @@ class Navbar extends Component {
           <div className="Navbar-title u-inlineBlock">Fanvision</div>
           <div className="Navbar-routeContainer u-inlineBlock">
           {this.props.userId !== undefined ? (
+              <Link to="/" className={this.state.current_path === '/'? "Navbar-route Route-clicked":"Navbar-route"} onClick={() => {this.setState({current_path: '/'})}}>
+                Home
+              </Link>
+            ) : (<div></div>)}
+          {this.props.userId !== undefined ? (
               <Link to="/dashboard" className={this.state.current_path === '/dashboard'? "Navbar-route Route-clicked":"Navbar-route"} onClick={() => {this.setState({current_path: '/dashboard'})}}>
                 Dashboard
               </Link>
@@ -74,6 +79,9 @@ class Navbar extends Component {
             <GoogleLogout
               clientId={GOOGLE_CLIENT_ID}
               buttonText="Logout"
+              render={renderProps => (
+                <button onClick={renderProps.onClick} disabled={renderProps.disabled} className='button-log'>Log Out</button>
+              )}
               onLogoutSuccess={this.props.handleLogout}
               onFailure={(err) => console.log(err)}
             />
@@ -81,6 +89,9 @@ class Navbar extends Component {
             <GoogleLogin
               clientId={GOOGLE_CLIENT_ID}
               buttonText="Login"
+              render={renderProps => (
+                <button onClick={renderProps.onClick} disabled={renderProps.disabled} className='button-log'>Log In</button>
+              )}
               onSuccess={this.props.handleLogin}
               onFailure={(err) => console.log(err)}              
             />

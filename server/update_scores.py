@@ -92,23 +92,25 @@ def update_scores_and_medals_for_date(date):
         existing = predictions_from_date[0]
     except:
         return 'No predictions from date'
-    results_from_date = sorted(sched_from_date['games'], key=lambda x: x['home_team'])
+    results_from_date = sched_from_date['games']
     medal_list = []
     for user_prediction in predictions_from_date:
         user_googleid = user_prediction['googleid']
-        user_games = sorted(user_prediction['todays_predictions'], key=lambda x: x['home_team'])
+        user_games = {g['home_team']: g for g in user_prediction['todays_predictions']}
         daily_score = 0
-        for outcome, user_guess in zip(results_from_date, user_games): ##calculate points gained for day
+        for outcome in results_from_date: ##calculate points gained for day
+            user_guess = user_games[outcome['home_team']]
             actual_winner = outcome['home_team'] if int(outcome['home_team_score']) > int(outcome['away_team_score']) else outcome['away_team']
             did_player_win = actual_winner == user_guess['predicted_winner']
             actual_margin = abs(int(outcome['home_team_score']) - int(outcome['away_team_score']))
-            daily_score += calculate_score(int(user_guess['predicted_margin']), actual_margin, did_player_win)
+            points_gained_from_game = calculate_score(int(user_guess['predicted_margin']), actual_margin, did_player_win)
+            daily_score += points_gained_from_game
         update_user_scores(user_googleid, daily_score) ##update scoreboard for given user
         medal_list.append((daily_score, user_googleid))
         medal_list = sorted(medal_list, key=lambda x: x[0], reverse = True)
         if len(medal_list) == 4:
             medal_list.pop()
-    assign_medals(date, medal_list)
+    return assign_medals(date, medal_list)
     return 'Scores updated for date'
 
 def get_missed_days(today_, last_update_):

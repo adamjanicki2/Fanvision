@@ -1,3 +1,35 @@
+
+.Standings-header{
+  background-image: url("../../public/img/mj2.png");
+  background-color: var(--offblack);
+  height: 85vh;
+  background-position: bottom;
+  background-size: cover;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+
+
+}
+
+.Standings-headerText{
+  font-family:'united_kingdomregular'; 
+  font-size: 65pt;
+  color: #ffffff;
+  padding-right:35px;
+  padding-top: 250px;
+  text-align: center;
+  filter: brightness(100%);
+}
+
+.Standings-headersubText{
+  font-family:'pakenhamregular'; 
+  font-size: 18pt;
+  color: #ffffff;
+  text-align:center;
+  word-spacing: 1px;
+  opacity: 1.0;
+}
+
 .OverallStandings-row {
     display: flex;
     flex-direction: row;
@@ -39,4 +71,7 @@ td, th {
 
 tr:nth-child(odd) {
   background-color: #ffffff;
+}
+tr:nth-child(even) {
+  background-color: var(--medgrey);
 }

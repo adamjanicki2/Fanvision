@@ -22,12 +22,17 @@ class Profile extends Component {
     // remember -- api calls go here!
     get("/api/whoami").then((user) => {
       console.log(user.name);
+      const SIZE_ = '384'; //dimensions of pfp, change this number to change the size
+      let arr = user.picture.split('/');
+      arr[arr.length - 2] = arr[arr.length - 2][0]+SIZE_+arr[arr.length - 2].substring(3);
+      let picture_to_use = arr.join('/');
+      console.log(picture_to_use)
       this.setState({
         name: user.name,
         gold_dates: user.gold_dates,
         silver_dates: user.silver_dates,
         bronze_dates: user.bronze_dates,
-        picture: user.picture,
+        picture: picture_to_use,
       })
     })
   };

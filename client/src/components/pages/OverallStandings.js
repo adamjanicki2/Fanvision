@@ -5,8 +5,7 @@ import "../../utilities.css";
 import "./OverallStandings.css";
 import Loader from 'react-loader-spinner';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-
-
+import {motion} from "framer-motion";
 class OverallStandings extends Component {
   constructor(props) {
     super(props);
@@ -33,8 +32,21 @@ class OverallStandings extends Component {
     let isScores = this.state.scoreboard.length !== 0;
     let score_table = isScores ? (
     <>
-    <h1 className='u-textCenter'>2020-2021 NBA Season Player Standings</h1>
     
+    {/* <h1 className='u-textCenter'>2020-2021 NBA Season Player Standings</h1> */}
+    <div>
+        <div className="Standings-header">
+        <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.8,opacity:0 },
+         visible:{scale:1,opacity:1,transition:{delay:.08,duration:.1}},}}>
+          <header className="Standings-headerText">Standings</header>
+        </motion.div>
+        <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.8,opacity:0 },
+         visible:{scale:1,opacity:1,transition:{delay:.2,durant:.1}},}}>
+          <h3 className="Standings-headersubText">See who's on top.</h3>
+        </motion.div>
+        </div>
+      </div>
+
     <table>
         <tbody>
         <tr className='table-header'>

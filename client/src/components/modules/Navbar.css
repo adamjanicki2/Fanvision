@@ -84,7 +84,7 @@
 }
 
 .Navbar-pfpContainer{
-  padding-right: 40px;
+  padding-right: var(--m);
 }
 .Navbar-pfp {
   border-radius: 50%;

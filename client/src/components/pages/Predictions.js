@@ -243,11 +243,6 @@ class Predictions extends Component {
   }
   render() {
     
-    if(this.state.can_enter_predictions===false){
-      return (<div>too late!!!!!!!!!!!!!!!!</div>);
-    }
-
-
     if (this.state.lockedIn===true){
       let TodayPredictionCardList = [];
       const predictionObjects = this.state.predictionObjects;

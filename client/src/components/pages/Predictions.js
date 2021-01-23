@@ -173,42 +173,28 @@ class Predictions extends Component {
     return true
   };
   
-  isBefore = (earliest_game_time) => {
+  timeBefore = (earliest_game_time) => {
     let is_current_time_before = true;
     get('/api/current_time').then((current_time) => {
+      console.log(current_time)
+      console.log(earliest_game_time)
       if (earliest_game_time !== ''){
-        let min_cur = current_time.time.split(' ')[1];
-        let min_early = earliest_game_time.split(' ')[1];
-        let num_cur = parseInt(min_cur.split(':')[0]) + parseInt(min_cur.split(':')[1])/60;
-        let num_early = parseInt(min_early.split(':')[0]) + parseInt(min_early.split(':')[1])/60;
-        is_current_time_before = num_cur < num_early;
+        let early_time = moment(earliest_game_time, 'YYYY-MM-DD HH:mm')
+        let current_time = moment(current_time, 'YYYY-MM-DD HH:mm')
+        is_current_time_before = current_time.isBefore(early_time)
       }
     });
+    console.log(is_current_time_before)
     return is_current_time_before;
   };
 
   render() {
 
-    if (this.state === {
-      today_schedule: [],
-      user_id: null,
-      lockedIn: false,
-      predictionObjects: [],
-      earliest_start_time: '',
-    }){
-      console.log("should load spinner");
-      return(
-        <Loader
-           type="Puff"
-           color="#00BFFF"
-           height={100}
-           width={100}
-           timeout={3000} //3 secs
-        />
-       );
+    console.log(this.state.earliest_start_time)
+    console.log(this.timeBefore(this.state.earliest_start_time))
+    if (this.timeBefore(this.state.earliest_start_time)){
+      return <div>too late</div>
     }
-    
-    console.log(this.isBefore(this.state.earliest_start_time))
     if (this.state.lockedIn===true){
       let TodayPredictionCardList = [];
       const predictionObjects = this.state.predictionObjects;

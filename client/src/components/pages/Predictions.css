@@ -1,7 +1,7 @@
 .Predictions-header{
     background-image: url("../../public/img/court.jpg");
     background-color: var(--offblack);
-    height: 85vh;
+    height: 95vh;
     background-position: bottom;
     background-size: cover;
     border-bottom-left-radius: 8px;

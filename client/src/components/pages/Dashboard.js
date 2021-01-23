@@ -21,6 +21,8 @@ class Dashboard extends Component {
       yesterday_results: [],
       yesterday_predictions: [],
       predictionsEntered: false,
+      current_score:null,
+      last_day_score:null
     };
   };
 
@@ -60,6 +62,10 @@ class Dashboard extends Component {
     }
     )
   });
+
+    get("/api/getuserscore").then((scores) => {
+      this.setState({current_score:scores.current_score,last_day_score:scores.last_day_score})
+    })
   };
 
   //TODO determine how many points the user earned
@@ -171,11 +177,13 @@ class Dashboard extends Component {
           {this.state.predictionsEntered ? 
           (<h2 className="u-inlineBlock CompleteGreen">Complete</h2>) : (<h2 className="u-inlineBlock IncompleteRed">Incomplete</h2>)
           }
+          <h2>Your Season Point Total: {this.state.current_score}</h2>
         </div>
 
         <h2 className="sectionheading">Today's Games</h2>
         <div className = "NextGameCard-allGamesContainer">{gamesList}</div>
-        <h2 className="sectionheading">Yesterday's Results:</h2>
+        <h2 className="sectionheading">Yesterday's Results</h2>
+        <h2 className = " u-textCenter lastDayPoints CompleteGreen">+{this.state.last_day_score}</h2>
         <div className = "ResultGameCard-allGamesContainer">{resultsList}</div>
       </>
     ) : (<><div className="center-screen"><Loader type="Grid" color="black" height={50} width={50}/></div></>);

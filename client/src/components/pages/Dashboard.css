@@ -75,3 +75,9 @@
 .predStatus{
     margin-left: 12px;
 }
+
+.lastDayPoints{
+    font-size:25pt;
+    margin-top:-15px;
+    margin-bottom: 0px;
+}

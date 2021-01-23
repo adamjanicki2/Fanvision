@@ -25,6 +25,7 @@ class Dashboard extends Component {
   };
 
   componentDidMount() {
+
     //get name
     get("/api/whoami").then((user) => {
       console.log(user.name);

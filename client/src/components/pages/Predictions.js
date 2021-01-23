@@ -173,28 +173,42 @@ class Predictions extends Component {
     return true
   };
   
-  timeBefore = (earliest_game_time) => {
-    let is_current_time_before = true;
+  isTimeBefore = (earliest_game_time) => {
     get('/api/current_time').then((current_time) => {
-      console.log(current_time)
-      console.log(earliest_game_time)
-      if (earliest_game_time !== ''){
-        let early_time = moment(earliest_game_time, 'YYYY-MM-DD HH:mm')
-        let current_time = moment(current_time, 'YYYY-MM-DD HH:mm')
-        is_current_time_before = current_time.isBefore(early_time)
+      
+      if (earliest_game_time !== '' ){
+        console.log('1')
+        const curr_day = moment(current_time.time.substring(0,10),'YYYY-MM-DD');
+
+
+        let curr_time = current_time.time.split(" ").pop();
+        curr_time = moment(curr_time,'HH:mm')
+        
+        const earliest_game_day = moment(earliest_game_time.substring(0,10),'YYYY-MM-DD');
+
+        let earliest_time = earliest_game_time.slice(-5);
+        earliest_time = moment(earliest_time,'HH:mm')
+        
+        if (earliest_game_day.isSameOrBefore(curr_day) === false){
+          console.log('2')
+          return false;
+        }else if (curr_time.isBefore(earliest_time)===false){
+          console.log('3')
+          return false;
       }
-    });
-    console.log(is_current_time_before)
-    return is_current_time_before;
-  };
+      return true;
+    };
 
+  });
+  }
   render() {
-
-    console.log(this.state.earliest_start_time)
-    console.log(this.timeBefore(this.state.earliest_start_time))
-    if (this.timeBefore(this.state.earliest_start_time)){
+    let isBefore = this.isTimeBefore(this.state.earliest_start_time);
+    console.log(isBefore)
+    if(this.isTimeBefore(this.state.earliest_start_time)===false){
       return <div>too late</div>
     }
+
+
     if (this.state.lockedIn===true){
       let TodayPredictionCardList = [];
       const predictionObjects = this.state.predictionObjects;
@@ -348,7 +362,7 @@ class Predictions extends Component {
               onChange={eventhandler}
             />) };
 
-        if (this.isBefore(this.state.earliest_start_time)===false){
+        if (this.isTimeBefore(this.state.earliest_start_time)===false){
           return(
             <>
             <h2>It is too late to submit predictions today.</h2>

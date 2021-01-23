@@ -130,7 +130,7 @@ class ResultGameCard extends Component {
                         </div>
                         <div className="ResultGameCard-resultItem">
                             <div className="ResultGameCard-pointBreakdown"> Points Earned:</div>
-                            <div className = "ResultGameCard-points">{"+"+this.props.points_earned}</div>
+                            {this.props.points_earned === 0? <div className = "ResultGameCard-points-loss">{"+"+this.props.points_earned}</div> : <div className = "ResultGameCard-points-win">{"+"+this.props.points_earned}</div>}
                         </div>
                     </div>
                 

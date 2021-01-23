@@ -26,7 +26,6 @@ class Profile extends Component {
       let arr = user.picture.split('/');
       arr[arr.length - 2] = arr[arr.length - 2][0]+SIZE_+arr[arr.length - 2].substring(3);
       let picture_to_use = arr.join('/');
-      console.log(picture_to_use)
       this.setState({
         name: user.name,
         gold_dates: user.gold_dates,

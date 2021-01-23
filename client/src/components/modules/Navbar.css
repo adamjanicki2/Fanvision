@@ -88,9 +88,9 @@
 }
 .Navbar-pfp {
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  border: 1px solid #000;
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--offwhite);
     
   }
 

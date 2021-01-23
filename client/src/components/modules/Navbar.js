@@ -17,6 +17,10 @@ class Navbar extends Component {
 
     componentDidMount (){
       get("/api/whoami").then((user) => {
+        const SIZE_ = '36'; //dimensions of pfp, change this number to change the size, make sure to change width/h in navbar.css
+        let arr = user.picture.split('/');
+        arr[arr.length - 2] = arr[arr.length - 2][0]+SIZE_+arr[arr.length - 2].substring(3);
+        let picture_to_use = arr.join('/');
         this.setState({
           picture: user.picture,
         })

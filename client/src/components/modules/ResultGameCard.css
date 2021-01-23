@@ -18,6 +18,9 @@
     border-radius: 12px;
     max-width: 100%;
     justify-content: center;
+    padding:8px;
+    padding-top:12px;
+    padding-bottom:10px;
 }
 
 .ResultGameCard-scoreActual{

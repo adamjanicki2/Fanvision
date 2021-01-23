@@ -11,7 +11,7 @@
 .ResultGameCard-container{
     display: flex;
     flex-direction: row;
-    margin:10px;
+    margin:20px;
     background-color: var(--offwhite);
     border-style: solid;
     border-color: var(--offblack);

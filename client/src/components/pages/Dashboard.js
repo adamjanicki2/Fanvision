@@ -22,7 +22,7 @@ class Dashboard extends Component {
       yesterday_predictions: [],
       predictionsEntered: false,
       current_score:null,
-      last_day_score:null
+      last_day_score:null,
     };
   };
 
@@ -99,6 +99,7 @@ class Dashboard extends Component {
 
 
   render() {
+    let num_correct_predictions = 0;
     
     let total_points=0;
     //make list of games for today's games
@@ -135,6 +136,9 @@ class Dashboard extends Component {
         const game_winner = result[i].away_team_score < result[i].home_team_score ? result[i].home_team : result[i].away_team;
         const correct_guess = winner_predicted === game_winner;
         const point_reward = this.awardPoints(actual_margin, margin_predicted, correct_guess)
+        if(point_reward[0]>0){
+          num_correct_predictions+=1;
+        }
         total_points = total_points+ point_reward[0]+point_reward[1];
         resultsList.push(
           <ResultGameCard
@@ -179,6 +183,7 @@ class Dashboard extends Component {
           (<h2 className="u-inlineBlock CompleteGreen">Complete</h2>) : (<h2 className="u-inlineBlock IncompleteRed">Incomplete</h2>)
           }
           <h2>Your Season Point Total: {this.state.current_score}</h2>
+          <h2>Yesterday Record:  {num_correct_predictions}-{this.state.yesterday_results.length-num_correct_predictions}</h2>
           <h2 className="CompleteGreen">Yesterday's Score: +{this.state.last_day_score}</h2>
         </div>
 

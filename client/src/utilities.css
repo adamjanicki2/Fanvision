@@ -145,4 +145,5 @@ form {
   background: url('./public/img/bg.png');
   height: 100%;
   width: 100%;
+  padding-bottom: 20px;
 }

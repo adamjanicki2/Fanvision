@@ -85,12 +85,14 @@
 
 .Navbar-pfpContainer{
   padding-right: var(--m);
+  margin-right: -8px;
 }
 .Navbar-pfp {
   border-radius: 50%;
   width: 36px;
   height: 36px;
   border: 2px solid var(--offwhite);
+
     
   }
 
@@ -98,16 +100,25 @@
     background-color: var(--offwhite);
     color: #000;
     margin-top: 5%;
-    border-radius: 15px;
-    font-family: "pakenhamregular";
-    font-size: 24px;
-    margin:10px;
+    border-radius: 8px;
+    font-family: "united_kingdomregular";
+    font-size: 20px;
+    margin-right:0px;
+    margin-left:3px;
+    margin-bottom:12px;
     padding-top:2px;
     padding-bottom: 2px;
+
 }
 
 .button-log:hover{
     background-color: #ffcccb;
     color: var(--offblack);
     cursor: pointer;
+}
+
+.Navbar-rightside{
+  display:flex;
+  align-items:center;
+
 }

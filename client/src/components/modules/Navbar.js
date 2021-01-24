@@ -66,13 +66,14 @@ class Navbar extends Component {
           
             
           </div>
-          <div className='Navbar-logout u-inlineBlock'>
+
+          <div className='Navbar-logout u-inlineBlock Navbar-rightside'>
           {this.props.userId !== undefined? 
-          <div className='u-inlineBlock'>
+          <div className='Navbar-rightside'>
             <div className="u-inlineBlock Navbar-pfpContainer"> 
-          <img src={this.state.picture} className='Navbar-pfp'/>
-          </div>
-          <Link to="/profile" className='Navbar-route Navbar-name u-inlineBlock' onClick={() => {this.setState({current_path: '/profile'})}}>{this.props.name.split(" ")[0]} </Link> 
+              <img src={this.state.picture} className='Navbar-pfp'/>
+            </div>
+            <Link to="/profile" className='Navbar-route Navbar-name u-inlineBlock' onClick={() => {this.setState({current_path: '/profile'})}}>{this.props.name.split(" ")[0]} </Link> 
           </div>
           :<div/>}
           {this.props.userId !== undefined? (

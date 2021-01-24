@@ -123,5 +123,12 @@
   font-size: 16pt;
 }
 
+.Name-link{
 
+}
+.Name-link:hover {
+  cursor: pointer;
+  color: #0269a4;
+  font-size: 14.5pt;
+}
 

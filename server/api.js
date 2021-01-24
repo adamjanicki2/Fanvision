@@ -45,6 +45,11 @@ router.post("/initsocket", (req, res) => {
   res.send({});
 });
 
+router.get("/get_user", (req, res) => {
+  User.findById(req.query._id_).then((user) => {
+    res.send(user);
+  });
+})
 // |------------------------------|
 // | write your API methods below!|
 // |------------------------------|

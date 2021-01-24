@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { get } from "../../utilities.js";
-
+import { navigate } from "@reach/router";
 import "../../utilities.css";
 import "./OverallStandings.css";
 import Loader from 'react-loader-spinner';
@@ -93,7 +93,7 @@ class OverallStandings extends Component {
       <tr>
         
         {entry.name === this.state.name ? <td className = 'extra-bold your-row'>{i+1}</td> : <td className = 'extra-bold'>{i+1}</td>}
-        {entry.name === this.state.name ? <td className='your-row'>{entry.name}</td> : <td>{entry.name}</td>}
+        {entry.name === this.state.name ? <td className='your-row'><div className='Name-link' onClick={() => {navigate("/MyProfile")}}>{entry.name}</div></td> : <td><div className='Name-link' onClick={() => {navigate(`/profile/${entry.user_id}`)}}>{entry.name}</div></td>}
         {entry.name === this.state.name ? <td className = 'your-row'>{entry.current_score}</td> : <td>{entry.current_score}</td>}
         {entry.name === this.state.name ? <td className = 'your-row'>{entry.gold} Gold, {entry.silver} Silver, {entry.bronze} Bronze</td> : <td>{entry.gold} Gold, {entry.silver} Silver, {entry.bronze} Bronze</td>}
 
@@ -106,7 +106,7 @@ class OverallStandings extends Component {
 
     </>) : (<div className="center-screen"><Loader type="Grid" color="black" height={50} width={50}/></div>);
 
-    let html_to_return = this.state.user_id ? score_table : (<h2>Please log in and refresh to display Standings!</h2>);
+    let html_to_return = this.state.user_id ? score_table : (<div></div>);
 
 
     return <div className = 'bg'>{html_to_return}</div>;

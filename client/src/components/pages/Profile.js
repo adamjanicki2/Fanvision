@@ -19,7 +19,7 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    // remember -- api calls go here!
+    
     get("/api/whoami").then((user) => {
       console.log(user.name);
       const SIZE_ = '384'; //dimensions of pfp, change this number to change the size
@@ -52,7 +52,7 @@ class Profile extends Component {
         {/* <h2>Bronze Dates: {this.state.bronze_dates}</h2> */}
       </div>
       </>
-    ) : (<div>Please log in to display profile!</div>);
+    ) : (<div></div>);
     return html_to_display;
   }
 }

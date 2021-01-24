@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPage.js";
 import Dashboard from "./pages/Dashboard.js";
 import OverallStandings from "./pages/OverallStandings.js";
 import Profile from "./pages/Profile.js";
+import UserProfile from "./pages/UserProfile.js";
 import Predictions from "./pages/Predictions.js";
 import Navbar from "./modules/Navbar.js";
 import { navigate } from "@reach/router";
@@ -78,7 +79,8 @@ class App extends Component {
           <Dashboard path="/dashboard" userId={this.state.userId}/>
           <OverallStandings path="/overallstandings" userId={this.state.userId}/>
           <Predictions path="/predictions" userId={this.state.userId}/>
-          <Profile path="/profile" userId={this.state.userId}/>
+          <Profile path="/MyProfile" userId={this.state.userId}/>
+          <UserProfile path="/profile/:userId"/>
           <NotFound default />
         </Router>
       </>

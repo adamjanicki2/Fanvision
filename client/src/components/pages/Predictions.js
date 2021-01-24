@@ -401,8 +401,19 @@ class Predictions extends Component {
         if (this.state.can_enter_predictions === false){
           return(
             <>
-            <h2>It is too late to submit predictions today.</h2>
+            <div className='bg'>
+              <div className="OOPS-header">
+              <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.8,opacity:0 },
+              visible:{scale:1,opacity:1,transition:{delay:.08,duration:.1}},}}>
+                <header className="Predictions-headerText">oopsies</header>
+              </motion.div>
+              <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.8,opacity:0 },
+              visible:{scale:1,opacity:1,transition:{delay:.08,duration:.1}},}}>
+                <h3 className="Predictions-headersubText">It's too late to submit predictions!</h3>
+              </motion.div>
+              </div>
             <div className="NextGameCard-allGamesContainer">{gamesList}</div>
+            </div>
             </>
           )
         }

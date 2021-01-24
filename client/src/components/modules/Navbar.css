@@ -23,6 +23,9 @@
     font-family: 'united_kingdomregular';
   }
   
+  .Navbar-title:hover {
+    cursor: pointer;
+  }
   .Navbar-routeContainer {
     margin-left: var(--xxl);
   }
@@ -92,7 +95,6 @@
   width: 36px;
   height: 36px;
   border: 2px solid var(--offwhite);
-
     
   }
 

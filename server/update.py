@@ -13,7 +13,7 @@ MONGO_CONNECTION_URL = os.getenv('MONGO_SRV')
 client = MongoClient(MONGO_CONNECTION_URL)
 db = client.cluster0
 
-TIME_THRESHOLD = 1.0 ##This is the min number of hours in between scrapes.
+TIME_THRESHOLD = 2.0 ##This is the min number of hours in between scrapes.
 
 
 def get_schedule(end_year):

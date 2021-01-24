@@ -1,5 +1,5 @@
 import React, { Component,useEffect } from "react";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import "./Navbar.css";
 import logo from '../../public/img/fanvision32.png';
@@ -27,20 +27,18 @@ class Navbar extends Component {
       })
     };
     
-
+    navigate_home() {
+      navigate('/');
+      this.setState({ current_path: '/'});
+    };
 
     render() {
       return (
         <nav className="Navbar-container">
           <img src={logo} className='Navbar-logo u-inlineBlock'/>
           {/*.Navbar-logo in Navbar.css, idk what im doing with this*/}
-          <div className="Navbar-title u-inlineBlock">Fanvision</div>
+          <div className="Navbar-title u-inlineBlock" onClick={() => {this.navigate_home()}}>Fanvision</div>
           <div className="Navbar-routeContainer u-inlineBlock">
-          {this.props.userId !== undefined ? (
-              <Link to="/" className={this.state.current_path === '/'? "Navbar-route Route-clicked":"Navbar-route"} onClick={() => {this.setState({current_path: '/'})}}>
-                Home
-              </Link>
-            ) : (<div></div>)}
           {this.props.userId !== undefined ? (
               <Link to="/dashboard" className={this.state.current_path === '/dashboard'? "Navbar-route Route-clicked":"Navbar-route"} onClick={() => {this.setState({current_path: '/dashboard'})}}>
                 Dashboard

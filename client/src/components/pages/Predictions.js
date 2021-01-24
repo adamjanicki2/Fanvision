@@ -67,15 +67,18 @@ class Predictions extends Component {
         this.setState({
           predictionObjects: prediction[0].todays_predictions,
           });
-    //call api for lockedIn status
-    get("/api/lockinstatus").then((res) => {
-      this.setState({lockedIn: res[0].status})
-    }
-    )
-
+        } else{
+          this.setState({predictionObjects:false});
+        }
+  
+  });
     
-    }   
-   });
+          //call api for lockedIn status
+    get("/api/lockinstatus").then((res) => {
+      this.setState({lockedIn: res[0].status,})
+    });
+
+
   };
 
 
@@ -158,6 +161,12 @@ class Predictions extends Component {
     if (this.state.lockedIn){
       return;
     }
+
+    if (this.state.predictionObjects===false){
+      window.alert("No Predictions to Save")
+      return
+    }
+    
     const can_still_enter = this.update_pred_valid();
     if (can_still_enter === false){
       console.log('Time to predict expired!')
@@ -179,6 +188,8 @@ class Predictions extends Component {
       window.alert("Predicted margins invalid");
       return
     }
+
+    
 
     //check if there is already a saved prediction. if there is delete it first before posting new one
     if (this.state.predictionObjects.length!==0){

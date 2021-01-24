@@ -99,7 +99,11 @@ def update_scores_and_medals_for_date(date):
         user_games = {g['home_team']: g for g in user_prediction['todays_predictions']}
         daily_score = 0
         for outcome in results_from_date: ##calculate points gained for day
-            user_guess = user_games[outcome['home_team']]
+            try:
+                user_guess = user_games[outcome['home_team']]
+            except:
+                ##if user didn't predict this game
+                continue
             actual_winner = outcome['home_team'] if int(outcome['home_team_score']) > int(outcome['away_team_score']) else outcome['away_team']
             did_player_win = actual_winner == user_guess['predicted_winner']
             actual_margin = abs(int(outcome['home_team_score']) - int(outcome['away_team_score']))

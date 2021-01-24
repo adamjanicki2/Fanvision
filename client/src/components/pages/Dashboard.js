@@ -99,6 +99,7 @@ class Dashboard extends Component {
 
 
   render() {
+
     let num_correct_predictions = 0;
     
     let total_points=0;
@@ -125,17 +126,35 @@ class Dashboard extends Component {
       for (let i=0;i<this.state.yesterday_results.length;i++){
         let result = this.state.yesterday_results;
         let home_team = result[i].home_team;
-        console.log(home_team)
+  
         //find the corresponding prediction object from yesterday
         let matchingPrediction = this.state.yesterday_predictions.filter(obj => {return obj.home_team === home_team})[0];
-        console.log(matchingPrediction)
-        console.log('------')
+        
+        if (matchingPrediction===undefined){
+          resultsList.push(
+            <ResultGameCard
+              home_team={result[i].home_team}
+              away_team={result[i].away_team}
+              start_time={result[i].start_time}
+              home_team_score={result[i].home_team_score}
+              away_team_score={result[i].away_team_score}
+              predicted_winner= {"--"}
+              predicted_margin={'--'}
+              points_breakdown={0}
+              points_earned = {0}
+            />
+          );
+        } else{
+          console.log(matchingPrediction)
+          console.log(result[i])
         const actual_margin = Math.abs(result[i].home_team_score - result[i].away_team_score);
-        const margin_predicted = this.state.yesterday_predictions.length-1>=i ? matchingPrediction.predicted_margin : -1;
-        const winner_predicted = this.state.yesterday_predictions.length-1>=i ? matchingPrediction.predicted_winner : '';
+        const margin_predicted = matchingPrediction.predicted_margin ;
+        console.log(margin_predicted)
+        const winner_predicted = matchingPrediction.predicted_winner;
         const game_winner = result[i].away_team_score < result[i].home_team_score ? result[i].home_team : result[i].away_team;
         const correct_guess = winner_predicted === game_winner;
         const point_reward = this.awardPoints(actual_margin, margin_predicted, correct_guess)
+      
         if(point_reward[0]>0){
           num_correct_predictions+=1;
         }
@@ -147,13 +166,13 @@ class Dashboard extends Component {
             start_time={result[i].start_time}
             home_team_score={result[i].home_team_score}
             away_team_score={result[i].away_team_score}
-            predicted_winner={this.state.yesterday_predictions.length-1>=i ? matchingPrediction.predicted_winner : '--'}
-            predicted_margin={this.state.yesterday_predictions.length-1>=i ? matchingPrediction.predicted_margin : '--'}
+            predicted_winner={winner_predicted}
+            predicted_margin={margin_predicted}
             points_breakdown={point_reward[0].toString()+"+"+point_reward[1].toString()}
             points_earned = {point_reward[0]+point_reward[1]}
           />
         );
-      };
+       } };
 
     }
     else{

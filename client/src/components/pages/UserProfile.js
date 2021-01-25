@@ -38,6 +38,15 @@ class UserProfile extends Component {
     };
 
     render(){
+      const gold_list = this.state.gold_dates.map((date) =>
+    <h2>{date}</h2>
+    );
+    const silver_list = this.state.silver_dates.map((date) =>
+    <h2>{date}</h2>
+    );
+    const bronze_list = this.state.bronze_dates.map((date) =>
+      <h2>{date}</h2>
+    );
         let isLoggedin = this.state.name !== null;
         let html_to_display = isLoggedin? (
             <>
@@ -47,9 +56,9 @@ class UserProfile extends Component {
               <h2>Medals</h2>
         <div className='medalContainer'>
           
-          <div className = "goldMedal">x{this.state.gold_dates.length}</div>
-          <div className = "silverMedal">x{this.state.silver_dates.length}</div>
-          <div className = "bronzeMedal">x{this.state.bronze_dates.length}</div>
+        <div><div className = "goldMedal">x{this.state.gold_dates.length}</div><div className='Dates-list'>{gold_list}</div></div>
+        <div><div className = "silverMedal">x{this.state.silver_dates.length}</div><div className='Dates-list'>{silver_list}</div></div>
+        <div><div className = "bronzeMedal">x{this.state.bronze_dates.length}</div><div className='Dates-list'>{bronze_list}</div></div>
       
 
         </div>

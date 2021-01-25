@@ -64,3 +64,9 @@
   line-height: 245px;
   color: var(--offblack);
 }
+
+.Dates-list {
+  font-family: 'green_mountain_3regular';
+  font-size: 12pt;
+  text-align: center;
+}

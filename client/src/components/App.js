@@ -8,7 +8,7 @@ import Profile from "./pages/Profile.js";
 import UserProfile from "./pages/UserProfile.js";
 import Predictions from "./pages/Predictions.js";
 import Navbar from "./modules/Navbar.js";
-import { navigate } from "@reach/router";
+import { navigate, Location } from "@reach/router";
 import "./pages/LoginPage.css";
 import "../utilities.css";
 import Popup from 'reactjs-popup';
@@ -67,13 +67,18 @@ class App extends Component {
 
     return (
       <>
-      <Navbar
-          handleLogin={this.handleLogin}
-          handleLogout={this.handleLogout}
-          userId={this.state.userId}
-          name={this.state.user_name}
-          picture={this.state.user_picture}
-        />
+      <Location>
+          {locationProps => (
+            <Navbar
+            handleLogin={this.handleLogin}
+            handleLogout={this.handleLogout}
+            userId={this.state.userId}
+            name={this.state.user_name}
+            picture={this.state.user_picture}
+            location={locationProps.location}
+          />
+          )}
+        </Location>
 
         <Router>
           <LoginPage path="/" userId={this.state.userId}/>

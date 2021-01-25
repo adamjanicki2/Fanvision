@@ -10,7 +10,7 @@ class Navbar extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        current_path: '/',
+        
       };
     }
 
@@ -20,10 +20,10 @@ class Navbar extends Component {
     
     navigate_home() {
       navigate('/');
-      this.setState({ current_path: '/'});
     };
 
     render() {
+      console.log(this.props.location);
       let picture_to_use=null;
       if (this.props.picture !== null){
         const SIZE_ = '36'; //dimensions of pfp, change this number to change the size, make sure to change width/h in navbar.css
@@ -39,17 +39,17 @@ class Navbar extends Component {
           <div className="Navbar-title u-inlineBlock" onClick={() => {this.navigate_home()}}>Fanvision</div>
           <div className="Navbar-routeContainer u-inlineBlock">
           {this.props.userId !== undefined ? (
-              <Link to="/dashboard" className={this.state.current_path === '/dashboard'? "Navbar-route Route-clicked":"Navbar-route"} onClick={() => {this.setState({current_path: '/dashboard'})}}>
+              <Link to="/dashboard" className={this.props.location.pathname === '/dashboard'? "Navbar-route Route-clicked":"Navbar-route"}>
                 Dashboard
               </Link>
             ) : (<div></div>)}
             {this.props.userId !== undefined ? (
-              <Link to="/predictions" className={this.state.current_path === '/predictions'? "Navbar-route Route-clicked":"Navbar-route"} onClick={() => {this.setState({current_path: '/predictions'})}}>
+              <Link to="/predictions" className={this.props.location.pathname === '/predictions'? "Navbar-route Route-clicked":"Navbar-route"} >
                 Predict
               </Link>
             ) : (<div></div>)}
             {this.props.userId !== undefined ? (
-              <Link to="/overallstandings" className={this.state.current_path === '/overallstandings'? "Navbar-route Route-clicked":"Navbar-route"} onClick={() => {this.setState({current_path: '/overallstandings'})}}>
+              <Link to="/overallstandings" className={this.props.location.pathname === '/overallstandings'? "Navbar-route Route-clicked":"Navbar-route"} >
                 Standings
               </Link>
             ) : (<div></div>)}
@@ -61,7 +61,7 @@ class Navbar extends Component {
             <div className="u-inlineBlock Navbar-pfpContainer">
               <img src={picture_to_use} className='Navbar-pfp'/>
             </div>
-            <Link to="/MyProfile" className='Navbar-route Navbar-name u-inlineBlock' onClick={() => {this.setState({current_path: '/profile'})}}>{this.props.name.split(" ")[0]} </Link>
+            <Link to="/MyProfile" className='Navbar-route Navbar-name u-inlineBlock'>{this.props.name.split(" ")[0]} </Link>
           </div>
           :<div/>}
           {this.props.userId !== undefined? (

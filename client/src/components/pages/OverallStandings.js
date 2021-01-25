@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { get, dateConvert } from "../../utilities.js";
+import { get, dateConvert, convertMilitary } from "../../utilities.js";
 import { navigate } from "@reach/router";
 import "../../utilities.css";
 import "./OverallStandings.css";
@@ -71,7 +71,7 @@ class OverallStandings extends Component {
     
     <h1 className="overallstandingstext"> Overall Standings</h1>
 
-    <h1 className="updatedText">(Updated as of {dateConvert(this.state.time.substring(0,10))} @ {this.state.time.slice(-5)} ET)</h1>
+    <h1 className="updatedText">(Updated as of {dateConvert(this.state.time.substring(0,10))} @ {convertMilitary(this.state.time.split(' ')[1])} ET)</h1>
     <div className="table-container">
     <table className='styled-table'>
        <thead >

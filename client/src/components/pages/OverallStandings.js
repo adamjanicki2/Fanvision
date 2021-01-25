@@ -41,40 +41,7 @@ class OverallStandings extends Component {
 
   }
 
-  dateConvert = (inDate)=> {
-    //takes in string "yyyy-mm-dd" and returns string in proper english"
-    if (inDate===undefined){
-      return
-    }
-    const date_list = inDate.split("-");
-    let year = date_list[0];
-    let month = date_list[1];
-    let day = date_list[2];
-    const MONTH_CONVERSION={
-        "01":"January",
-        "02":"February",
-        "03":"March",
-        "04":"April",
-        "05":"May",
-        "06":"June",
-        "07":"July",
-        "08":"August",
-        "09":"September",
-        "10":"October",
-        "11":"November",
-        "12":"December",
-    }
-    if (day===undefined){
-      return
-    }
-    if (day[0]==="0"){
-        day=day[1]
-    }
-    return MONTH_CONVERSION[month]+" "+day+", "+year
-}
-
-
-
+   
   render() {
   
     let isScores = this.state.scoreboard.length !== 0;

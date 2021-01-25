@@ -135,6 +135,10 @@
   font-size: 14.5pt;
 }
 
+.Name-link{
+  transition: all .25s;
+}
+
 .Podium {
   width: 550px;
   height: 440px;
@@ -167,25 +171,27 @@
 }
 
 .bronzeMedalWinner{
-  color: var(--offwhite);
+  color:  #e6e6e6;
   font-size:18pt;
   text-align: center;
   margin-top: 70px;
 }
 
 .silverMedalWinner{
-  color: var(--offwhite);
-  font-size:18pt;
+  color:  #e6e6e6;
+  font-size:19pt;
   text-align: center;
   margin-top:-10px;
+
 }
 
 .goldMedalWinner{
-  color: var(--offwhite);
-  font-size:18pt;
+  color:  #e6e6e6;
+  font-size:20pt;
   text-align: center;
   margin-bottom: 80px;
   text-align: center;
+
 }
 
 
@@ -194,4 +200,5 @@
   margin-bottom: -130px;
   text-align: center;
   margin-top:-30px;
+  
 }

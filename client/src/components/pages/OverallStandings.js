@@ -64,7 +64,7 @@ class OverallStandings extends Component {
         "11":"November",
         "12":"December",
     }
-    if (day[0]===undefined){
+    if (day===undefined){
       return
     }
     if (day[0]==="0"){

@@ -41,6 +41,32 @@ class TodayPredictionCard extends Component {
 
     }
 
+    dateConvert = (inDate)=> {
+      //takes in string "yyyy-mm-dd" and returns string in proper english"
+      const date_list = inDate.split("-");
+      let year = date_list[0];
+      let month = date_list[1];
+      let day = date_list[2];
+      const MONTH_CONVERSION={
+          "01":"January",
+          "02":"February",
+          "03":"March",
+          "04":"April",
+          "05":"May",
+          "06":"June",
+          "07":"July",
+          "08":"August",
+          "09":"September",
+          "10":"October",
+          "11":"November",
+          "12":"December",
+      }
+      if (day[0]==="0"){
+          day=day[1]
+      }
+      return MONTH_CONVERSION[month]+" "+day+", "+year
+  }
+
     render() {
         const teamStadiums = {
             ATL: "State Farm Arena",
@@ -145,20 +171,33 @@ class TodayPredictionCard extends Component {
         let game_city = teamCities[this.props.home_team];
         let away_img_src = this.props.away_team+"_logo";
         let home_img_src = this.props.home_team+"_logo";
+        let game_date = this.props.start_time.substring(0,10)
+        let eng_game_date = this.dateConvert(game_date)
 
         return(
             <>
-                <div className="NextGameCard-container">
-                    <div className = "NextGameCard-logosContainer">
+                <div className="NextGameCard-container1">
+                  <div className = "NextGameCard-matchup">
+                    <div className = "NextGameCard-teamContainerTop">
                       <img className="NextGameGard-logo" src={teamLogos[away_img_src]}/>
-                      <img className="NextGameGard-logo" src={teamLogos[home_img_src]}/>
+                      <h1 className="NextGameCard-abbrev">{this.props.away_team}</h1>
                     </div>
-                    <div>{this.props.away_team} vs {this.props.home_team}</div>
-                    <div className="NextGameCard-time"> {this.props.start_time}</div>
+                    <hr width="95%" className="NextGameCard-line"></hr>
+                    <div className = "NextGameCard-teamContainerBottom">
+                      <img className="NextGameGard-logo" src={teamLogos[home_img_src]}/>
+                      <h1 className="NextGameCard-abbrev">{this.props.home_team}</h1>
+                    </div>
+                  </div>
+                  <div className="NextGameCard-setting">
+                    <div className="NextGameCard-time">{eng_game_date} {this.props.start_time.slice(10)} ET</div>
                     <div className="NextGameCard-time"> {game_stadium}</div>
                     <div className="NextGameCard-time"> {game_city}</div>
-                    <div className="ResultGameCard-scoreIdentifier">Your Prediction:</div>
-                    <div className="ResultGameCard-scorePredicted">{this.props.predicted_winner} by {this.props.predicted_margin}</div>
+                    <div className="u-inlineBlock">
+                      <h2>Your Prediction:</h2>
+                      <div className='TodayPredictionCard-predictionText'>{this.props.predicted_winner} wins by {this.props.predicted_margin}</div>
+
+                    </div>
+                  </div>
                 </div>
             </> );
    

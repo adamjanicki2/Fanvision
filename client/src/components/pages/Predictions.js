@@ -68,7 +68,7 @@ class Predictions extends Component {
           predictionObjects: prediction[0].todays_predictions,
           });
         } else{
-          this.setState({predictionObjects:false});
+          this.setState({predictionObjects:[]});
         }
   
   });
@@ -158,15 +158,17 @@ class Predictions extends Component {
 
   //Calling savePredictions(predictionData); will post predictionData for today's date for current user to mongo without locking in
   savePredictions = (predictionData) => {
+
     if (this.state.lockedIn){
       return;
     }
+    
 
-    if (this.state.predictionObjects===false){
+    if (predictionData.length===0){
       window.alert("No Predictions to Save")
       return
     }
-    
+
     const can_still_enter = this.update_pred_valid();
     if (can_still_enter === false){
       console.log('Time to predict expired!')
@@ -306,7 +308,8 @@ class Predictions extends Component {
     //runs everytime a PredictionCriteriaBox is updated by the user's inputs
     const eventhandler = (data) => {
 
-
+        console.log(data)
+  
         //if not all fields are populated, check if the game has been saved previosuly
         if (data.predicted_winner === "" || data.predicted_margin ===0){
           const data_home_team = data.home_team
@@ -320,20 +323,26 @@ class Predictions extends Component {
                   break;
                   }}
           if (found){
-            if (data.predicted_winner === ""){
+            if (data.predicted_winner === "" && data.predicted_margin!==0){
             allPredictionEntries[index] = {
               home_team: data.home_team, 
               away_team: data.away_team, 
               predicted_winner: allPredictionEntries[index].predicted_winner,
               predicted_margin: data.predicted_margin,
             }
-          }else if (data.predicted_margin===0){
+          }else if (data.predicted_margin===0 && data.predicted_winner!==''){
             allPredictionEntries[index] = {
               home_team: data.home_team, 
               away_team: data.away_team, 
               predicted_winner: data.predicted_winner,
               predicted_margin: allPredictionEntries[index].predicted_margin,
             }
+          } else if (data.predicted_margin!==0 && data.predicted_winner!=='')
+          allPredictionEntries[index] = {
+            home_team: data.home_team, 
+            away_team: data.away_team, 
+            predicted_winner: data.predicted_winner,
+            predicted_margin: data.predicted_margin,
           }
           }
         }
@@ -350,13 +359,14 @@ class Predictions extends Component {
                   break;
                   }}
           if (found === false){ //if the game wasn't predicted yet, append to list
+          console.log(allPredictionEntries)
             allPredictionEntries.push(data);
           } else{
             allPredictionEntries = allPredictionEntries.map(obj => [data].find(o => o.home_team === obj.home_team) || obj);
           }
         
         }
-
+console.log(allPredictionEntries)
 }
     
 

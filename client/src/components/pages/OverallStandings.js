@@ -91,28 +91,7 @@ class OverallStandings extends Component {
         <h3 className="Standings-headersubText">See who's on top.</h3>
       </motion.div>
       </div>
-      <div className="confetti-container">
-        <div className="confetti"></div>
-        <div className="confetti"></div>
-        <div className="confetti"></div>
-        <div className="confetti"></div>
-        <div className="confetti"></div>
-        <div className="confetti"></div>
-        <div className="confetti"></div>
-        <div className="confetti"></div>
-        <div className="confetti"></div>
-        <div className="confetti"></div>
-        <div className="confetti"></div>
-        <div className="confetti"></div>
-        <div className="confetti"></div>
-        <div className="confetti"></div>
-        <div className="confetti"></div>
-        <div className="confetti"></div>
-        <div className="confetti"></div>
-        <div className="confetti"></div>
-        <div className="confetti"></div>
-        <div className="confetti"></div>
-        <div className="confetti"></div>
+     
       
       <h1 className="podiumheadertext">Yesterday's Podium</h1>
     <div src={podium_img} className='Podium'>
@@ -149,7 +128,7 @@ class OverallStandings extends Component {
     </tbody>
     </table>
     </div>
-    </div>
+    
     
 
     </>) : (<div className="center-screen"><Loader type="Grid" color="black" height={50} width={50}/></div>);

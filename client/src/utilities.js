@@ -61,3 +61,63 @@ export function post(endpoint, params = {}) {
       throw `POST request to ${endpoint} failed with error:\n${error}`;
     });
 }
+
+export function convertMilitary(military_time) {
+  if (military_time === '' || military_time === undefined || military_time === null) return '';
+  const hour = military_time.split(':')[0]
+  const minutes = military_time.split(':')[1]
+  const conversion = {
+    '00': '12 AM',
+    '01': '1 AM',
+    '02': '2 AM',
+    '03': '3 AM',
+    '04': '4 AM',
+    '05': '5 AM',
+    '06': '6 AM',
+    '07': '7 AM',
+    '08': '8 AM',
+    '09': '9 AM',
+    '10': '10 AM',
+    '11': '11 AM',
+    '12': '12 PM',
+    '13': '1 PM',
+    '14': '2 PM',
+    '15': '3 PM',
+    '16': '4 PM',
+    '17': '5 PM',
+    '18': '6 PM',
+    '19': '7 PM',
+    '20': '8 PM',
+    '21': '9 PM',
+    '22': '10 PM',
+    '23': '11 PM',
+  };
+  return conversion[hour].split(' ')[0]+':'+minutes+conversion[hour].split(' ')[1]
+}
+
+export function dateConvert(inDate){
+  //takes in string "yyyy-mm-dd" and returns string in proper english"
+  if (inDate === null || inDate === '' || inDate === undefined) return '';
+  const date_list = inDate.split("-");
+  let year = date_list[0];
+  let month = date_list[1];
+  let day = date_list[2];
+  const MONTH_CONVERSION={
+      "01":"January",
+      "02":"February",
+      "03":"March",
+      "04":"April",
+      "05":"May",
+      "06":"June",
+      "07":"July",
+      "08":"August",
+      "09":"September",
+      "10":"October",
+      "11":"November",
+      "12":"December",
+  }
+  if (day[0]==="0"){
+      day=day[1]
+  }
+  return MONTH_CONVERSION[month]+" "+day+", "+year
+}

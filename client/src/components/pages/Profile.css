@@ -5,3 +5,8 @@
   max-height: 500px;
   border: 8px solid var(--offblack);
   }
+
+.Medal-img {
+  padding-left: 20px;
+  padding-right: 20px;
+}

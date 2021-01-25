@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import "../../utilities.css";
 import "./Profile.css";
 import { get, post } from "../../utilities.js";
+import gold_medal from '../../public/img/gold_medal.png';
+import silver_medal from '../../public/img/silver_medal.png';
+import bronze_medal from '../../public/img/bronze_medal.png';
 
 class UserProfile extends Component {
     constructor(props) {
@@ -41,12 +44,20 @@ class UserProfile extends Component {
             <div className="u-textCenter">
               <img src={this.state.picture} className='Profile-picture'/>
               <h1>{this.state.name}</h1>
-              <h2>Gold Count: {this.state.gold_dates.length}</h2>
-              {/* <h2>Gold Dates: {this.state.gold_dates}</h2> */}
-              <h2>Silver Count: {this.state.silver_dates.length}</h2>
-              {/* <h2>Silver Dates: {this.state.silver_dates}</h2> */}
-              <h2>Bronze Count: {this.state.bronze_dates.length}</h2>
-              {/* <h2>Bronze Dates: {this.state.bronze_dates}</h2> */}
+              <div className='u-inlineBlock'>
+              <div className='u-inlineBlock Medal-img'>
+                <img src={gold_medal}/>
+                <h2>x{this.state.gold_dates.length}</h2>
+              </div>
+              <div className='u-inlineBlock Medal-img'>
+                <img src={silver_medal}/>
+                <h2>x{this.state.silver_dates.length}</h2>
+              </div>
+              <div className='u-inlineBlock Medal-img'>
+                <img src={bronze_medal}/>
+                <h2>x{this.state.bronze_dates.length}</h2>
+              </div>
+            </div>
             </div>
             </>
           ) : (<div></div>);

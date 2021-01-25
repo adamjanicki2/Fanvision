@@ -67,11 +67,15 @@ def update_user_scores(googleid, points_on_date):
 
 def assign_medals(date, medal_list):
     ranking = ['gold', 'silver', 'bronze']
+    updating_dict = {'gold': {'name': None, 'googleid': None, 'last_day_score': None}, 'silver': {'name': None, 'googleid': None, 'last_day_score': None}, 'bronze': {'name': None, 'googleid': None, 'last_day_score': None}}
     for i in range(len(medal_list)):
+        updating_dict[ranking[i]] = {'name': medal_list[i][2], 'googleid': medal_list[i][1], 'last_day_score': medal_list[i][0]}
         current_medals = db.users.find_one({'googleid': medal_list[i][1]})[ranking[i]+'_dates']
         amount = len(current_medals) + 1
         updated_medal_list = db.users.update_one({'googleid': medal_list[i][1]}, { "$set": {ranking[i]+'_dates': current_medals + [date]}})
         updated_amount = db.scoreboards.update_one({'googleid': medal_list[i][1]}, { "$set": {ranking[i]: amount}})
+    ##update podium:
+    db.podia.update_one({}, {'$set': updating_dict})
     return {'medal_winners: '+date: {ranking[i]: medal_list[i] for i in range(len(medal_list))}}
 
 def update_scores_and_medals_for_date(date):
@@ -96,6 +100,7 @@ def update_scores_and_medals_for_date(date):
     medal_list = []
     for user_prediction in predictions_from_date:
         user_googleid = user_prediction['googleid']
+        u_name = user_prediction['user_name']
         user_games = {g['home_team']: g for g in user_prediction['todays_predictions']}
         daily_score = 0
         for outcome in results_from_date: ##calculate points gained for day
@@ -110,7 +115,7 @@ def update_scores_and_medals_for_date(date):
             points_gained_from_game = calculate_score(int(user_guess['predicted_margin']), actual_margin, did_player_win)
             daily_score += points_gained_from_game
         update_user_scores(user_googleid, daily_score) ##update scoreboard for given user
-        medal_list.append((daily_score, user_googleid))
+        medal_list.append((daily_score, user_googleid, u_name))
         medal_list = sorted(medal_list, key=lambda x: x[0], reverse = True)
         if len(medal_list) == 4:
             medal_list.pop()

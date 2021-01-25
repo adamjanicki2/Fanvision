@@ -19,6 +19,7 @@ const Prediction = require("./models/predictions");
 const Scoreboard = require("./models/scoreboard");
 const Time = require("./models/Time");
 const LockInStatus = require("./models/LockInStatus");
+const Podium = require("./models/Podium");
 // import authentication library
 const auth = require("./auth");
 const PostedScore = require("./models/postedscore");
@@ -253,7 +254,11 @@ router.get('/getuserscore', (req, res) => {
 })
 
 
-
+router.get('/get_podium', (req, res) => {
+  Podium.findOne().then((grogu) => {
+    res.send(grogu);
+  });
+});
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

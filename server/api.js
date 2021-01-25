@@ -254,7 +254,7 @@ router.get('/getuserscore', (req, res) => {
 })
 
 
-router.get('/get_podium', (req, res) => {
+router.get('/getpodium', (req, res) => {
   Podium.findOne().then((grogu) => {
     res.send(grogu);
   });

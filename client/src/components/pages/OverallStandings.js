@@ -16,6 +16,9 @@ class OverallStandings extends Component {
       scoreboard: [],
       time:'',
       name:null,
+      gold_winner:'',
+      silver_winner:'',
+      bronze_winner:'',
     };
   }
 
@@ -31,6 +34,10 @@ class OverallStandings extends Component {
     get('/api/current_time').then((res) => {
       this.setState({time:res.time});
     });
+
+    get('/api/getpodium').then((res) => {
+      this.setState({gold_winner: res.gold.name, silver_winner: res.silver.name, bronze_winner:res.bronze.name});
+    })
 
   }
 
@@ -69,6 +76,7 @@ class OverallStandings extends Component {
 
 
   render() {
+  
     let isScores = this.state.scoreboard.length !== 0;
     let score_table = isScores ? (
     <>
@@ -83,8 +91,40 @@ class OverallStandings extends Component {
         <h3 className="Standings-headersubText">See who's on top.</h3>
       </motion.div>
       </div>
-    <img src={podium_img} className='Podium-img'/>
-    <h1 className="updatedText">Updated as of {this.dateConvert(this.state.time.substring(0,10))} @ {this.state.time.slice(-5)} ET</h1>
+      <div className="confetti-container">
+        <div className="confetti"></div>
+        <div className="confetti"></div>
+        <div className="confetti"></div>
+        <div className="confetti"></div>
+        <div className="confetti"></div>
+        <div className="confetti"></div>
+        <div className="confetti"></div>
+        <div className="confetti"></div>
+        <div className="confetti"></div>
+        <div className="confetti"></div>
+        <div className="confetti"></div>
+        <div className="confetti"></div>
+        <div className="confetti"></div>
+        <div className="confetti"></div>
+        <div className="confetti"></div>
+        <div className="confetti"></div>
+        <div className="confetti"></div>
+        <div className="confetti"></div>
+        <div className="confetti"></div>
+        <div className="confetti"></div>
+        <div className="confetti"></div>
+      
+      <h1 className="podiumheadertext">Yesterday's Podium</h1>
+    <div src={podium_img} className='Podium'>
+      <div className="medalWinnersContainer">
+        <div className="bronzeMedalWinner">{this.state.bronze_winner}</div>
+        <div className="goldMedalWinner">{this.state.gold_winner}</div>
+        <div className="silverMedalWinner">{this.state.silver_winner}</div>
+      </div>
+    </div>
+    <h1 className="overallstandingstext"> Overall Standings</h1>
+
+    <h1 className="updatedText">(Updated as of {this.dateConvert(this.state.time.substring(0,10))} @ {this.state.time.slice(-5)} ET)</h1>
     <div className="table-container">
     <table className='styled-table'>
        <thead >
@@ -108,6 +148,7 @@ class OverallStandings extends Component {
     )}
     </tbody>
     </table>
+    </div>
     </div>
     
 

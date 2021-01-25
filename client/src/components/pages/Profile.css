@@ -4,9 +4,63 @@
   max-width: 500px;
   max-height: 500px;
   border: 8px solid var(--offblack);
+
   }
 
 .Medal-img {
   padding-left: 20px;
   padding-right: 20px;
+  height: 200px;
+  width: 200px;
+}
+
+
+.medalContainer{
+  display:flex;
+  align-items: center;
+  height: 200px;
+  width:100%;
+  margin-top:60px;
+  margin-bottom:100px;
+  justify-content: center;
+}
+
+.goldMedal{
+  width:245px;
+  height: 245px;
+  background-image: url('../../public/img/gold_medal.png');
+  margin:25px;
+  font-family: 'green_mountain_3regular';
+  font-size: 48pt;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 245px;
+  color: var(--offblack);
+}
+
+.silverMedal{
+  width:245px;
+  height: 245px;
+  background-image: url('../../public/img/silver_medal.png');
+  margin:25px;
+  font-family: 'green_mountain_3regular';
+  font-size: 48pt;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 245px;
+  color: var(--offblack);
+}
+
+
+.bronzeMedal{
+  width:245px;
+  height: 245px;
+  background-image: url('../../public/img/bronze_medal.png');
+  margin:25px;
+  font-family: 'green_mountain_3regular';
+  font-size: 48pt;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 245px;
+  color: var(--offblack);
 }

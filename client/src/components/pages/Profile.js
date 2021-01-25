@@ -44,20 +44,14 @@ class Profile extends Component {
       <div className="u-textCenter">
         <img src={this.state.picture} className='Profile-picture'/>
         <h1>{this.state.name}</h1>
-        <h2>This is your profile page!</h2>
-        <div className='u-inlineBlock'>
-          <div className='u-inlineBlock Medal-img'>
-            <img src={gold_medal}/>
-            <h2>x{this.state.gold_dates.length}</h2>
-          </div>
-          <div className='u-inlineBlock Medal-img'>
-            <img src={silver_medal}/>
-            <h2>x{this.state.silver_dates.length}</h2>
-          </div>
-          <div className='u-inlineBlock Medal-img'>
-            <img src={bronze_medal}/>
-            <h2>x{this.state.bronze_dates.length}</h2>
-          </div>
+        <h2>Your Medals</h2>
+        <div className='medalContainer'>
+          
+          <div className = "goldMedal">x{this.state.gold_dates.length}</div>
+          <div className = "silverMedal">x{this.state.silver_dates.length}</div>
+          <div className = "bronzeMedal">x{this.state.bronze_dates.length}</div>
+      
+
         </div>
       </div>
       </>

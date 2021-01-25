@@ -167,11 +167,11 @@ class TodayPredictionCard extends Component {
                     <div className="NextGameCard-time">{eng_game_date} {convertMilitary(this.props.start_time.split(' ')[1])} ET</div>
                     <div className="NextGameCard-time"> {game_stadium}</div>
                     <div className="NextGameCard-time"> {game_city}</div>
-                    <div className="u-inlineBlock">
+                    
                       <h2>Your Prediction:</h2>
                       <div className='TodayPredictionCard-predictionText'>{this.props.predicted_winner} wins by {this.props.predicted_margin}</div>
 
-                    </div>
+                    
                   </div>
                 </div>
             </> );

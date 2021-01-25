@@ -1,0 +1,27 @@
+
+.NotFound-header{
+    background-image: url("../../public/img/court2.jpg");
+    background-color: var(--offblack);
+    height: 800px;
+    background-position: bottom;
+    background-size: cover;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+.NotFound-headerText{
+    font-family:'united_kingdomregular'; 
+    font-size: 65pt;
+    color: #ffffff;
+    padding-right:35px;
+    padding-top: 250px;
+    text-align: center;
+    filter: brightness(100%);
+}
+.NotFound-headersubText{
+    font-family:'pakenhamregular'; 
+    font-size: 18pt;
+    color: #ffffff;
+    text-align:center;
+    word-spacing: 1px;
+
+}

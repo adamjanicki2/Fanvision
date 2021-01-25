@@ -23,13 +23,20 @@ class Navbar extends Component {
     };
 
     render() {
-      console.log(this.props.location);
       let picture_to_use=null;
       if (this.props.picture !== null){
         const SIZE_ = '36'; //dimensions of pfp, change this number to change the size, make sure to change width/h in navbar.css
-        let arr = this.props.picture.split('/');
-        arr[arr.length - 2] = arr[arr.length - 2][0]+SIZE_+arr[arr.length - 2].substring(3);
-        picture_to_use = arr.join('/');
+        if (this.props.picture.split('/')[this.props.picture.split('/').length - 2] === 's96-c'){
+          let arr = this.props.picture.split('/');
+          arr[arr.length - 2] = arr[arr.length - 2][0]+SIZE_+arr[arr.length - 2].substring(3);
+          picture_to_use = arr.join('/');
+        }else if (this.props.picture.split('=')[this.props.picture.split('=').length - 1] === 's96-c'){
+          let arr = this.props.picture.split('=');
+          arr[arr.length-1] = arr[arr.length - 1][0]+SIZE_+arr[arr.length - 1].substring(3);
+          picture_to_use = arr.join('=');
+        }else{
+          picture_to_use = this.props.picture;
+        }
       }
       
       return (

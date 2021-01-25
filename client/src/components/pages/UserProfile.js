@@ -53,7 +53,7 @@ class UserProfile extends Component {
             <div className="u-textCenter">
               <img src={this.state.picture} className='Profile-picture'/>
               <h1>{this.state.name}</h1>
-              <h2>Medals</h2>
+              <h2>{this.state.name.split(" ")[0]}'s Medals</h2>
         <div className='medalContainer'>
           
         <div><div className = "goldMedal">x{this.state.gold_dates.length}</div><div className='Dates-list'>{gold_list}</div></div>

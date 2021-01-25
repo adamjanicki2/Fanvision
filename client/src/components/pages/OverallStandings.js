@@ -6,6 +6,7 @@ import "./OverallStandings.css";
 import Loader from 'react-loader-spinner';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import {motion} from "framer-motion";
+import podium_img from "../../public/img/podium.png";
 class OverallStandings extends Component {
   constructor(props) {
     super(props);
@@ -82,7 +83,7 @@ class OverallStandings extends Component {
         <h3 className="Standings-headersubText">See who's on top.</h3>
       </motion.div>
       </div>
-      
+    <img src={podium_img} className='Podium-img'/>
     <h1 className="updatedText">Updated as of {this.dateConvert(this.state.time.substring(0,10))} @ {this.state.time.slice(-5)} ET</h1>
     <div className="table-container">
     <table className='styled-table'>

@@ -35,6 +35,9 @@ class OverallStandings extends Component {
 
   dateConvert = (inDate)=> {
     //takes in string "yyyy-mm-dd" and returns string in proper english"
+    if (inDate===undefined){
+      return
+    }
     const date_list = inDate.split("-");
     let year = date_list[0];
     let month = date_list[1];
@@ -52,6 +55,9 @@ class OverallStandings extends Component {
         "10":"October",
         "11":"November",
         "12":"December",
+    }
+    if (day[0]===undefined){
+      return
     }
     if (day[0]==="0"){
         day=day[1]
@@ -85,7 +91,7 @@ class OverallStandings extends Component {
           <th className='tableheadertext'>Rank</th>
           <th className='tableheadertext'>Player Name</th>
           <th className='tableheadertext'>Total Points</th>
-          <th className='tableheadertext'>Medals</th>
+          <th className='tableheadertext'>Yesterday Points</th>
         </tr>
         </thead>
     <tbody>
@@ -95,7 +101,7 @@ class OverallStandings extends Component {
         {entry.name === this.state.name ? <td className = 'extra-bold your-row'>{i+1}</td> : <td className = 'extra-bold'>{i+1}</td>}
         {entry.name === this.state.name ? <td className='your-row'><div className='Name-link' onClick={() => {navigate("/MyProfile")}}>{entry.name}</div></td> : <td><div className='Name-link' onClick={() => {navigate(`/profile/${entry.user_id}`)}}>{entry.name}</div></td>}
         {entry.name === this.state.name ? <td className = 'your-row'>{entry.current_score}</td> : <td>{entry.current_score}</td>}
-        {entry.name === this.state.name ? <td className = 'your-row'>{entry.gold} Gold, {entry.silver} Silver, {entry.bronze} Bronze</td> : <td>{entry.gold} Gold, {entry.silver} Silver, {entry.bronze} Bronze</td>}
+        {entry.name === this.state.name ? <td className = 'your-row'>+{entry.last_day_score}</td> : <td>+{entry.last_day_score}</td>}
 
       </tr>
     )}

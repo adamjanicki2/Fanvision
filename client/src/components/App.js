@@ -26,6 +26,7 @@ class App extends Component {
     this.state = {
       userId: undefined,
       user_name: '',
+      user_picture: null,
     };
   }
 
@@ -33,7 +34,7 @@ class App extends Component {
     get("/api/whoami").then((user) => {
       if (user._id) {
         // they are registed in the database, and currently logged in.
-        this.setState({ userId: user._id , user_name: user.name});
+        this.setState({ userId: user._id , user_name: user.name, user_picture: user.picture});
       }
     });
     get('/api/5KdnT6mfJ56YhGVcHeXDW2Kls5be4D').then((response_message) => {
@@ -48,16 +49,15 @@ class App extends Component {
     console.log(`Logged in as ${res.profileObj.name}`);
     const userToken = res.tokenObj.id_token;
     post("/api/login", { token: userToken }).then((user) => {
-      this.setState({ userId: user._id , user_name: user.name});
+      this.setState({ userId: user._id , user_name: user.name, user_picture: user.picture});
       post("/api/initsocket", { socketid: socket.id });
       //post('/api/setlockinstatus', { googleid: user.googleid});
     });
-    
     navigate('/');
   };
 
   handleLogout = () => {
-    this.setState({ userId: undefined, user_name: "", });
+    this.setState({ userId: undefined, user_name: "", user_picture: null});
     post("/api/logout");
     navigate('/');
   };
@@ -72,6 +72,7 @@ class App extends Component {
           handleLogout={this.handleLogout}
           userId={this.state.userId}
           name={this.state.user_name}
+          picture={this.state.user_picture}
         />
 
         <Router>

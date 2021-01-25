@@ -101,6 +101,7 @@ class OverallStandings extends Component {
         <div className="silverMedalWinner">{this.state.silver_winner}</div>
       </div>
     </div>
+    
     <h1 className="overallstandingstext"> Overall Standings</h1>
 
     <h1 className="updatedText">(Updated as of {this.dateConvert(this.state.time.substring(0,10))} @ {this.state.time.slice(-5)} ET)</h1>

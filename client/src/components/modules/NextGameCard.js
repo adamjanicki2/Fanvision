@@ -30,7 +30,7 @@ import SAS_logo from '../../public/img/logos/SAS.png';
 import TOR_logo from '../../public/img/logos/TOR.png';
 import UTA_logo from '../../public/img/logos/UTA.png';
 import WAS_logo from '../../public/img/logos/WAS.png';
-
+import { convertMilitary, dateConvert } from '../../utilities.js';
 
 class NextGameCard extends Component {
     constructor(props) {
@@ -43,32 +43,7 @@ class NextGameCard extends Component {
         
       }
 
-    
-      dateConvert = (inDate)=> {
-        //takes in string "yyyy-mm-dd" and returns string in proper english"
-        const date_list = inDate.split("-");
-        let year = date_list[0];
-        let month = date_list[1];
-        let day = date_list[2];
-        const MONTH_CONVERSION={
-            "01":"January",
-            "02":"February",
-            "03":"March",
-            "04":"April",
-            "05":"May",
-            "06":"June",
-            "07":"July",
-            "08":"August",
-            "09":"September",
-            "10":"October",
-            "11":"November",
-            "12":"December",
-        }
-        if (day[0]==="0"){
-            day=day[1]
-        }
-        return MONTH_CONVERSION[month]+" "+day+", "+year
-    }
+      
 
     render() {
         const teamStadiums = {
@@ -178,7 +153,7 @@ class NextGameCard extends Component {
         let game_city = teamCities[this.props.home_team];
 
         let game_date = this.props.start_time.substring(0,10)
-        let eng_game_date = this.dateConvert(game_date)
+        let eng_game_date = dateConvert(game_date)
 
         if (home_team)
         
@@ -196,7 +171,7 @@ class NextGameCard extends Component {
                     </div>
                   </div>
                   <div className="NextGameCard-setting">
-                    <div className="NextGameCard-time">{eng_game_date} {this.props.start_time.slice(10)} ET</div>
+                    <div className="NextGameCard-time">{eng_game_date} {convertMilitary(this.props.start_time.split(' ')[1])} ET</div>
                     <div className="NextGameCard-time"> {game_stadium}</div>
                     <div className="NextGameCard-time"> {game_city}</div>
                   </div>

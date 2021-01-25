@@ -3,7 +3,7 @@ import NextGameCard from "../modules/NextGameCard.js";
 import PredictionCriteriaBox from "../modules/PredictionCriteriaBox.js";
 import "../../utilities.css";
 import "./Predictions.css";
-import { get, post } from "../../utilities.js";
+import { get, post, convertMilitary } from "../../utilities.js";
 import Popup from "reactjs-popup";
 import TodayPredictionCard from "../modules/TodayPredictionCard.js";
 import {motion} from "framer-motion";
@@ -223,37 +223,7 @@ class Predictions extends Component {
     };
     return true
   };
-  
-  
 
-  isTimeBefore = (earliest_game_time) => {
-    get('/api/current_time').then((current_time) => {
-      
-      if (earliest_game_time !== '' ){
-        console.log('1')
-        const curr_day = moment(current_time.time.substring(0,10),'YYYY-MM-DD');
-
-
-        let curr_time = current_time.time.split(" ").pop();
-        curr_time = moment(curr_time,'HH:mm')
-        
-        const earliest_game_day = moment(earliest_game_time.substring(0,10),'YYYY-MM-DD');
-
-        let earliest_time = earliest_game_time.slice(-5);
-        earliest_time = moment(earliest_time,'HH:mm')
-        
-        if (earliest_game_day.isSameOrBefore(curr_day) === false){
-          console.log('2')
-          return false;
-        }else if (curr_time.isBefore(earliest_time)===false){
-          console.log('3')
-          return false;
-      }
-      return true;
-    };
-
-  });
-  }
   render() {
     
     if (this.state.lockedIn===true){
@@ -470,7 +440,7 @@ console.log(allPredictionEntries)
 
         {this.state.lockedIn ? 
           (<><div className = "NextGameCard-allGamesContainer">{gamesList}</div><h2 className='u-textCenter'>You have locked in predictions for the day!</h2></>) : 
-          (<><div className = "NextGameCard-allGamesContainer">  {gameEntryVisualList}</div>
+          (<><h1 className='u-textCenter'>Enter Predictions before {convertMilitary(this.state.earliest_start_time.split(' ')[1])} ET</h1><div className = "NextGameCard-allGamesContainer">  {gameEntryVisualList}</div>
           <div className="Predictions-buttonContainer">
           <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => {this.savePredictions(allPredictionEntries)}} className="Predictions-submitButton">
             Save

@@ -30,7 +30,7 @@ import SAS_logo from '../../public/img/logos/SAS.png';
 import TOR_logo from '../../public/img/logos/TOR.png';
 import UTA_logo from '../../public/img/logos/UTA.png';
 import WAS_logo from '../../public/img/logos/WAS.png';
-
+import { convertMilitary, dateConvert } from '../../utilities.js';
 
 class TodayPredictionCard extends Component {
     constructor(props) {
@@ -40,7 +40,7 @@ class TodayPredictionCard extends Component {
     componentDidMount(){
 
     }
-
+    
     render() {
         const teamStadiums = {
             ATL: "State Farm Arena",
@@ -154,7 +154,7 @@ class TodayPredictionCard extends Component {
                       <img className="NextGameGard-logo" src={teamLogos[home_img_src]}/>
                     </div>
                     <div>{this.props.away_team} vs {this.props.home_team}</div>
-                    <div className="NextGameCard-time"> {this.props.start_time}</div>
+                    <div className="NextGameCard-time"> {dateConvert(this.props.start_time.split(' ')[0])+' '+convertMilitary(this.props.start_time.split(' ')[1])} ET</div>
                     <div className="NextGameCard-time"> {game_stadium}</div>
                     <div className="NextGameCard-time"> {game_city}</div>
                     <div className="ResultGameCard-scoreIdentifier">Your Prediction:</div>

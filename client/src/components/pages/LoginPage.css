@@ -11,9 +11,10 @@
 .LoginPage-descriptionContainer{
     display:flex;
     flex-direction: column;
-    max-width: 55%;
-    padding-top: 30px;
+    width: 55%;
+    padding-top: 25px;
     padding-left: 80px;
+    padding-bottom: 25px;
 
 }
 
@@ -25,18 +26,13 @@
     
 }
 
-.LoginPage-bottomMessage{
-    font-family:'united_kingdomregular'; 
-    font-size: 33pt;
-    color: #c01916;
-    padding: 30px;
-    padding-left:80px;
-    padding-top: 50px;
-    flex-basis: 0;
-}
-
 .LoginPage-footerContainer{
     display:flex;
+    align-items: center;
+    width: 75%;
+    padding-left:50px;
+    margin:5px;
+    
 
 }
 
@@ -44,7 +40,43 @@
     font-family:'united_kingdomregular'; 
     font-size: 65pt;
     color: #f1f5f2;
-    padding-right:35px;
+    padding-right:65px;
     padding-top: 10px;
     text-align: right;
+    width:100%;
+  
+}
+
+.LoginPage-verticalContainer{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+    margin-left:10vh;
+    margin-top:5vh;
+    width:100%;
+    margin: 0 auto;
+}
+
+.LoginPage-howitworks{
+    font-family:'united_kingdomregular';
+    color:var(--red);
+    font-size: 42pt;
+    text-align: center;
+    width:15%;
+
+}
+
+.LoginPage-graphic{
+    background-image: url("../../public/img/gameflow3.png");
+    width: 185px;
+    height:575px;
+    margin-right: 100px;
+  
+
+}
+
+.LoginPage-contentContainer{
+    display: flex;
+    align-items: center;
 }

@@ -5,6 +5,7 @@ import "./LoginPage.css";
 import { get } from "../../utilities.js";
 import { motion } from "framer-motion";
 
+
 class LoginPage extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +22,8 @@ class LoginPage extends Component {
   render() {
     return (
       <>
+      <div className='bg'>
+        
         <div className="LoginPage-background">
         <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.8,opacity:0 },
          visible:{scale:1,opacity:1,transition:{delay:1}},}}>
@@ -35,12 +38,26 @@ class LoginPage extends Component {
           <header className="LoginPage-bigMessage">Win.</header>
           </motion.div>
         </div>
+        <div className='LoginPage-contentContainer'>
+        <div className="LoginPage-verticalContainer">
         <div className="LoginPage-footerContainer">
-          <div className="LoginPage-bottomMessage">Put your prediction skills to the test.</div>
+          <div className="LoginPage-howitworks">What it is</div>
           <div className="LoginPage-descriptionContainer">
-            <h3 className="LoginPage-descriptionItem">Fanvision is a platform for NBA fans eager to demonstrate their predictive abilities. For every leaguewide gameday, fans submit predictions for the outcome of each contest. Users are awarded points for guessing the correct winner and earn bonus points for accurately forecasting the margin of victory.</h3>
-            <h3 className="LoginPage-descriptionItem">At the end of each day of action, your predictions are checked against actual game results and your point total is updated. Earn medals by topping the daily standings and compete against fellow fans to find out who makes the most accurate picks!</h3>
+            <h3 className="LoginPage-descriptionItem">Fanvision is a competitive and social platform for NBA fans eager to demonstrate their predictive abilities. While sports gambling platforms are a great way to leverage your NBA knowledge and win real money, the risk factors make them unsuitable for many people. Fanvision is a gambling-free alternative for NBA fans who want to predict game outcomes without betting money. Users compete against one another for medals and a spot on atop the daily podium and overall standings for everyone to see. </h3>
           </div>
+        </div>
+        <div className="LoginPage-footerContainer">
+          <div className="LoginPage-howitworks">How it works</div>
+          <div className="LoginPage-descriptionContainer">
+            <h3 className="LoginPage-descriptionItem">Everyday starting at midnight Eastern time, predictions for the day’s games will open. You may submit predictions until the first game of the day starts, at which point entries will no longer be accepted. If you save predictions and forget to lock in, your saved predictions will automatically be locked in. 
+                                                      The following morning, you will find your own prediction results on the Dashboard, the medal winners from yesterday on the daily podium, and updated overall standings. Use your future-telling abilities to beat out other fans and earn your way to the top! </h3>
+          </div>
+          
+          </div>
+      
+      </div>
+      <div className="LoginPage-graphic"></div>
+      </div>
       </div>
       </>
 

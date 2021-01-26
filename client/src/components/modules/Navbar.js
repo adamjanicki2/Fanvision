@@ -68,7 +68,7 @@ class Navbar extends Component {
             <div className="u-inlineBlock Navbar-pfpContainer">
               <img src={picture_to_use} className='Navbar-pfp'/>
             </div>
-            <Link to="/MyProfile" className='Navbar-route Navbar-name u-inlineBlock'>{this.props.name.split(" ")[0]} </Link>
+            <Link to="/MyProfile" className='Navbar-name u-inlineBlock'>{this.props.name.split(" ")[0]} </Link>
           </div>
           :<div/>}
           {this.props.userId !== undefined? (

@@ -26,7 +26,7 @@ class UserProfile extends Component {
           if (user.picture !== null){
             const SIZE_ = '384'; //dimensions of pfp, change this number to change the size, make sure to change width/h in navbar.css
             if (user.picture.split('/')[user.picture.split('/').length - 2] === 's96-c'){
-              let arr = this.props.picture.split('/');
+              let arr = user.picture.split('/');
               arr[arr.length - 2] = arr[arr.length - 2][0]+SIZE_+arr[arr.length - 2].substring(3);
               picture_to_use = arr.join('/');
             }else if (user.picture.split('=')[user.picture.split('=').length - 1] === 's96-c'){

@@ -26,7 +26,7 @@
   .Navbar-title:hover{
     cursor: pointer;
     transform: scale(1.05);
-    transition: all .2s ;
+    transition: all .25s ease-in-out;
   }
   
   

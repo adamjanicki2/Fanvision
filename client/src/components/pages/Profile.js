@@ -37,7 +37,10 @@ class Profile extends Component {
     })
   };
 
-  render() {
+  render() 
+  
+  {
+ 
     const gold_list = this.state.gold_dates.map((date) =>
     <h2>{date}</h2>
     );
@@ -49,7 +52,8 @@ class Profile extends Component {
     );
     let isLoggedin = this.state.name !== null;
     let html_to_display = isLoggedin? (
-      <>
+      <>   
+      <div className='bg'>
       <div className="u-textCenter">
         <img src={this.state.picture} className='Profile-picture'/>
         <h1>{this.state.name}</h1>
@@ -61,6 +65,7 @@ class Profile extends Component {
       
 
         </div>
+      </div>
       </div>
       </>
     ) : (<div></div>);

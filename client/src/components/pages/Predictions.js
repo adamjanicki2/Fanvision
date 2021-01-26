@@ -234,7 +234,7 @@ class Predictions extends Component {
         const home_team = predictionObjects[i].home_team;
         let matchingGame = this.state.today_schedule.filter(obj => {return obj.home_team === home_team})[0];
         if (matchingGame===undefined){
-          window.location.reload();
+          continue
         }
         TodayPredictionCardList.push(
           <TodayPredictionCard

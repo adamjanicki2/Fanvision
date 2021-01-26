@@ -52,6 +52,8 @@ function createNewScoreboardUser(user){
         silver: 0,
         bronze: 0,
         last_day_score: 0,
+        total_wins: 0,
+        total_losses: 0,
       });
       newScore.save();
     }

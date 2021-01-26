@@ -60,9 +60,12 @@ def update_games_for_date(date):
         update_games_in_db(date, games_for_date)
     return scores_yet
 
-def update_user_scores(googleid, points_on_date):
-    current_ = db.scoreboards.find_one({'googleid': googleid})['current_score']
-    db.scoreboards.update_one({'googleid': googleid}, {'$set': {'last_day_score': points_on_date, 'current_score': current_ + points_on_date}})
+def update_user_scores(googleid, points_on_date, daily_wins, daily_losses):
+    current_person = db.scoreboards.find_one({'googleid': googleid})
+    current_ = current_person['current_score']
+    cur_wins = current_person['total_wins']
+    cur_losses = current_person['total_losses']
+    db.scoreboards.update_one({'googleid': googleid}, {'$set': {'last_day_score': points_on_date, 'current_score': current_ + points_on_date, 'total_wins':cur_wins+daily_wins, 'total_losses': cur_losses+daily_losses}})
     return
 
 def assign_medals(date, medal_list):
@@ -103,6 +106,8 @@ def update_scores_and_medals_for_date(date):
         u_name = user_prediction['user_name']
         user_games = {g['home_team']: g for g in user_prediction['todays_predictions']}
         daily_score = 0
+        daily_wins = 0
+        daily_losses = 0
         for outcome in results_from_date: ##calculate points gained for day
             try:
                 user_guess = user_games[outcome['home_team']]
@@ -111,10 +116,14 @@ def update_scores_and_medals_for_date(date):
                 continue
             actual_winner = outcome['home_team'] if int(outcome['home_team_score']) > int(outcome['away_team_score']) else outcome['away_team']
             did_player_win = actual_winner == user_guess['predicted_winner']
+            if did_player_win:
+                daily_wins+=1
+            else:
+                daily_losses+=1
             actual_margin = abs(int(outcome['home_team_score']) - int(outcome['away_team_score']))
             points_gained_from_game = calculate_score(int(user_guess['predicted_margin']), actual_margin, did_player_win)
             daily_score += points_gained_from_game
-        update_user_scores(user_googleid, daily_score) ##update scoreboard for given user
+        update_user_scores(user_googleid, daily_score, daily_wins, daily_losses) ##update scoreboard for given user
         medal_list.append((daily_score, user_googleid, u_name))
         medal_list = sorted(medal_list, key=lambda x: x[0], reverse = True)
         if len(medal_list) == 4:

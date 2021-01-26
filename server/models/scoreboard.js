@@ -9,6 +9,8 @@ const scoreboardSchema = new mongoose.Schema({
   silver: Number,
   bronze: Number,
   last_day_score: Number,
+  total_wins: Number,
+  total_losses: Number,
 });
 
 // compile model from schema

@@ -73,7 +73,7 @@ class UserProfile extends Component {
             <img src={this.state.picture} className='Profile-picture'/>
             <h1>{this.state.name}</h1>
             <h2>All-Time Record: {this.state.total_correct}-{this.state.total_wrong}</h2>
-            <h2>Your Medals</h2>
+            <h2>{this.state.name.split(" ")[0]}'s Medals</h2>
             <div className='medalContainer'>
               <div className='medalAndDate'><div className = "goldMedal">x{this.state.gold_dates.length}</div><div className='Dates-list'>{gold_list}</div></div>
               <div className='medalAndDate'><div className = "silverMedal">x{this.state.silver_dates.length}</div><div className='Dates-list'>{silver_list}</div></div>

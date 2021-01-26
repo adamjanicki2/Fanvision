@@ -23,10 +23,21 @@ class Profile extends Component {
     
     get("/api/whoami").then((user) => {
       console.log(user.name);
-      const SIZE_ = '384'; //dimensions of pfp, change this number to change the size
-      let arr = user.picture.split('/');
-      arr[arr.length - 2] = arr[arr.length - 2][0]+SIZE_+arr[arr.length - 2].substring(3);
-      let picture_to_use = arr.join('/');
+      let picture_to_use=null;
+      if (user.picture !== null){
+        const SIZE_ = '384'; //dimensions of pfp, change this number to change the size, make sure to change width/h in navbar.css
+        if (user.picture.split('/')[user.picture.split('/').length - 2] === 's96-c'){
+          let arr = user.picture.split('/');
+          arr[arr.length - 2] = arr[arr.length - 2][0]+SIZE_+arr[arr.length - 2].substring(3);
+          picture_to_use = arr.join('/');
+        }else if (user.picture.split('=')[user.picture.split('=').length - 1] === 's96-c'){
+          let arr = user.picture.split('=');
+          arr[arr.length-1] = arr[arr.length - 1][0]+SIZE_+arr[arr.length - 1].substring(3);
+          picture_to_use = arr.join('=');
+        }else{
+          picture_to_use = user.picture;
+        }
+      }
       this.setState({
         name: user.name,
         gold_dates: user.gold_dates,

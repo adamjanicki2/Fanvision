@@ -37,6 +37,7 @@ class Navbar extends Component {
         }else{
           picture_to_use = this.props.picture;
         }
+        
       }
       
       return (

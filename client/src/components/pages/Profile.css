@@ -17,7 +17,7 @@
 
 .medalContainer{
   display:flex;
-  align-items: center;
+  align-items: baseline;
   height: 200px;
   width:100%;
   margin-top:60px;
@@ -69,4 +69,9 @@
   font-family: 'green_mountain_3regular';
   font-size: 12pt;
   text-align: center;
+}
+
+.medalAndDate{
+  display:flex;
+  flex-direction: column;
 }

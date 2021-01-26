@@ -70,9 +70,9 @@ class Profile extends Component {
         <h1>{this.state.name}</h1>
         <h2>Your Medals</h2>
         <div className='medalContainer'>
-          <div><div className = "goldMedal">x{this.state.gold_dates.length}</div><div className='Dates-list'>{gold_list}</div></div>
-          <div><div className = "silverMedal">x{this.state.silver_dates.length}</div><div className='Dates-list'>{silver_list}</div></div>
-          <div><div className = "bronzeMedal">x{this.state.bronze_dates.length}</div><div className='Dates-list'>{bronze_list}</div></div>
+          <div className='medalAndDate'><div className = "goldMedal">x{this.state.gold_dates.length}</div><div className='Dates-list'>{gold_list}</div></div>
+          <div className='medalAndDate'><div className = "silverMedal">x{this.state.silver_dates.length}</div><div className='Dates-list'>{silver_list}</div></div>
+          <div className='medalAndDate'><div className = "bronzeMedal">x{this.state.bronze_dates.length}</div><div className='Dates-list'>{bronze_list}</div></div>
       
 
         </div>

@@ -90,7 +90,9 @@
 }
 
 .Navbar-logo {
-  /* ADD logo formatting here!! */
+  align-items:center;
+  width: fit-content;
+  height: fit-content;
   border: 2px solid var(--offwhite);
   border-radius: 50%;
   padding: 0 0 0 0;
@@ -108,7 +110,6 @@
   width: 36px;
   height: 36px;
   border: 2px solid var(--offwhite);
-
     
   }
 
@@ -138,4 +139,10 @@
   align-items:center;
   
 
+}
+
+.Navbar-logocontainer {
+  display:flex;
+  align-items:center;
+  float: left;
 }

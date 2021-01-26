@@ -41,7 +41,7 @@ class Navbar extends Component {
       
       return (
         <nav className="Navbar-container">
-          <img src={logo} className='Navbar-logo u-inlineBlock'/>
+          <div className='Navbar-logocontainer u-inlineBlock'><img src={logo} className='Navbar-logo u-inlineBlock'/></div>
           <div className="Navbar-title u-inlineBlock" onClick={() => {this.navigate_home()}}>Fanvision</div>
           <div className="Navbar-routeContainer u-inlineBlock">
           {this.props.userId !== undefined ? (

@@ -2,11 +2,12 @@
 .NotFound-header{
     background-image: url("../../public/img/court2.jpg");
     background-color: var(--offblack);
-    height: 800px;
+    height: 820px;
     background-position: bottom;
     background-size: cover;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
+    margin-top: -8px;
 }
 .NotFound-headerText{
     font-family:'united_kingdomregular'; 

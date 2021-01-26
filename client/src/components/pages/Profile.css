@@ -18,10 +18,10 @@
 .medalContainer{
   display:flex;
   align-items: baseline;
-  height: 200px;
+  height: 100%;
   width:100%;
   margin-top:60px;
-  margin-bottom:200px;
+  margin-bottom: 20px;
   justify-content: center;
 }
 

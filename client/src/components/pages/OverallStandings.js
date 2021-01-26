@@ -47,7 +47,6 @@ class OverallStandings extends Component {
     let isScores = this.state.scoreboard.length !== 0;
     let score_table = isScores ? (
     <>
-    
       <div className="Standings-header">
       <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.8,opacity:0 },
         visible:{scale:1,opacity:1,transition:{delay:.08,duration:.1}},}}>
@@ -58,7 +57,6 @@ class OverallStandings extends Component {
         <h3 className="Standings-headersubText">See who's on top.</h3>
       </motion.div>
       </div>
-     
       
       <h1 className="podiumheadertext">Yesterday's Podium</h1>
     <div src={podium_img} className='Podium'>

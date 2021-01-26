@@ -4,7 +4,7 @@
     padding-left: var(--m);
     padding-right: var(--m);
     background-color: var(--red);
-    /* border-radius: 0px 0px 5px 5px; */
+    border-radius: 0px 0px 8px 8px;
     position:sticky;
     top:0;
     transition: all .7s ease-in;
@@ -47,6 +47,7 @@
     color: var(--medgrey);
     opacity: 0.75;
     border-bottom: 5px solid var(--offblack);
+    border-radius: 4px;
   }
 
   .Navbar-route {
@@ -56,11 +57,14 @@
   .Navbar-route:visited {
     opacity: 0.95;
     border-bottom: 5px solid var(--offblack);
+    border-radius: 4px;
+
   }
   
   .Route-clicked {
     color: var(--offwhite);
     border-bottom: 5px solid var(--offblack);
+    border-radius: 4px;
   }
 
   .Navbar-route.Navbar-login {

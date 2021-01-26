@@ -9,9 +9,7 @@
   border-bottom-right-radius: 8px;
   margin-bottom: 100px;
   position: relative;
-  z-index:99999;
-
-
+  margin-top: -8px;
 }
 
 .Standings-headerText{

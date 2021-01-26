@@ -13,10 +13,13 @@ class UserProfile extends Component {
       // Initialize Default State
       this.state = {
         name: null,
+        googleid: null,
         gold_dates: [],
         silver_dates: [],
         bronze_dates: [],
         picture: null,
+        total_correct:null,
+        total_wrong:null,
       };
     }
 
@@ -43,8 +46,13 @@ class UserProfile extends Component {
             silver_dates: user.silver_dates,
             bronze_dates: user.bronze_dates,
             picture: picture_to_use,
+            googleid: user.googleid,
         })
         });
+        get("/api/getscoreboard").then((scores) => {
+          let matchingUser = scores.filter(obj => {return obj.googleid === this.state.googleid})[0];
+          this.setState({total_correct:matchingUser.total_wins, total_wrong:matchingUser.total_losses})
+        })
     };
 
     render(){
@@ -59,21 +67,23 @@ class UserProfile extends Component {
     );
         let isLoggedin = this.state.name !== null;
         let html_to_display = isLoggedin? (
-            <>
-            <div className="u-textCenter">
-              <img src={this.state.picture} className='Profile-picture'/>
-              <h1>{this.state.name}</h1>
-              <h2>{this.state.name.split(" ")[0]}'s Medals</h2>
-        <div className='medalContainer'>
+          <>   
+          <div className='bg'>
+          <div className="u-textCenter">
+            <img src={this.state.picture} className='Profile-picture'/>
+            <h1>{this.state.name}</h1>
+            <h2>All-Time Record: {this.state.total_correct}-{this.state.total_wrong}</h2>
+            <h2>Your Medals</h2>
+            <div className='medalContainer'>
+              <div className='medalAndDate'><div className = "goldMedal">x{this.state.gold_dates.length}</div><div className='Dates-list'>{gold_list}</div></div>
+              <div className='medalAndDate'><div className = "silverMedal">x{this.state.silver_dates.length}</div><div className='Dates-list'>{silver_list}</div></div>
+              <div className='medalAndDate'><div className = "bronzeMedal">x{this.state.bronze_dates.length}</div><div className='Dates-list'>{bronze_list}</div></div>
           
-        <div><div className = "goldMedal">x{this.state.gold_dates.length}</div><div className='Dates-list'>{gold_list}</div></div>
-        <div><div className = "silverMedal">x{this.state.silver_dates.length}</div><div className='Dates-list'>{silver_list}</div></div>
-        <div><div className = "bronzeMedal">x{this.state.bronze_dates.length}</div><div className='Dates-list'>{bronze_list}</div></div>
-      
-
-        </div>
+    
             </div>
-            </>
+          </div>
+          </div>
+          </>
           ) : (<div></div>);
           return html_to_display;
     };

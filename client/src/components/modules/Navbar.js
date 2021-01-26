@@ -2,7 +2,7 @@ import React, { Component,useEffect } from "react";
 import { Link, navigate } from "@reach/router";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import "./Navbar.css";
-import logo from '../../public/img/fanvision32.png';
+import logo from '../../public/img/fanvision45.png';
 import { get, post } from "../../utilities.js";
 const GOOGLE_CLIENT_ID = "911618425792-hk0acmfunco1f8qg441iih4pvm01cuae.apps.googleusercontent.com";
 
@@ -42,7 +42,6 @@ class Navbar extends Component {
       return (
         <nav className="Navbar-container">
           <img src={logo} className='Navbar-logo u-inlineBlock'/>
-          {/*.Navbar-logo in Navbar.css, idk what im doing with this*/}
           <div className="Navbar-title u-inlineBlock" onClick={() => {this.navigate_home()}}>Fanvision</div>
           <div className="Navbar-routeContainer u-inlineBlock">
           {this.props.userId !== undefined ? (

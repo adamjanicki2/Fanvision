@@ -91,6 +91,9 @@
 
 .Navbar-logo {
   /* ADD logo formatting here!! */
+  padding: 0 0 0 0;
+  margin-top: 0;
+  margin-bottom: 0;
   margin-right: var(--m);
 }
 

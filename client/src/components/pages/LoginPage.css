@@ -42,7 +42,7 @@
     font-family:'united_kingdomregular'; 
     font-size: 65pt;
     color: #f1f5f2;
-    padding-right:65px;
+    margin-right:65px;
     padding-top: 10px;
     text-align: right;
     width:100%;
@@ -75,10 +75,8 @@
     width: 175px;
     height:575px;
     margin-right: 15vh;
-    margin-left:-55vh;
+    margin-left:-25vh;
     margin-top:10vh;
-  
-
 }
 
 .LoginPage-contentContainer{

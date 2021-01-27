@@ -20,6 +20,7 @@ class UserProfile extends Component {
         picture: null,
         total_correct:null,
         total_wrong:null,
+        season_points: null,
       };
     }
 
@@ -50,6 +51,7 @@ class UserProfile extends Component {
               googleid: user.googleid,
               total_correct: user_scores.total_wins,
               total_wrong: user_scores.total_losses,
+              season_points: user_scores.current_score,
             });
           });
         });
@@ -73,6 +75,7 @@ class UserProfile extends Component {
             <img src={this.state.picture} className='Profile-picture'/>
             <h1 className='name-header'>{this.state.name}</h1>
             <h2>All-Time Record: {this.state.total_correct}-{this.state.total_wrong}</h2>
+            <h2>Season total: {this.state.season_points}</h2>
             <h2>{this.state.name.split(" ")[0]}'s Medals</h2>
             <div className='medalContainer'>
               <div className='medalAndDate'><div className = "goldMedal">x{this.state.gold_dates.length}</div><div className='Dates-list'>{gold_list}</div></div>

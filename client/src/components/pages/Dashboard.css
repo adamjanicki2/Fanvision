@@ -81,3 +81,17 @@
     margin-top:-15px;
     margin-bottom: 0px;
 }
+
+.Dashboard-topContainer{
+    display:flex;
+    justify-content:space-evenly;
+    align-items:center;
+    border-style: solid;
+    border-radius: 12px;
+    background-color: var(--offwhite);
+    width:80%;
+    margin:auto;
+    margin-top: 7vh;
+    margin-bottom: 7vh;;
+   
+}

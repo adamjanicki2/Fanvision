@@ -9,7 +9,7 @@
 
 .PredictionCriteriaBox-item{
     margin:10px;
-    margin-left: 75px;
+
 };
 
 .PredictionCriteriaBox-savedWinnerText{
@@ -20,4 +20,5 @@
 .PredictionCriteriaBox-entryPrompt{
     font-size:18pt;
     margin-right: 20px;
+    margin-top:-10px;
 }

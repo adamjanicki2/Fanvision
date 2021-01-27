@@ -79,7 +79,7 @@ class Profile extends Component {
         <img src={this.state.picture} className='Profile-picture'/>
         <h1 className='name-header'>{this.state.name}</h1>
         <h2>All-Time Record: {this.state.total_correct}-{this.state.total_wrong}</h2>
-        <h2>Your season total: {this.state.season_points}</h2>
+        <h2>Your Season Total: {this.state.season_points}</h2>
         <h2>Your Medals:</h2>
         <div className='medalContainer'>
           <div className='medalAndDate'><div className = "goldMedal">x{this.state.gold_dates.length}</div><div className='Dates-list'>{gold_list}</div></div>

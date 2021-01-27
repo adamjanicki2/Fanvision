@@ -71,7 +71,7 @@ class UserProfile extends Component {
           <div className='bg'>
           <div className="u-textCenter">
             <img src={this.state.picture} className='Profile-picture'/>
-            <h1>{this.state.name}</h1>
+            <h1 className='name-header'>{this.state.name}</h1>
             <h2>All-Time Record: {this.state.total_correct}-{this.state.total_wrong}</h2>
             <h2>{this.state.name.split(" ")[0]}'s Medals</h2>
             <div className='medalContainer'>

@@ -41,7 +41,7 @@ class LoginPage extends Component {
         <div className='LoginPage-contentContainer'>
         <div className="LoginPage-verticalContainer">
         <div className="LoginPage-footerContainer">
-          <div className="LoginPage-howitworks">What it is</div>
+          <div className="LoginPage-howitworks">What is Fanvision?</div>
           <div className="LoginPage-descriptionContainer">
             <h3 className="LoginPage-descriptionItem">Fanvision is a competitive and social platform for NBA fans eager to demonstrate their predictive abilities. While sports gambling platforms are a great way to leverage your NBA knowledge and win real money, the risk factors make them unsuitable for many people. Fanvision is a gambling-free alternative for NBA fans who want to predict game outcomes without betting money. Users compete against one another for medals and a spot on atop the daily podium and overall standings for everyone to see. </h3>
           </div>
@@ -49,8 +49,8 @@ class LoginPage extends Component {
         <div className="LoginPage-footerContainer">
           <div className="LoginPage-howitworks">How it works</div>
           <div className="LoginPage-descriptionContainer">
-            <h3 className="LoginPage-descriptionItem">Everyday starting at midnight Eastern time, predictions for the day’s games will open. You may submit predictions until the first game of the day starts, at which point entries will no longer be accepted. If you save predictions and forget to lock in, your saved predictions will automatically be locked in. 
-                                                      The following morning, you will find your own prediction results on the Dashboard, the medal winners from yesterday on the daily podium, and updated overall standings. Use your future-telling abilities to beat out other fans and earn your way to the top! </h3>
+            <h3 className="LoginPage-descriptionItem">Everyday starting at midnight eastern time, predictions for the day’s games will open. You may submit predictions until the first game of the day starts, at which point entries will no longer be accepted. If you save predictions and forget to lock in, your saved predictions will automatically be locked in. 
+                                                      The following morning, you will find your own prediction results on the Dashboard, the medal winners from yesterday on the daily podium, and updated overall standings. Use your future-telling abilities and NBA knowledge to beat out other fans and earn your way to the top! </h3>
           </div>
           
           </div>

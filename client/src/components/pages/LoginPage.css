@@ -63,17 +63,20 @@
 .LoginPage-howitworks{
     font-family:'united_kingdomregular';
     color:var(--red);
-    font-size: 42pt;
+    font-size: 38pt;
     text-align: center;
-    width:15%;
+    width:25%;
+    margin-left:-25vh;
 
 }
 
 .LoginPage-graphic{
     background-image: url("../../public/img/gameflow3.png");
-    width: 185px;
+    width: 175px;
     height:575px;
-    margin-right: 100px;
+    margin-right: 15vh;
+    margin-left:-55vh;
+    margin-top:10vh;
   
 
 }

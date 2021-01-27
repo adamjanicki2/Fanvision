@@ -126,7 +126,8 @@ class ResultGameCard extends Component {
                         </div>
                         <div className="ResultGameCard-resultItem">
                             <div className="ResultGameCard-pointBreakdown"> Actual Result:</div>
-                            <div className="ResultGameCard-result">{this.getWinner()} by {this.getMargin()}</div>
+                            {(this.getWinner()==='TIE' && this.getMargin()===0) ? <div className="ResultGameCard-result">Pending...</div>: <div className="ResultGameCard-result">{this.getWinner()} by {this.getMargin()}</div>}
+                            
                         </div>
                         <div className="ResultGameCard-resultItem">
                             <div className="ResultGameCard-pointBreakdown"> Points Earned:</div>

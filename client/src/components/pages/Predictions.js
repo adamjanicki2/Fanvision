@@ -389,7 +389,7 @@ console.log(allPredictionEntries)
               onChange={eventhandler}
             />) };
 
-        if (this.state.can_enter_predictions === false){
+        if (this.state.can_enter_predictions === false){ //change back to false
           return(
             <>
             <div className='bg'>

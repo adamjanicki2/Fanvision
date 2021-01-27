@@ -2,11 +2,22 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center
+    align-items: left;
+    margin-left:14vh;
 
+};
+
+.PredictionCriteriaBox-item{
+    margin:10px;
+    margin-left: 75px;
 };
 
 .PredictionCriteriaBox-savedWinnerText{
     font-size: 7pt;
     color: #dd1c1a;
+}
+
+.PredictionCriteriaBox-entryPrompt{
+    font-size:18pt;
+    margin-right: 20px;
 }

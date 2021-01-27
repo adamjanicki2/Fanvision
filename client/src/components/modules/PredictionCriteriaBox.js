@@ -72,12 +72,12 @@ class PredictionCriteriaBox extends Component {
         return(
             <>
                 <div className = "PredictionCriteriaBox-container">
-                    <div>
-                        <label for="team-select">Predicted Winner:</label>
+                    <div className='PredictionCriteriaBox-item'>
+                        <label for="team-select" className='PredictionCriteriaBox-entryPrompt'>Predicted Winner:</label>
                         <>{options_html}</>
                     </div>
-                    <div>
-                        <label for="margin-guess">Margin of Victory:</label>
+                    <div className='PredictionCriteriaBox-item'>
+                        <label for="margin-guess" className='PredictionCriteriaBox-entryPrompt'>Margin of Victory:</label>
                         {this.props.saved_margin === undefined ?
                         (<input type="number" id="margin-guess" name="margin-guess" min="0" max="200" onChange={this.handleChangeMargin}></input>):
                         (<input type="number" id="margin-guess" name="margin-guess" min="0" max="200" defaultValue={this.props.saved_margin} onChange={this.handleChangeMargin}></input>)

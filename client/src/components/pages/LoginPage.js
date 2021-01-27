@@ -50,7 +50,8 @@ class LoginPage extends Component {
           <div className="LoginPage-howitworks">How it works</div>
           <div className="LoginPage-descriptionContainer">
             <h3 className="LoginPage-descriptionItem">Everyday starting at midnight eastern time, predictions for the day’s games will open. You may submit predictions until the first game of the day starts, at which point entries will no longer be accepted. If you save predictions and forget to lock in, your saved predictions will automatically be locked in. 
-                                                      The following morning, you will find your own prediction results on the Dashboard, the medal winners from yesterday on the daily podium, and updated overall standings. Use your future-telling abilities and NBA knowledge to beat out other fans and earn your way to the top! </h3>
+                                                      The following morning, you will find your own prediction results on the Dashboard, the medal winners from yesterday on the daily podium, and updated overall standings.</h3>
+            <h3 className="LoginPage-descriptionItem">You earn 15 points for guessing the correct winner, and can gain up to another 15 bonus points for proximity to the margin of victory. You will not receive bonus points if you choose the wrong winner, and margin bonus points are based on Mario Kart scoring. Use your future-telling abilities and NBA knowledge to beat out other fans and earn your way to the top!</h3>
           </div>
           
           </div>

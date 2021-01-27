@@ -6,6 +6,8 @@
     background-size: cover;
     color: #f1f5f2;
     margin-top: -8px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 .LoginPage-descriptionContainer{

@@ -2,14 +2,23 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: left;
-    margin-left:14vh;
+    align-items: center;
+    margin-left:12%;
+    border-style:solid;
+    border-top-style: hidden;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    width:70%;
+    padding:10px;
+    background-color: #dddddd;
+    margin-top:-10px;
+   
+    
 
 };
 
 .PredictionCriteriaBox-item{
     margin:10px;
-
 };
 
 .PredictionCriteriaBox-savedWinnerText{

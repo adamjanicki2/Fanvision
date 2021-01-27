@@ -41,24 +41,19 @@ class Profile extends Component {
           picture_to_use = user.picture;
         }
       }
-      this.setState({
-        name: user.name,
-        googleid: user.googleid,
-        gold_dates: user.gold_dates,
-        silver_dates: user.silver_dates,
-        bronze_dates: user.bronze_dates,
-        picture: picture_to_use,
-      })
+      get('/api/getuserscoreboard', {googleid: user.googleid}).then((user_scores) => {
+        this.setState({
+          name: user.name,
+          gold_dates: user.gold_dates,
+          silver_dates: user.silver_dates,
+          bronze_dates: user.bronze_dates,
+          picture: picture_to_use,
+          googleid: user.googleid,
+          total_correct: user_scores.total_wins,
+          total_wrong: user_scores.total_losses,
+        });
+      });
     })
-  
-    get("/api/getscoreboard").then((scores) => {
-      let matchingUser = scores.filter(obj => {return obj.googleid === this.state.googleid})[0];
-      console.log(matchingUser)
-      console.log(matchingUser.total_wins)
-      this.setState({total_correct:matchingUser.total_wins, total_wrong:matchingUser.total_losses})
-    })
-  
-  
   };
 
   render() 

@@ -253,6 +253,11 @@ router.get('/getuserscore', (req, res) => {
   Scoreboard.findOne({googleid: req.user.googleid}).then((scores)=>res.send({current_score: scores.current_score,last_day_score: scores.last_day_score}));
 })
 
+router.get('/getuserscoreboard', (req, res) => {
+  Scoreboard.findOne({googleid: req.query.googleid}).then((userscore) => {
+    res.send(userscore);
+  });
+});
 
 router.get('/getpodium', (req, res) => {
   Podium.findOne().then((grogu) => {

@@ -70,23 +70,26 @@ class UserProfile extends Component {
         let isLoggedin = this.state.name !== null;
         let html_to_display = isLoggedin? (
           <>   
-          <div className='bg'>
-          <div className="u-textCenter">
-            <img src={this.state.picture} className='Profile-picture'/>
-            <h1 className='name-header'>{this.state.name}</h1>
-            <h2>All-Time Record: {this.state.total_correct}-{this.state.total_wrong}</h2>
-            <h2>Season Total: {this.state.season_points}</h2>
-            <h2>{this.state.name.split(" ")[0]}'s Medals</h2>
-            <div className='medalContainer'>
-              <div className='medalAndDate'><div className = "goldMedal">x{this.state.gold_dates.length}</div><div className='Dates-list'>{gold_list}</div></div>
-              <div className='medalAndDate'><div className = "silverMedal">x{this.state.silver_dates.length}</div><div className='Dates-list'>{silver_list}</div></div>
-              <div className='medalAndDate'><div className = "bronzeMedal">x{this.state.bronze_dates.length}</div><div className='Dates-list'>{bronze_list}</div></div>
-          
-    
-            </div>
-          </div>
-          </div>
-          </>
+      <div className='bg'>
+      <div className="u-textCenter">
+        <img src={this.state.picture} className='Profile-picture'/>
+        <h1 className='name-header'>{this.state.name}</h1>
+        <hr />
+        <div className='u-inlineBlock'>
+          <h2 className='h2-text u-inlineBlock'>All-Time Record: {this.state.total_correct}-{this.state.total_wrong}</h2>
+          <h2 className='h2-text u-inlineBlock'>Season Total: {this.state.season_points}</h2>
+        </div>
+        <h2 className='h2-text'>{this.state.name.split(' ')[0]}'s Medals:</h2>
+        <div className='medalContainer'>
+          <div className='medalAndDate'><div className = "goldMedal">x{this.state.gold_dates.length}</div><div className='Dates-list'>{gold_list}</div></div>
+          <div className='medalAndDate'><div className = "silverMedal">x{this.state.silver_dates.length}</div><div className='Dates-list'>{silver_list}</div></div>
+          <div className='medalAndDate'><div className = "bronzeMedal">x{this.state.bronze_dates.length}</div><div className='Dates-list'>{bronze_list}</div></div>
+      
+
+        </div>
+      </div>
+      </div>
+      </>
           ) : (<div></div>);
           return html_to_display;
     };

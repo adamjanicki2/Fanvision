@@ -78,3 +78,15 @@
 .name-header {
   font-size: 54px;
 }
+
+hr {
+  width: 32%;
+  border: 1px solid var(--offblack);
+  border-radius: 1px;
+}
+
+.h2-text {
+  font-size: 26px;
+  margin-left: 16px;
+  margin-right: 16px;
+}

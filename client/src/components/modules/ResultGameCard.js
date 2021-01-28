@@ -105,7 +105,16 @@ class ResultGameCard extends Component {
         let yesterday_str = moment(yesterday).tz("America/New_York").format("YYYY-MM-DD");
         yesterday_str=yesterday_str.replace(/[_-]/g, "");
 
-        let box_score_link = "https://basketball-reference.com/boxscores/"+yesterday_str+"0"+this.props.home_team+".html"
+        let home_team = this.props.home_team
+        if (home_team === 'CHA'){
+            home_team = 'CHO'
+        } else if (home_team === 'PHX'){
+            home_team = 'PHO'
+        } else if (home_team === 'BKN'){
+            home_team = 'BRK'
+        }
+        
+        let box_score_link = "https://basketball-reference.com/boxscores/"+yesterday_str+"0"+home_team+".html"
         
         let points_html = <></>
 

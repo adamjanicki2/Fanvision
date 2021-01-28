@@ -1,7 +1,7 @@
 .LoginPage-background{
     background-image: url("../../public/img/bw.jpg");
     background-color: var(--offblack);
-    height: 800px;
+    height: 850px;
     background-position: center;
     background-size: cover;
     color: #f1f5f2;
@@ -40,13 +40,20 @@
 
 .LoginPage-bigMessage{
     font-family:'united_kingdomregular'; 
-    font-size: 65pt;
+    font-size: 75pt;
     color: #f1f5f2;
-    margin-right:65px;
-    padding-top: 10px;
+    padding-top: 20px;
+    padding-right: 10px;
     text-align: right;
-    width:100%;
+    width:98%;
   
+}
+
+.LoginPage-bigHeaderContainer{
+    display:flex;
+    flex-direction: column;
+    margin-right:-500px;
+    align-items: flex-end;
 }
 
 .LoginPage-verticalContainer{
@@ -63,10 +70,10 @@
 .LoginPage-howitworks{
     font-family:'united_kingdomregular';
     color:var(--red);
-    font-size: 38pt;
+    font-size: 50pt;
     text-align: center;
-    width:25%;
-    margin-left:-25vh;
+    width:23%;
+    margin-left:-15vh;
 
 }
 
@@ -76,7 +83,7 @@
     height:575px;
     margin-right: 15vh;
     margin-left:-25vh;
-    margin-top:10vh;
+    margin-top:0vh;
 }
 
 .LoginPage-contentContainer{

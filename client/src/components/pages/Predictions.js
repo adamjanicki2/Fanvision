@@ -226,7 +226,7 @@ class Predictions extends Component {
 
   render() {
     
-    if (this.state.lockedIn===true){
+    if (this.state.lockedIn===true){ //change back to true
       let TodayPredictionCardList = [];
       const predictionObjects = this.state.predictionObjects;
 
@@ -389,14 +389,14 @@ console.log(allPredictionEntries)
               onChange={eventhandler}
             />) };
 
-        if (this.state.can_enter_predictions === false){ //change back to false
+        if (this.state.can_enter_predictions === false){ //change back to false this.state.can_enter_predictions
           return(
             <>
             <div className='bg'>
               <div className="OOPS-header">
               <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.8,opacity:0 },
               visible:{scale:1,opacity:1,transition:{delay:.08,duration:.1}},}}>
-                <header className="Predictions-headerText">oopsies</header>
+                <header className="Predictions-headerText">oopsies!</header>
               </motion.div>
               <motion.div initial="hidden" animate="visible" variants={{hidden:{scale:.8,opacity:0 },
               visible:{scale:1,opacity:1,transition:{delay:.08,duration:.1}},}}>

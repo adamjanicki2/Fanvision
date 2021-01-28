@@ -77,7 +77,7 @@ class UserProfile extends Component {
         <hr />
         <div className='u-inlineBlock'>
           <h2 className='h2-text u-inlineBlock'>All-Time Record: {this.state.total_correct}-{this.state.total_wrong}</h2>
-          <h2 className='h2-text u-inlineBlock'>Season Total: {this.state.season_points}</h2>
+          <h2 className='h2-text u-inlineBlock'>Season Total: {this.state.season_points} pts</h2>
         </div>
         <h2 className='h2-text'>{this.state.name.split(' ')[0]}'s Medals:</h2>
         <div className='medalContainer'>

@@ -204,7 +204,7 @@ class Dashboard extends Component {
           }
           <h2>Your Season Point Total: {this.state.current_score}</h2>
           <h2>Yesterday Record:  {num_correct_predictions}-{this.state.yesterday_results.length-num_correct_predictions}</h2>
-          <h2 className="IncompleteRed">Yesterday's Score: +{this.state.last_day_score}</h2>
+          <h2>Yesterday's Score: +{this.state.last_day_score}</h2>
         </div>
 
         <h2 className="sectionheading">Today's Games</h2>

@@ -70,9 +70,9 @@
 .LoginPage-howitworks{
     font-family:'united_kingdomregular';
     color:var(--red);
-    font-size: 50pt;
+    font-size: 45pt;
     text-align: center;
-    width:23%;
+    width:22%;
     margin-left:-15vh;
 
 }
@@ -89,4 +89,6 @@
 .LoginPage-contentContainer{
     display: flex;
     align-items: center;
+    justify-content: center;
+    
 }

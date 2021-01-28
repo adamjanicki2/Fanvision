@@ -106,6 +106,19 @@ class ResultGameCard extends Component {
         yesterday_str=yesterday_str.replace(/[_-]/g, "");
 
         let box_score_link = "https://basketball-reference.com/boxscores/"+yesterday_str+"0"+this.props.home_team+".html"
+        
+        let points_html = <></>
+
+        if((this.getWinner()==='TIE' && this.getMargin()===0)){
+            points_html = (<div className = "ResultGameCard-points-loss">&nbsp;&nbsp;--</div>)
+        } else if (this.props.points_earned === 0){
+            points_html =(<div className = "ResultGameCard-points-loss">+{this.props.points_earned}</div>)
+        } else{
+            points_html =(<div className = "ResultGameCard-points-win">{"+"+this.props.points_earned}</div>)
+        }
+        
+        
+        
         return(
             <>
                 <div className="ResultGameCard-container">
@@ -131,7 +144,12 @@ class ResultGameCard extends Component {
                         </div>
                         <div className="ResultGameCard-resultItem">
                             <div className="ResultGameCard-pointBreakdown"> Points Earned:</div>
-                            {this.props.points_earned === 0? <div className = "ResultGameCard-points-loss">{"+"+this.props.points_earned}</div> : <div className = "ResultGameCard-points-win">{"+"+this.props.points_earned}</div>}
+                            {/* {(this.getWinner()==='TIE' && this.getMargin()===0) ? (<div className = "ResultGameCard-points-loss">&nbsp;&nbsp;--</div>) : <div className = "ResultGameCard-points-win">{"+"+this.props.points_earned}</div>} */}
+                            {points_html}
+
+
+
+
                         </div>
                     </div>
                 

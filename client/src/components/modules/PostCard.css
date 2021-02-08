@@ -1,0 +1,19 @@
+.PostCard-container{
+    display: flex;
+    flex-direction:column;
+    width:50%;
+    margin: auto;
+    border: 2px solid;
+    padding:20px;
+}
+
+.PostCard-username{
+    font-size:18pt;
+    font-weight:bold;
+    margin-bottom: 15px;
+    
+}
+
+.PostCard-message{
+    font-size:18px;
+}

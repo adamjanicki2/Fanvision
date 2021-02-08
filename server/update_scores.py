@@ -68,6 +68,10 @@ def update_user_scores(googleid, points_on_date, daily_wins, daily_losses):
     db.scoreboards.update_one({'googleid': googleid}, {'$set': {'last_day_score': points_on_date, 'current_score': current_ + points_on_date, 'total_wins':cur_wins+daily_wins, 'total_losses': cur_losses+daily_losses}})
     return
 
+def wipe_podium():
+    db.podia.update_one({}, {'$set': {'gold': {'name': None, 'googleid': None, 'last_day_score': None}, 'silver': {'name': None, 'googleid': None, 'last_day_score': None}, 'bronze': {'name': None, 'googleid': None, 'last_day_score': None}}})
+    return
+
 def assign_medals(date, medal_list):
     ranking = ['gold', 'silver', 'bronze']
     updating_dict = {'gold': {'name': None, 'googleid': None, 'last_day_score': None}, 'silver': {'name': None, 'googleid': None, 'last_day_score': None}, 'bronze': {'name': None, 'googleid': None, 'last_day_score': None}}
@@ -128,7 +132,8 @@ def update_scores_and_medals_for_date(date):
         medal_list = sorted(medal_list, key=lambda x: x[0], reverse = True)
         if len(medal_list) == 4:
             medal_list.pop()
-    return assign_medals(date, medal_list)
+    wipe_podium()
+    assign_medals(date, medal_list)
     return 'Scores updated for date'
 
 def get_missed_days(today_, last_update_):

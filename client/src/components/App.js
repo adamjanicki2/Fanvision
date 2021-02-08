@@ -15,6 +15,7 @@ import Popup from 'reactjs-popup';
 import { socket } from "../client-socket.js";
 import { get, post } from "../utilities";
 import { motion,AnimatePresence } from "framer-motion";
+import Forum from "./pages/Forum.js";
 
 /**
  * Define the "App" component as a class.
@@ -87,6 +88,7 @@ class App extends Component {
           <Predictions path="/predictions" userId={this.state.userId}/>
           <Profile path="/MyProfile" userId={this.state.userId}/>
           <UserProfile path="/profile/:userId"/>
+          <Forum path='/forum' userId={this.state.userId}/>
           <NotFound default />
         </Router>
       </>

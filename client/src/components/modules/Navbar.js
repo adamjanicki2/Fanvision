@@ -60,6 +60,11 @@ class Navbar extends Component {
                 Standings
               </Link>
             ) : (<div></div>)}
+            {this.props.userId !== undefined ? (
+              <Link to="/forum" className={this.props.location.pathname === '/forum'? "Navbar-route Route-clicked":"Navbar-route"} >
+                Forum
+              </Link>
+            ) : (<div></div>)}
           </div>
 
           <div className='Navbar-logout u-inlineBlock Navbar-rightside'>

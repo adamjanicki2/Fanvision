@@ -22,6 +22,9 @@ class Forum extends Component {
         <div>
           <h1 className='u-textCenter'>Forum!</h1>
           <PostCard user='Kevin LeBryant'></PostCard>
+          <PostCard user='Kevin LeBryant'></PostCard>
+          <PostCard user='Kevin LeBryant'></PostCard>
+          <PostCard user='Kevin LeBryant'></PostCard>
         </div>
         
       

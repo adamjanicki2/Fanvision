@@ -1,15 +1,24 @@
 .PostCard-container{
     display: flex;
     flex-direction:column;
-    width:50%;
+    width:60%;
     margin: auto;
     border: 2px solid;
+    border-radius:5px;
     padding:20px;
+    margin-top:50px;
+    margin-bottom:50px;
+}
+
+.PostCard-postTitle{
+    font-size:22pt;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .PostCard-username{
-    font-size:18pt;
-    font-weight:bold;
+    font-size:13pt;
+    color: var(--red);
     margin-bottom: 15px;
     
 }

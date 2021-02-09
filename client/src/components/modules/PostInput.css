@@ -5,6 +5,7 @@
     align-items:flex-start;
     border-style:solid;
     border-radius: 5px;
+    padding:1px;
 }
 
 .PostInput-inputBox{
@@ -16,5 +17,7 @@
     height:100%;
     font-family: 'pakenhamregular';
     font-size:16pt;
+    background-color: var(--red);
+    color: var(--offwhite);
 
 }

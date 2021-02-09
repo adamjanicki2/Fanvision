@@ -1,0 +1,18 @@
+.PostInput-container{
+    display: flex;
+    width:60%;
+    margin:auto;
+    align-items:flex-start;
+}
+
+.PostInput-inputBox{
+    width:90%;
+    height:20px;
+}
+
+.PostInput-button{
+    height:20px;
+    font-family: 'pakenhamregular';
+    font-size:16pt;
+
+}

@@ -3,15 +3,17 @@
     width:60%;
     margin:auto;
     align-items:flex-start;
+    border-style:solid;
+    border-radius: 5px;
 }
 
 .PostInput-inputBox{
-    width:90%;
-    height:20px;
+    width:95%;
+    height:26px;
 }
 
 .PostInput-button{
-    height:20px;
+    height:100%;
     font-family: 'pakenhamregular';
     font-size:16pt;
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./PostCard.css";
+import "./SinglePost.css";
 import { convertMilitary, dateConvert } from '../../utilities.js';
 
 class PostCard extends Component {
